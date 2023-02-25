@@ -1,0 +1,76 @@
+<div v-if="errorMsg != ''" class="alert alert-danger">
+    <div v-html="lng(errorMsg)"></div>
+</div>
+
+<div id="tag">
+    <form id="tagForm" action="index.php?task=tag.save" method="post" 
+        enctype="multipart/form-data">
+        <input type="hidden" value="tag.save" name="task" />			
+        <input type="hidden" v-model="record.id" name="id" />
+        <input type="hidden" v-model="flowKey" name="flowKey" />
+        <input type="hidden" v-model="browserUrl" name="browserUrl" />
+        <div class="row">
+            <div class="form-outline col-12">
+                    <h1 class="ribbon-banner"><span>{{ lng('TAG') }}</span><h1>	
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-outline col-12">
+                {{ lng('PARENT') }}
+                <select name="parent" id="parent" class="form-control" v-model="record.parent">
+                </select>    
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-outline col-12">
+                <input name="name" class="form-control" v-model="record.name" type="text" required="required" />
+            </div>
+        </div>
+        <div class="row formBUttons" v-if="logedAdmin">
+            <div class="col-12">
+                <button type="submit" class="btn btn-success">
+                    <em class="fas fa-check"></em>&nbsp;{{ lng('SAVE') }}
+                </button>&nbsp;
+                <a v-bind:href="previous" class="btn btn-secondary">
+                    <em class="fas fa-reply"></em>&nbsp;{{ lng('CANCEL') }}
+                </a>&nbsp;
+                <button type="button" v-on:click="delClick()"
+                   v-if="record.id > 0"
+                   class="btn btn-danger">
+                    <em class="fas fa-eraser"></em>&nbsp;{{ lng('DELETE') }}
+                </button>
+            </div>
+        </div>
+        <div class="row formBUttons" v-if="! logedAdmin">
+            <div class="col-12">
+                <a v-bind:href="previous" class="btn btn-secondary">
+                    <em class="fas fa-reply"></em>&nbsp;{{ lng('DELETE') }}
+                </a>
+            </div>
+    </div>
+</form>    
+</div>
+
+<script>
+    methods = {
+        afterMount() {
+            var items = JSON.parse(window.localStorage.getItem('tags'));
+            console.log(items);
+                items.push({id:0, parent:0, name:'--'});
+				for (var i = 0; i<items.length; i++) {
+					var option = document.createElement('OPTION');
+					option.value = items[i].id;
+					option.innerHTML = items[i].name;
+					if (this.record.parent == items[i].id) {
+						option.selected = 'selected';
+					}					
+					document.getElementById('parent').appendChild(option);
+				}
+        },        
+        delClick() {
+            popupConfirm(lng('SUREDELETE'),function() {
+                location = 'index.php?task=tag.delete&id='+app.record.id+'&browserUrl='+encodeURI(app.browserUrl);
+            });
+        }
+    }
+</script>

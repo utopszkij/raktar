@@ -1,0 +1,119 @@
+
+<div v-if="errorMsg != ''" class="alert alert-danger">
+    <div v-html="lng(errorMsg)"></div>
+</div>
+
+<div id="event">
+    <form id="eventForm" action="index.php" method="post" class="form" 
+        enctype="multipart/form-data">
+        <input type="hidden" value="event.save" name="task" />			
+        <input type="hidden" v-model="record.id" name="id" />
+        <input type="hidden" v-model="flowKey" name="flowKey" />
+        <input type="hidden" v-model="record.direction" name="direction" />
+        <input type="hidden" v-model="record.product_id" name="product_id" />
+        <input type="hidden" v-model="record.partner_id" name="partner_id" />
+        <input type="hidden" v-model="record.created_by" name="created_by" />
+        <input type="hidden" v-model="record.created_at" name="created_at" />
+        <div class="row">
+            <div class="form-outline col-12">
+				<h3>{{ product.sort_name }}
+					<img v-bind:src="product.image_link" style="height:60px" v-if="product.image_link != ''" />
+				</h3>
+				<h4>{{ lng(record.direction) }} {{ lng('EVENT') }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-outline col-12">
+                <label>{{ lng('EVENT_TYPE') }}:&nbsp;</label>
+                <select name="event_type" class="form-control" id="event_type"
+                        v-model="record.event_type" required="required"
+                        :disabled="(!logedAdmin)" >
+                    <option v-for="eventtype in eventtypes" v-bind:value="eventtype.id">{{ eventtype.name }}</option>    
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-outline col-12">
+                <label>{{ lng('EVENT_DATE') }}:&nbsp;</label>
+                <input type="date" name="event_date" class="form-control" 
+                        v-model="record.event_date" required="required"
+                        :disabled="(!logedAdmin)"  />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-outline col-12">
+                <label>{{ lng('QUANTITY') }}:&nbsp;</label>
+                <input type="number" name="quantity" class="form-control" 
+                        v-model="record.quantity" required="required"
+                        :disabled="(!logedAdmin)"  />
+                &nbsp;{{ product.unit}}        
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-outline col-12">
+                <label>{{ lng('DOCUMENT_ID') }}:&nbsp;</label>
+                <input type="string" name="document_id" class="form-control" 
+                        v-model="record.document_id" 
+                        :disabled="(!logedAdmin)"  />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-outline col-12">
+                <label>{{ lng('DOCUMENT_LINK') }}:&nbsp;</label>
+                <input type="string" name="document_link" class="form-control" 
+                        v-model="record.document_link" 
+                        :disabled="(!logedAdmin)"  />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-outline col-12">
+                <label>{{ lng('DESCRIPTION') }}:&nbsp;</label>
+                <textarea colls="50" rows="5" name="description" class="form-control" 
+                        v-model="record.description" 
+                        :disabled="(!logedAdmin)"></textarea>
+            </div>
+        </div>
+        
+        <div class="row formButtons" v-if="logedAdmin">
+            <div class="col-12">
+                <button type="submit" class="btn btn-success">
+                    <em class="fas fa-check"></em>&nbsp;{{ lng('SAVE') }}
+                </button>&nbsp;
+                <a v-bind:href="previous" class="btn btn-secondary">
+                    <em class="fas fa-reply"></em>&nbsp;{{ lng('CANCEL') }}
+                </a>&nbsp;
+                <button type="button" 
+                   v-on:click="delClick()"
+                   v-if="record.id > 0"
+                   class="btn btn-danger">
+                    <em class="fas fa-eraser"></em>&nbsp;{{ lng('DELETE') }}
+                </button>
+            </div>
+        </div>
+        <div class="row formButtons" v-if="!logedAdmin">
+            <div class="col-12">
+                <a v-bind:href="HREF('product.items',{})" class="btn btn-secondary">
+                    <em class="fas fa-reply"></em>&nbsp;{{ lng('BACK') }}
+                </a>
+            </div>
+        </div>
+    </form>    
+</div>
+
+<script>
+    methods = {
+		afterMount() {
+			if (this.record.id <= 0) {
+				this.record.event_type = this.eventtypes[0].id;
+			}
+			this.record.event_date = this.record.event_date.substring(0,10);
+			$('#event_type').focus();
+		},	
+        delClick() {
+            popupConfirm(lng('SUREDELETE'), 
+            function() {
+                location=HREF('event.delete',{id:app.record.id, key:app.flowKey}); 
+            })
+        }    
+    }
+</script>

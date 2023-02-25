@@ -1,0 +1,5 @@
+{
+    "require": {
+        "yidas/socket-mailer": "^1.0"
+    }
+}

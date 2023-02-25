@@ -1,0 +1,82 @@
+<div id="tags">
+    <div v-if="errorMsg != ''" class="alert alert-danger">
+        <div v-html="lng(errorMsg)"></div>
+    </div>
+    <div v-if="successMsg != ''" class="alert alert-success">
+        <div v-html="lng(successMsg)"></div>
+    </div>
+    
+    <h2 class="ribbon-banner"><span><em class="fa fa-sitemap" aria-hidden="true"></em>&nbsp;{{ lng('TAGS') }}</span></h2>
+    <div class="row" v-if="items.length > 0">
+		<table style="width:auto">
+			<tr>
+				<th>ID</th>
+				<th style="width:300px">{{ lng('NAME')}}</th>
+				<th></th>
+			</tr>
+			<tr v-for="record in items" v-if="logedAdmin" style="border-style:solid; border-width:1px">
+				<td>{{ record.id }}</td>
+				<td>
+					<a v-bind:href="'index.php?task=tag.edit&id='+record.id+'&browserUrl='+encodeURI(browserUrl)" style="width:80%; max-width:80%">
+						<var v-bind:style="'display:inline-block; '+getBehuzas(record.szint)">&nbsp;</var>{{ record.name }}
+					</a>
+				</td> 
+				<td>
+					<a class="btn btn-primary" v-bind:href="HREF('tag.edit',{id:record.id})"><em class="fas fa-edit"></em></a>&nbsp;
+					<button type="button" class="btn btn-danger" v-if="logedAdmin" v-on:click="delClick(record.id)">
+						<em class="fas fa-eraser"></em>
+					</button>
+				</td>
+			</tr>
+			<tr v-for="record in items" v-if="!logedAdmin" style="border-style:solid; border-width:1px">
+				<td>{{ record.id }}</td>
+				<td>
+				<var v-bind:style="'display:inline-block; '+getBehuzas(record.szint)">&nbsp;</var>{{ record.name }}
+				</td>
+				<td></td>
+			</tr>
+        </table>
+    </div>
+    <div v-if="items.length > 0">
+		include paginator
+    </div>
+    <div v-if="items.length == 0">
+		<div class="alert alert-info">{{ lng('NOT_ITEMS') }}</div>
+    </div>
+    
+    <div v-if="logedAdmin">
+        <a v-bind:href="'index.php?task=tag.new&browserUrl='+encodeURI(browserUrl)" class="btn btn-primary">
+            <em class="fas fa-plus"></em>&nbsp;{{ lng('ADD') }}</a>
+        </a>
+    </div>    
+</div>
+
+<script>
+    methods = {
+		afterMount() {
+            window.setTimeout('app.makePaginatorClass(1,1)',1000);
+		},
+        makePaginatorClass(p,page) {
+            var result = '';
+            if (p == page) {
+                result="actPaginatorItem";
+            } else {
+                result="paginatorItem"
+            }
+            window.localStorage.setItem('tags', JSON.stringify(this.items));
+            console.log('makePaginatorClass');
+            console.log(this.items);
+            return result;
+        },
+        getBehuzas(szint) {
+            return 'width:'+(szint*25)+'px';
+        },
+        delClick(id) {
+            popupConfirm(lng('SUREDELETE'), 
+            function() {
+                location=HREF('tag.delete',{'id':id, key:app.flowKey}); 
+            })
+        }    
+        
+    }
+</script>

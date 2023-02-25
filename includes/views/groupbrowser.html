@@ -1,0 +1,70 @@
+<div id="group">
+    <div v-if="errorMsg != ''" class="alert alert-danger">
+        <div v-html="lng(errorMsg)"></div>
+    </div>
+    <div v-if="successMsg != ''" class="alert alert-success">
+        <div v-html="lng(successMsg)"></div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <h2>{{ lng('GROUPS') }}</h2>
+        </div>
+        <div class="col-12">
+			<table class="col-12" style="width:auto" v-if="items.length > 0">
+				<tr><th style="width:30px">ID</th>
+					<th style="width:60px">{{ lng('NAME') }}</th>
+					<th></th>
+				</tr>
+				<tr v-for="item in items" style="border-style:solid; border-width:1px;">
+					<td>{{ item.id }}</td>
+					<td> <a v-bind:href="HREF('group.edit',{id:item.id, backtask:'demo.items'})">
+							{{ item.name }}
+						 </a>
+					</td>    
+					<td>
+						<a class="btn btn-primary" v-if="logedAdmin" v-bind:href="HREF('group.edit',{id:item.id, backtask:'demo.items'})">
+							<em class="fas fa-edit"></em><span>{{ lng('EDIT') }}</span>
+						</a>
+						<button type="button" class="btn btn-danger" v-if="logedAdmin" v-on:click="delClick(item.id)">
+							<em class="fas fa-eraser"></em><span>{{ lng('DELETE') }}</span>
+						</button>
+					</td> 
+				</tr>
+			</table>
+            
+            <div class="alert alert-info" v-if="items.length == 0">
+                {{ lng('NODATA') }}
+            </div> 
+        </div>
+        <div class="col-12" v-if="items.length > 0">
+            include paginator
+        </div>    
+        <div class="col-12" v-if="logedAdmin">
+            <a v-bind:href="HREF('group.new')" class="btn btn-primary">
+                <em class="fas fa-plus-circle"></em>&nbsp;{{ lng('ADD') }}
+            </a>
+        </div>    
+    </div>
+</div>
+
+<script>
+    methods = {
+        makePaginatorClass(p,page) {
+            var result = '';
+            if (p == page) {
+                result="actPaginatorItem";
+            } else {
+                result="paginatorItem"
+            }
+            return result;
+        },
+        delClick(id) {
+            popupConfirm(lng('SUREDELETE'), 
+            function() {
+                location=HREF('group.delete',{'id':id, key:app.flowKey}); 
+            })
+        }    
+
+    }
+</script>
