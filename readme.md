@@ -1,13 +1,26 @@
-# Utopszkij_fw
+# Raktár kezelő program
+
+Egyszerű raktár kezelő program utopszkij_fw keretrendszerrel
 
 PHP-MYSQL-VUE keretrendszer web oldalak fejlesztéséhez.
 
-![logo](https://szakacskonyv.nfx.hu/fw/images/utopszkij_fw.png)
 
 ## WEB SITE 
-[https://szakacskonyv.nfx.hu/fw](https://szakacskonyv.nfx.hu/fw)
+[https://raktar.gerisznet.hu](https://raktar.gerisznet.hu)
 
 ## Tulajdonságok
+- multiuser
+- multilanguage
+- bootstrap responziv dizajn
+- definiálható tranzakció tipusok
+- definiálható cimkék
+- definiálható mértékegységek
+- a termékekhez megadható adatok: 
+megnevezés, leírás (html - ckeditor), dokumentum-ID, dokumentu-link, qrkód, kép, csatolt jájlok (pdf,doc,docx,txt,odt), cimkék
+- keresés név részlet, cimke, tároló szerint
+- esemény napló
+
+## utopszkij_fw keretrendszer Tulajdonságok
 
 - PHP, MYSQL backend, vue frontend,
 - bootstrap, fontawesome,
