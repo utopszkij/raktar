@@ -2,11 +2,11 @@
 
 Egyszerű raktár kezelő program utopszkij_fw keretrendszerrel
 
-PHP-MYSQL-VUE keretrendszer web oldalak fejlesztéséhez.
 
+![logo](https://raktar.siriusworld.hu/images/logo.png)
 
 ## WEB SITE 
-[https://raktar.gerisznet.hu](https://raktar.gerisznet.hu)
+[https://raktar.siriusworld.hu](https://raktar.siriusworld.hu)
 
 ## Tulajdonságok
 - multiuser
@@ -20,7 +20,7 @@ megnevezés, leírás (html - ckeditor), dokumentum-ID, dokumentu-link, qrkód, 
 - keresés név részlet, cimke, tároló szerint
 - esemény napló
 
-## utopszkij_fw keretrendszer Tulajdonságok
+## utopszkij_fw keretrendszer Tulajdonságai
 
 - PHP, MYSQL backend, vue frontend,
 - bootstrap, fontawesome,
@@ -34,25 +34,21 @@ megnevezés, leírás (html - ckeditor), dokumentum-ID, dokumentu-link, qrkód, 
 - php és viewer.html unittest rendszer,
 - verzió követés a github main branch -ról.
 
-## Dokumentáció
+## Lecensz
 
-[https://szakacskonyv.nfx.hu/fw/task/home.swdoc](https://szakacskonyv.nfx.hu/fw/task/home.swdoc)
+GNU v3
 
-A fekhasznált harmadik féltől származó sw elemek (bootstrap, vue, awesome font) a vendor könyvtárba vannak másolva és innen 
+A fekhasznált harmadik féltől származó sw elemek (bootstrap, vue, awesome font, jquery, phpmailer) a vendor könyvtárba vannak másolva és innen 
 tölti be a program. Azért választottam ezt a megoldást, hogy a web oldalak ne fagyjanak le az online elérhetőséget biztositó szerverek 
 esetleges üzemszüneténél, és a verzió frissitések esetleges visszamenőleges inkopatibilitásából eredő hibákat is elkerüljük. 
 Aki ezzel a módszerrel nem ért egyet az az index.php -t modosítva használhat NET -es eléréseket is (pl cdn).
 
 ### A programot mindenki csak saját felelősségére használhatja.
+
+## verzió v2.0.0
+2022.02.26. használható (nem béta)
+### *************************************
 						
-## Lecensz
-
-GNU v3
-
-## A keretrendszer segitségével felépített müködő demo:
-
-[https://szakacskonyv.nfx.hu](https://szakacskonyv.nfx.hu)
-
 ## Információk informatikusok számára      
 
 ## Szükséges sw környezet
@@ -159,21 +155,14 @@ views/demobrowser.php, views/demoform.php, languages/hu.js
 controllers/upgrade.php -ben a v1.1.0 tartozik ehhez.
  
 
+vagy parancssorból varázslóval:
 
-## verzió v1.0.3
-table lock, unlock, tranzakció kezelés a database interface-be
-### *************************************
-## verzió v1.0.2
-table create, alter, drop a database interface-be
-### *************************************
-## verzió v1.0.1
-2022.07.28
-GDPR megfelelés
-### *************************************
-## verzió v1.0.0
-2022.07.27
+cd {documentroot}
 
-### *************************************
+php ./tools/createCURD {compName}
+
+
+
 
 
 
