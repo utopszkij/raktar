@@ -36,6 +36,7 @@
                 <label>{{ lng('QRCODE') }}:&nbsp;</label>
                 <input name="qrcode" class="form-control qrcode" 
                         v-model="record.qrcode" type="text" 
+                        v-on:blur="qrcodeBlur()" v-on:focus="qrcodeFocus()"
                         :disabled="(!logedAdmin)" />
             </div>
         </div>    
@@ -291,13 +292,14 @@
                 </select>
             </div>
         </div>
-        <div class="row">
+        <div class="row attachments">
             <div class="form-outline col-12" style="vertical-align: middle">
-                <label>{{ lng('ATTACMENTS') }}:&nbsp;</label>
+                <label>{{ lng('ATTACHMENTS') }}:&nbsp;</label>
                 <div style="display:inline-block; width:auto; border-style:solid; border-width:1px; padding:2px"> 
 					<p  v-for="attachment in attachments">
+						<em v-bind:class="attachmentIcon(attachment)"></em>&nbsp;
 						<a v-bind:href="'images/upload/'+record.id+'/'+attachment" 
-							target="_new" />{{ attachment}}
+							target="_new" />{{ attachName(attachment) }}
 						</a>
 					</p>
 				</div>	
@@ -398,6 +400,22 @@
 				this.qrCodeShow = true;
 			}	
 		},
+		qrcodeFocus() {
+            if (this.record != undefined) {
+				this.oldQrCode = this.record.qrcode;
+			}	
+		},
+		qrcodeBlur() {
+            if (this.record != undefined) {
+				if (this.record.qrcode != this.oldQrCode) {
+					this.qrCodeShow = false;
+					$('#qrcode').html('');
+					$('#qrcode2').html('');
+					this.showQrcode(); 
+					this.oldQrCode = this.record.qrcode;
+				}
+			}	
+		},
 		editClick() {
 			$('#productShow').css('display','none');
 			$('#productForm').css('display','block');
@@ -429,6 +447,22 @@
 				$('#tag').val('+');
 			}	
 		},
+		attachmentIcon(attachment) {
+			var result = 'fas fa-file-alt';
+			if (attachment.search('.pdf') > 0) {
+				result = 'fas fa-file-pdf';
+			}
+			if (attachment.search('.doc') > 0) {
+				result = 'fas fa-file-word';
+			}
+			if (attachment.search('.docx') > 0) {
+				result = 'fas fa-file-word';
+			}
+			return result;
+		},
+		attachName(attachment) {
+			return attachment.substring(0,attachment.lastIndexOf('.'));
+		},	
         qrCodePrint() {
 			$('#product').html('<div id="qrcode"></div>');
 			this.qrCodeShow = false;

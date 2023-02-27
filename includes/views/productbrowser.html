@@ -7,31 +7,31 @@
     </div>
     
     <h2 class="ribbon-banner"><span>{{ lng('PRODUCTS') }}</span></h2>
-    <div class="row filterForm">
-		<form class="form">
-		<h2>{{ lng('FILTERING') }}</h2>
-		<div class="col-12">
-			<label>{{ lng('NAME_SUBSTRING') }}</label>
-			<input type="filterName" id="filterName" class="form-control" /> 
-		</div>
-		<div class="col-12">
-			<label>{{ lng('STORAGE') }}</label>
-			<input type="filterStorage" id="filterStorage" class="form-control" /> 
-		</div>
-		<div class="col-12">
-			<label>{{ lng('TAG') }}</label>
-			<input type="filterTag" id="filterTag" class="form-control" /> 
-			<a v-on:click="goFilter()" 
-				class="btn btn-primary">
-				<em class="fas fa-search" v-bind:title="lng('GOFILTER')"></em></a>
-			<a v-on:click="delFilter()" 
-				class="btn btn-secondary">
-				<em class="fas fa-times" v-bind:title="lng('DELFILTER')"></em></a>
-		</div>
+    <div class="row filterForm"  style="margin:0px 0px 0px 0px">
+		<form class="form col-12">
+			<h2>{{ lng('FILTERING') }}</h2>
+			<div class="col-12">
+				<label>{{ lng('NAME_SUBSTRING') }}</label>
+				<input type="filterName" id="filterName" class="form-control" /> 
+			</div>
+			<div class="col-12">
+				<label>{{ lng('STORAGE') }}</label>
+				<input type="filterStorage" id="filterStorage" class="form-control" /> 
+			</div>
+			<div class="col-12">
+				<label>{{ lng('TAG') }}</label>
+				<input type="filterTag" id="filterTag" class="form-control" /> 
+				<a v-on:click="goFilter()" 
+					class="btn btn-primary">
+					<em class="fas fa-search" v-bind:title="lng('GOFILTER')"></em></a>
+				<a v-on:click="delFilter()" 
+					class="btn btn-secondary">
+					<em class="fas fa-times" v-bind:title="lng('DELFILTER')"></em></a>
+			</div>
 		</form>
 	</div>	
 	
-    <div class="row">
+    <div class="row" style="margin:0px 0px 0px 0px">
 		<table class="col-12 table table-bordered table-striped" style="width:100%" v-if="items.length > 0">
 			<tr><th class="id">ID</th>
 				<th class="name">{{ lng('NAME') }}</th>

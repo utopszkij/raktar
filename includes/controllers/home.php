@@ -54,6 +54,7 @@ class Home extends Controller {
 	public function policy() {
 		view('policy',["ADATKEZELO" => ADATKEZELO, 
 		"ADATFELDOLGOZO" => ADATFELDOLGOZO, 
+		"SITEURL" => SITEURL,
 		"SIGNO" => SIGNO]);
 	}
 	
@@ -63,6 +64,7 @@ class Home extends Controller {
 	public function policy2() {
 		view('policy2',["ADATKEZELO" => ADATKEZELO, 
 		"ADATFELDOLGOZO" => ADATFELDOLGOZO, 
+		"SITEURL" => SITEURL,
 		"SIGNO" => SIGNO]);
 	}
 	
@@ -72,6 +74,7 @@ class Home extends Controller {
 	public function policy3() {
 		view('policy3',["ADATKEZELO" => ADATKEZELO, 
 		"ADATFELDOLGOZO" => ADATFELDOLGOZO, 
+		"SITEURL" => SITEURL,
 		"SIGNO" => SIGNO]);
 	}
 	
@@ -86,6 +89,10 @@ class Home extends Controller {
 	 * impresszum megjelenítése
 	 */
 	public function impressum() {
+		view('impressum',["ADATKEZELO" => ADATKEZELO, 
+		"ADATFELDOLGOZO" => ADATFELDOLGOZO, 
+		"SITEURL" => SITEURL,
+		"SIGNO" => SIGNO]);
 		view('impressum',[]);
 	}
 
