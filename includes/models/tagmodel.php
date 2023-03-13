@@ -25,7 +25,7 @@
 		 * @param inr $limit
 		 * @param mixed $filter 
 		 * @param string $order
-		 * @return [{id, tulaj, szint, cimke}, ...]
+		 * @return [{id, tulaj, szint, name}, ...]
 		 */ 
 		public function getItems(int $page,int $limit,$filter,string $order): array {
 			$result = [];
@@ -36,9 +36,9 @@
 		/**
 		 * rekurziv eljárás adott tulajdonos alrekordjait olvassa
 		 * a $result tömbbe, kiegészítve a $level adattal
-		 * @param int $owner
+		 * @param int $owner (lehet nulla is!)
 		 * @param int $level
-		 * @param array &$result [{id, tulaj, szint, cimke}, ...]
+		 * @param array &$result [{id, tulaj, szint, name}, ...]
 		 * @return void
 		 */ 
 		public function getItems1(int $owner, int $level, array &$result) {

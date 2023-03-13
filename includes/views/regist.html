@@ -67,7 +67,7 @@
 		</div>
 	</div>	
     </form>
-    <div class="alert alert-warning">
+    <div class="alert alert-warning" v-if="LOGIN_MUST_VERIFYED_EMAIL">
             <p><strong>{{ lng('REGISTHELP') }}</strong></p>
     </div>
     <div class="alert alert-info">{{ lng('REGISTHELP2') }}</div>

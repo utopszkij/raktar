@@ -1,0 +1,195 @@
+<!-- nem jó!!!!! -->
+<div id="products">
+    <div v-if="errorMsg != ''" class="alert alert-danger">
+        <div v-html="lng(errorMsg)"></div>
+    </div>
+    <div v-if="successMsg != ''" class="alert alert-success">
+        <div v-html="lng(successMsg)"></div>
+    </div>
+    
+    <h2 class="ribbon-banner"><span>Termékek fa szerkezetben</span></h2>
+    
+	<div class="row">
+		<diiv class="col-sd-12 col-md-3 ">
+			<!-- tags fa -->			
+			<div v-for="tag in tags">
+				<a v-bind:href="HREF('product.tree',{page:1, filter:'fn||fs||filterTag|'+tag.name})" 
+				    v-bind:style="'text-decoration:none; '+tagStyle(tag.name)">
+					<var v-bind:style="'display:inline-block; '+getBehuzas(tag.szint)">&nbsp;</var>
+					{{ tag.name }}
+				</a>		
+			</div>
+		</diiv>
+		<diiv class="col-sd-12 col-md-9 ">
+			<!-- products browser -->
+			<div class="filterForm"  style="margin:0px 0px 0px 0px">
+				<form class="form">
+					<h2>{{ lng('FILTERING') }}</h2>
+					<input type="hidden" id="filterName" value="" class="form-control" /> 
+					<input type="hidden" id="filterStorage" value="" class="form-control" /> 
+					<label>{{ lng('TAG') }}</label>
+					<select id="filterTag" class="form-control">
+						<option value="">&nbsp;</option>
+						<option v-for="tag in tags" v-bind:value="tag.name">{{ getCimkeTxt(tag) }}</option>
+					</select>	 
+					<a v-on:click="goFilter()" 
+						class="btn btn-primary">
+						<em class="fas fa-search" v-bind:title="lng('GOFILTER')"></em></a>
+					<a v-on:click="delFilter()" 
+						class="btn btn-secondary">
+						<em class="fas fa-times" v-bind:title="lng('DELFILTER')"></em></a>
+				</form>
+			</div>	
+			<div style="margin:0px 0px 0px 0px">
+				<table class="table table-bordered table-striped" style="width:100%" v-if="items.length > 0">
+					<tr><th class="id">ID</th>
+						<th class="name">{{ lng('NAME') }}</th>
+						<th class="stock">{{ lng('STOCK') }}</th>
+						<th class="storage">{{ lng('STORAGE') }}</th>
+						<th class="tags">{{ lng('TAGS') }}</th>
+						<th class="buttons"></th>
+					</tr>
+					<tr v-for="item in items">
+						<td>{{ item.id }}</td>
+						<td> <a v-bind:href="HREF('product.edit',{id:item.id, backtask:'product.items'})">
+								<img v-bind:src="item.image_link" v-if="item.image_link != ''" style="height:32px" />
+								{{ item.sort_name }}
+							</a>
+						</td>    
+						<td>
+							{{ item.stock }}
+						</td>    
+						<td>
+							{{ item.code }}
+						</td>    
+						<td>
+							{{ item.tags }}
+						</td>    
+						<td>
+							<div class="container-fluid">
+								<!-- a class="__navbar-brand" href="#">Müveletek</a -->
+								<button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+									style="background-color:#0d6efd; color:white"
+									v-bind:data-bs-target="'#navbarSupportedContent'+item.id" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+									Művelet<em class="fas fa-caret-down"></em>
+								</button>
+								<div class="collapse navbar-collapse" v-bind:id="'navbarSupportedContent'+item.id">
+								<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+									<li><br />
+										<a class="btn btn-primary" v-bind:href="HREF('product.edit',{id:item.id, backtask:'product.items'})">
+											<em class="fas fa-eye" v-bind:title="lng('SHOW')"></em>
+										</a>&nbsp;
+										<button type="button" class="btn btn-danger" v-if="logedAdmin" v-on:click="delClick(item.id)">
+											<em class="fas fa-eraser" v-bind:title="lng('DELETE')"></em>
+										</button>&nbsp;
+										<a v-bind:href="HREF('event.items',{'page':1,'filter':'|'+item.id+'||'})" class="btn btn-secondary">
+											<em class="fas fa-clock" v-bind:title="lng('EVENTS')"></em>
+										</a>&nbsp;
+										<button type="button" class="btn btn-success" v-if="logedAdmin" v-on:click="plusClick(item.id)">
+											<em class="fas fa-plus" v-bind:title="lng('INPUT')"></em>
+										</button>&nbsp;
+										<button type="button" class="btn btn-secondary" v-if="logedAdmin" v-on:click="minusClick(item.id)">
+											<em class="fas fa-minus" v-bind:title="lng('OUTPUT')"></em>
+										</button>
+									</li>
+								</ul>
+								</div>
+							</div>					
+						</td> 
+					</tr>
+				</table>
+			</div>
+			<div class="alert alert-info " v-if="items.length == 0">{{ lng('NOT_ITEMS') }}</div>
+			<div v-if="items.length > 0">
+				include paginator
+			</div>
+		</diiv> <!-- product browser --> 
+	</div> <!-- row -->
+</div>
+ 
+
+<script>
+    methods = {
+		afterMount() {
+			// filter kezelés
+			this.filterTag = '';
+			if (this.filter) {
+				if (this.filter != '') {
+					var i = 0;
+					var fn = '';
+					var w = this.filter.split('|');
+					while (w.length < 6) {
+						w.push('');
+					}
+					var i = 0;
+					while (i < (w.length - 1)) {
+						fn = w[i];
+						if ($('#'+fn)) {
+							$('#'+fn).val(w[i+1]);
+						}
+						if (fn == 'filterTag') {
+							this.filterTag = w[i+1];
+						}
+						i = i + 2;
+					}
+				}
+			}
+		},
+        makePaginatorClass(p,page) {
+            var result = '';
+            if (p == page) {
+                result="actPaginatorItem";
+            } else {
+                result="paginatorItem"
+            }
+            return result;
+        },
+        delClick(id) {
+            popupConfirm(lng('SUREDELETE'), 
+            function() {
+                location=HREF('product.delete',{'id':id, key:app.flowKey}); 
+            })
+        },    
+        plusClick(id) {
+            location=HREF('event.plus',{'product_id':id, key:app.flowKey}); 
+        },    
+        minusClick(id) {
+            location=HREF('event.minus',{'product_id':id, key:app.flowKey}); 
+        },
+        goFilter() {
+			// filter str kialakitása
+			var filterStr = 'fn||'+
+							'fs||'+
+							'filterTag|'+$('#filterTag').val();
+			// url hivás filter, page paraméterrekkel
+			window.location=HREF('product.tree',{"page":1,"filter": filterStr});
+			return false;
+		},
+		delFilter() {
+			// filter JSON string kialakitása
+			// url hivás filter, page paraméterrekkel
+			window.location=HREF('product.tree',{"page":1,"filter":"all"});
+			return false;
+		},
+		getCimkeTxt(tag) {
+			var result = '';
+			var i = 0;
+			while (i < tag.szint) {
+				result += '- ';
+				i++;
+			}
+			return result + tag.name;
+		},
+		getBehuzas(szint) {
+            return 'width:'+(szint*25)+'px';
+        },
+		tagStyle(name) {
+			console.log('tagStyle ',name,this.filter);
+			result = 'color:black;';
+			if (this.filter == 'fn||fs||filterTag|'+name) {
+					result = 'color:red;';
+			}
+			return result;
+		}
+    }
+</script>

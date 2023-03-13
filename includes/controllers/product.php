@@ -3,7 +3,9 @@ use \RATWEB\DB\Query;
 use \RATWEB\DB\Record;
 
 include_once __DIR__.'/../models/productmodel.php';
+include_once __DIR__.'/../models/tagmodel.php';
 include_once __DIR__.'/../uploader.php';
+include_once __DIR__.'/../urlprocess.php';
 
 /**
  * product controller 
@@ -34,6 +36,7 @@ class Product extends Controller {
         $this->editURL = 'index.php?task=product.edit';
         $this->browserTask = 'product.items';
         $this->model = new ProductModel();
+        $this->ckeditorFields = ['description'];
 	}
 
     /**
@@ -67,6 +70,17 @@ class Product extends Controller {
 		if ($record->sort_name == '') {
 			$result = 'NAME_REQUERED';
 		}
+		//+ duplaság ellenörzés
+		$recs = $this->model->getBy('sort_name',$record->sort_name); // megpróbál olvasni az adatbázisból ilyen nevű rekordot.
+		if (count($recs) > 0) {
+			// ha van ilyen nevű rekord és az nem azonos a most javítottal akkor ez duplikátum!
+			// ez esetben hibajelzést kell visszadnia ennek a rutinnak.
+			if ($recs[0]->id != $record->id) {
+				$result = 'NAME_EXISTS';
+			}
+		}
+		//- duplaság ellenörzés
+		
         return $result;
     }
     
@@ -124,6 +138,8 @@ class Product extends Controller {
         if (is_dir('images/upload/'.$record->id)) {
 			$attachments = array_diff(scandir('images/upload/'.$record->id), array('.', '..'));
 		}
+        
+        $record->description2 = urlprocess($record->description);
         
         $this->browserURL = $this->request->input('browserUrl', $this->browserURL);
         $units = $this->model->getRecords('units','code');
@@ -202,7 +218,7 @@ class Product extends Controller {
 								$res = $uploader->doUpload('attachment'.$i, 
 													'images/upload/'.$record->id, 
 													'', 
-													['doc','pdf','docx','odt','txt']); 
+													['doc','pdf','docx','odt','txt','xlsx']); 
 								if ($res->error != '') {
 									echo 'image upload error '.$res->error; exit();
 								}					
@@ -235,7 +251,183 @@ class Product extends Controller {
 		$this->edit();
 	}
 
-}
+	/**
+     * browser
+     * GET| POST: page,order,filter,limit
+     *     filter= 'filter_name|value|filter_code|value|filter_tag|value'
+	 * (felülírás oka: tags -ot is át ad a viewernek, 
+     *  $fullTree paramétert is a a modelnek)
+     */
+    public function items($order = 1) {
+        // paraméter olvasása get vagy sessionból
+        $page = $this->session->input($this->name.'page',1);
+        $page = $this->request->input('page',$page);
+        $limit = round((int)$_SESSION['screen_height'] / 80);
+        $limit = $this->session->input($this->name.'limit',$limit);
+        $limit = $this->request->input('limit',$limit);
+        $order = $this->session->input($this->name.'order',$order);
+        $order = $this->request->input('order',$order);
+
+		// filter kezelés	
+        $sFilter = $this->session->input($this->name.'filter',''); // 'name|value...'
+        $sFilterArray = $this->filterParse($sFilter); // [name => value,...]
+        $rFilter = $this->request->input('filter'); // 'name|value...' vagy 'all'
+        if ($rFilter == 'all') {
+			$sFilterArray = [];
+			$filter = '';
+		} else {
+			$rFilterArray = $this->filterParse($rFilter); // [name => value,...]
+			foreach ($rFilterArray as $fn => $fv) {
+				$sFilterArray[$fn] = $fv;
+			}
+			$filter = $this->filterToStr($sFilterArray); // 'name|value...'
+		}
+        
+		// adatok a paginátor számára
+        $total = $this->model->getTotal($filter, true);
+        $pages = [];
+        $p = 1;
+        while ((($p - 1) * $limit) < $total) {
+            $pages[] = $p;
+            $p++;
+        }
+        $p = $p - 1;
+
+        // hibás paraméter kezelés
+        if ($page > $p) { 
+            $page = $p; 
+        }
+        if ($page < 1) {
+            $page = 1;
+        }
+
+        // paraméter tárolás sessionba
+        $this->session->set($this->name.'page',$page);
+        $this->session->set($this->name.'limit',$limit);
+        $this->session->set($this->name.'filter',$filter);
+        $this->session->set($this->name.'order',$order);
+        
+        // rekordok olvasása az adatbázisból
+        $items = $this->model->getItems($page,$limit,$filter,$order,true);
+
+		//+ tags -ot is átad a viewer -nek
+		$tagModel = new TagModel();
+		$tags = $tagModel->getItems(1, 9999, '', '');
+		//-
+
+        // megjelenítés
+        view($this->name.'browser',[
+            "items" => $items,
+			"tags" => $tags,
+            "page" => $page,
+            "total" => $total,
+            "pages" => $pages,
+            "task" => $this->browserTask,
+            "filter" => $filter,
+            "loged" => $this->loged,
+            "logedName" => $this->loged,
+            "logedAdmin" => (strpos($this->logedGroup,'admin') > 0),
+            "previous" => SITEURL,
+            "browserUrl" => $this->browserURL,
+            "errorMsg" => $this->session->input('errorMsg',''),
+            "successMsg" => $this->session->input('successMsg','')
+        ]);
+        $this->session->delete('errorMsg');
+        $this->session->delete('successMsg');
+        $this->session->delete('oldRecord');
+    }
+
+	/**
+     * tree browser
+     * 
+     * NEM JÓ!!!!
+     * 
+     * GET| POST: page,order,filter,limit
+     *     filter= 'filter_name|value|filter_code|value|filter_tag|value'
+	 * (felülírás oka: tags -ot is át ad a viewernek, 
+     *  $fullTree paramétert is a a modelnek)
+     */
+    public function tree($order = 1) {
+        // paraméter olvasása get vagy sessionból
+        $this->name='productTree';
+        $page = $this->session->input($this->name.'page',1);
+        $page = $this->request->input('page',$page);
+        $limit = round((int)$_SESSION['screen_height'] / 80);
+        $limit = $this->session->input($this->name.'limit',$limit);
+        $limit = $this->request->input('limit',$limit);
+        $order = $this->session->input($this->name.'order',$order);
+        $order = $this->request->input('order',$order);
+
+		// filter kezelés	
+        $sFilter = $this->session->input($this->name.'filter',''); // 'name|value...'
+        $sFilterArray = $this->filterParse($sFilter); // [name => value,...]
+        $rFilter = $this->request->input('filter'); // 'name|value...' vagy 'all'
+        if ($rFilter == 'all') {
+			$sFilterArray = [];
+			$filter = '';
+		} else {
+			$rFilterArray = $this->filterParse($rFilter); // [name => value,...]
+			foreach ($rFilterArray as $fn => $fv) {
+				$sFilterArray[$fn] = $fv;
+			}
+			$filter = $this->filterToStr($sFilterArray); // 'name|value...'
+		}
+
+        // adatok a paginátor számára
+        $total = $this->model->getTotal($filter, false);
+        $pages = [];
+        $p = 1;
+        while ((($p - 1) * $limit) < $total) {
+            $pages[] = $p;
+            $p++;
+        }
+        $p = $p - 1;
+
+        // hibás paraméter kezelés
+        if ($page > $p) { 
+            $page = $p; 
+        }
+        if ($page < 1) {
+            $page = 1;
+        }
+
+        // paraméter tárolás sessionba
+        $this->session->set($this->name.'page',$page);
+        $this->session->set($this->name.'limit',$limit);
+        $this->session->set($this->name.'filter',$filter);
+        $this->session->set($this->name.'order',$order);
+        
+        // rekordok olvasása az adatbázisból
+        $items = $this->model->getItems($page,$limit,$filter,$order,false);
+
+		//+ tags -ot is átad a viewer -nek
+		$tagModel = new TagModel();
+		$tags = $tagModel->getItems(1, 9999, '', '');
+		//-
+
+        // megjelenítés
+        view('producttree',[
+            "items" => $items,
+			"tags" => $tags,
+            "page" => $page,
+            "total" => $total,
+            "pages" => $pages,
+            "task" => $this->browserTask,
+            "filter" => $filter,
+            "loged" => $this->loged,
+            "logedName" => $this->loged,
+            "logedAdmin" => (strpos($this->logedGroup,'admin') > 0),
+            "previous" => SITEURL,
+            "browserUrl" => $this->browserURL,
+            "errorMsg" => $this->session->input('errorMsg',''),
+            "successMsg" => $this->session->input('successMsg','')
+        ]);
+        $this->session->delete('errorMsg');
+        $this->session->delete('successMsg');
+        $this->session->delete('oldRecord');
+    }
+
+} 
 
 
 ?>

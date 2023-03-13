@@ -3,6 +3,8 @@
     use \RATWEB\DB\Query;
     use \RATWEB\DB\Record;
 
+    include_once 'includes/models/tagmodel.php';
+
     class ProductModel extends Model  {
 
         function __construct() {
@@ -36,11 +38,15 @@
          * rekordok lapozható listája
          * @param int $page
          * @param int $limit
-         * @param string $filter  name|storage|tag vagy üres
+         * @param string $filter  'filter_name'|name|
+         *                         'filter_code'|code|
+         *                         'filter_tag'|tag|
          * @param string $order 
+         * @param bool $fullTree
          * @return array
          */
-        public function getItems(int $page, int $limit, string $filter, string $order = 'sort_name'): array {
+        public function getItems(int $page, int $limit, string $filter, 
+            string $order = 'sort_name', bool $fullTree = true): array {
 			if ($page <= 0) $page = 1;
 			
             $db1 = new Query($this->table,'p');
@@ -50,21 +56,41 @@
 				->groupBy(['p.id','p.sort_name','p.tags','s.code']);
 			if ($filter != '') {
 				$w = explode('|',$filter);
-				while (count($w) < 3) {
+				while (count($w) < 8) {
 					$w[] = '';
 				}
 			} else {
-				$w = ['','',''];
-			}	
-			if ($w[0] != '') {
-				$db1->where('p.sort_name','like','%'.$w[0].'%');
+				$w = ['filter_name','','filter_code','','filter_tag','','filter_full',1];
 			}	
 			if ($w[1] != '') {
-				$db1->where('s.code','=',$w[1]);
+				$db1->where('p.sort_name','like','%'.$w[1].'%');
 			}	
-			if ($w[2] != '') {
-				$db1->where('tags','like','%'.$w[2].'%');
+			if ($w[3] != '') {
+				$db1->where('s.code','like','%'.$w[3].'%');
 			}	
+			if ($w[5] != '') {
+                // tag szerinti keresés 
+                // $fullTree esetén beolvasni a tag összes alrekordjaihoz rendelteket is
+                $tagModel = new TagModel();
+                if ($w[5] == 'root') {
+                    $recs = [JSON_decode('{"id":0}')];
+                } else {
+                    $recs = $tagModel->getBy('name', $w[5]);
+                }  
+                if (count($recs) > 0) {    
+                    $subTags = [];      
+                    if ($fullTree) {
+                        $tagModel->getItems1($recs[0]->id, 0, $subTags);
+                    }    
+                    // összeállítjuk az sql in szürő stringet
+                    $w2 = [$w[5]];
+                    foreach ($subTags as $subTag) {
+                        $w2[] = $subTag->name;
+                    }    
+                    $db1->where('tags','in',$w2);
+                }    
+			}	
+    
             $result = $db1->offset((($page - 1) * $limit))
                     ->limit($limit)
                     ->orderBy($order)
@@ -76,13 +102,13 @@
          * Összes rekord száma
          * @return int
          */
-        public function getTotal($filter = ''): int {
-			$res = $this->getItems(1, 99999999, $filter, '1');
+        public function getTotal($filter = '',$fullTree): int {
+			$res = $this->getItems(1, 99999999, $filter, '1',$fullTree);
 			return count($res);
         }
         
         /**
-         * rekord kézlet olvasása
+         * rekord készlet olvasása
          * @param string tableName
          * @param string order
          * @return array

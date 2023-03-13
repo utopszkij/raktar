@@ -142,10 +142,10 @@ cd reporoot
 
 - index.php -ban verzió szám emelés
 - controllers/upgrade.php -ban adatbázist modosítás
-- controllers/{newModeulNaev}.php létrehozása
-- models/{newModeulNaev}model.php létrehozása
-- views/{newModeulNaev}browser.php létrehozása
-- views/{newModeulNaev}form.php létrehozása
+- controllers/{newModulNev}.php létrehozása
+- models/{newModulNev}model.php létrehozása
+- views/{newModulNev}browser.php létrehozása
+- views/{newModulNev}form.php létrehozása
 - languages/{lng}.js modosítása
 - főmenüben (vagy máshol) a modult inditó link elhelyezése
 - program inditása böngészöből
@@ -159,7 +159,7 @@ vagy parancssorból varázslóval:
 
 cd {documentroot}
 
-php ./tools/createCURD {compName}
+php ./tools/createCRUD {compName} {tableName}
 
 
 

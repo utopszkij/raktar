@@ -5,23 +5,24 @@
 
 <div id="demo">
     <form id="demoForm" action="index.php" method="post" class="form" 
-        enctype="multipart/form-data">
-        <input type="hidden" value="demo.save" name="task" />			
-        <input type="hidden" v-model="record.id" name="id" />
+        enctype="multipart/form-data"  style="display:none">
         <input type="hidden" v-model="flowKey" name="flowKey" />
-        <div class="row text-center">
-            <h2>{{ lng('DEMO') }}</h2>
-            <h3 v-if="logedAdmin & (record.id == 0)">{{ lng('ADD')}}</h3>
-            <h3 v-if="logedAdmin & (record.id > 0)">{{ lng('EDIT')}}</h3>
-        </div>
-        <div class="row">
-            <div class="form-outline col-12">
-                <label>{{ lng('NAME') }}:&nbsp;</label>
-                <input name="name" class="form-control" 
-                        v-model="record.name" type="text" required="true"
-                        :disabled="(!logedAdmin)" />
-            </div>
-        </div>
+        <input type="hidden" value="demo.save" name="task" />			
+		
+					<div class="row">
+						<div class="col-12">
+							<label>{{ lng("ID") }}</label>:
+							<input type="number" name="id" v-model="record.id" disabled="disabled" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-12">
+							<label>{{ lng("NAME") }}</label>:
+							<input type="text" name="name" v-model="record.name"  required="required" />
+						</div>
+					</div>
+					
         <div class="row formBUttons" v-if="logedAdmin">
             <div class="col-12">
                 <button type="submit" class="btn btn-success">
@@ -46,15 +47,69 @@
             </div>
         </div>
     </form>    
+
+    <div id="demoShow" class="form">
+		
+					<div class="row">
+						<div class="col-12">
+							<label>{{ lng("ID") }}</label>:
+							<var v-html="record.id"></var>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-12">
+							<label>{{ lng("NAME") }}</label>:
+							<var v-html="record.name"></var>
+						</div>
+					</div>
+					
+        <div class="row formBUttons" v-if="logedAdmin">
+            <div class="col-12">
+                <button type="button" 
+                   v-on:click="editClick()"
+                   class="btn btn-primary">
+                    <em class="fas fa-edit"></em>&nbsp;{{ lng('EDIT') }}
+                </button>
+                <button type="button" 
+                   v-on:click="delClick()"
+                   class="btn btn-danger">
+                    <em class="fas fa-eraser"></em>&nbsp;{{ lng('DELETE') }}
+                </button>
+            </div>
+        </div>
+        <div class="row formBUttons" v-if="!logedAdmin">
+            <div class="col-12">
+                <a v-bind:href="previous" class="btn btn-secondary">
+                    <em class="fas fa-reply"></em>&nbsp;{{ lng('BACK') }}
+                </a>
+            </div>
+        </div>
+    </form>    
+    
+    
 </div>
+
+
 
 <script>
     methods = {
+		afterMount() {
+			if (this.record != undefined) {
+				if (this.record.id == 0) {
+					this.editClick();
+				}
+			}
+		},
         delClick() {
             popupConfirm(lng('SUREDELETE'), 
             function() {
                 location=HREF('demo.delete',{id:app.record.id, key:app.flowKey}); 
             })
-        }    
+        },
+        editClick() {
+			document.getElementById('demoForm').style='display:"block"';
+			document.getElementById('demoShow').style='display:"none"';
+		}    
     }
 </script>

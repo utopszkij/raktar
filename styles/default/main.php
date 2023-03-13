@@ -50,9 +50,8 @@
 	<script src="index.js"></script>
 	
 	<!-- ckeditor -->
-	<script src="vendor/ckeditor/ckeditor.js"></script>
-	<script src="vendor/ckeditor/translations/hu.js"></script>
-	<script src="vendor/ckeditor/upload.js"></script>
+	<script src="vendor/ckeditor/build/ckeditor.js"></script>
+	<script src="vendor/ckeditor/myckeditor.js"></script>
 
 </script>
 	

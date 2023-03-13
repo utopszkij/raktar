@@ -8,8 +8,15 @@
     
     <h2 class="ribbon-banner"><span>{{ lng('PRODUCTS') }}</span></h2>
     <div class="row filterForm"  style="margin:0px 0px 0px 0px">
-		<form class="form col-12">
+		<div class="col-9">
 			<h2>{{ lng('FILTERING') }}</h2>
+		</div>
+		<div class="col-3 text-end">
+			<a v-bind:href="HREF('product.tree',{page:1, filter:'all'})">
+				<em class="fas fa-sitemap"></em>Fa szerkezet
+			</a>
+		</div>	
+		<form class="form col-12">
 			<div class="col-12">
 				<label>{{ lng('NAME_SUBSTRING') }}</label>
 				<input type="filterName" id="filterName" class="form-control" /> 
@@ -20,7 +27,10 @@
 			</div>
 			<div class="col-12">
 				<label>{{ lng('TAG') }}</label>
-				<input type="filterTag" id="filterTag" class="form-control" /> 
+				<select id="filterTag" class="form-control">
+					<option value="">&nbsp;</option>
+					<option v-for="tag in tags" v-bind:value="tag.name">{{ getCimkeTxt(tag) }}</option>
+				</select>	 
 				<a v-on:click="goFilter()" 
 					class="btn btn-primary">
 					<em class="fas fa-search" v-bind:title="lng('GOFILTER')"></em></a>
@@ -57,13 +67,12 @@
 					{{ item.tags }}
 				</td>    
 				<td>
-					<nav class="navbar navbar-expand-lg navbar-light bg-light">
 					  <div class="container-fluid">
 						<!-- a class="__navbar-brand" href="#">Müveletek</a -->
 						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
 							style="background-color:#0d6efd; color:white"
 							v-bind:data-bs-target="'#navbarSupportedContent'+item.id" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						    Müveletek<em class="fas fa-caret-down"></em>
+						    Művelet<em class="fas fa-caret-down"></em>
 						</button>
 						<div class="collapse navbar-collapse" v-bind:id="'navbarSupportedContent'+item.id">
 						  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -86,8 +95,7 @@
 							</li>
 						  </ul>
 						</div>
-					  </div>
-					</nav>					
+					  </div>					
 				</td> 
 			</tr>
 		</table>
@@ -110,13 +118,20 @@
 			// filter kezelés
 			if (this.filter) {
 				if (this.filter != '') {
+					var i = 0;
+					var fn = '';
 					var w = this.filter.split('|');
-					while (w.length < 3) {
-						w.add('');
+					while (w.length < 6) {
+						w.push('');
 					}
-					$('#filterName').val(w[0]);
-					$('#filterStorage').val(w[1]);
-					$('#filterTag').val(w[2]);
+					var i = 0;
+					while (i < (w.length - 1)) {
+						fn = w[i];
+						if ($('#'+fn)) {
+							$('#'+fn).val(w[i+1]);
+						}
+						i = i + 2;
+					}
 				}
 			}
 		},
@@ -143,9 +158,9 @@
         },
         goFilter() {
 			// filter str kialakitása
-			var filterStr = $('#filterName').val()+'|'+
-							$('#filterStorage').val()+'|'+
-							$('#filterTag').val();
+			var filterStr = 'filterName|'+$('#filterName').val()+'|'+
+							'filterStorage|'+$('#filterStorage').val()+'|'+
+							'filterTag|'+$('#filterTag').val();
 			// url hivás filter, page paraméterrekkel
 			window.location=HREF('product.items',{"page":1,"filter": filterStr});
 			return false;
@@ -153,8 +168,17 @@
 		delFilter() {
 			// filter JSON string kialakitása
 			// url hivás filter, page paraméterrekkel
-			window.location=HREF('product.items',{"page":1,"filter":""});
+			window.location=HREF('product.items',{"page":1,"filter":"all"});
 			return false;
+		},
+		getCimkeTxt(tag) {
+			var result = '';
+			var i = 0;
+			while (i < tag.szint) {
+				result += '- ';
+				i++;
+			}
+			return result + tag.name;
 		}    
     }
 </script>

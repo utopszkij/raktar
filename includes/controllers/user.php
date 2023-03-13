@@ -73,6 +73,7 @@ class User extends Controller {
 					  "successMsg" => $this->request->input('successMsg', $this->session->input('successMsg'),NOFILTER),
 					  "SITEURL" => SITEURL,
 					  "redirect" => $this->request->input('redirect',''),
+					  "LOGIN_MUST_VERIFYED_EMAIL" => LOGIN_MUST_VERIFYED_EMAIL,
 					  "flowkey" => $this->newFlowKey()]);
 		$this->session->set('errorMsg','');
 		$this->session->set('successMsg','');
@@ -109,6 +110,7 @@ class User extends Controller {
 					   "SITEURL" => SITEURL,
 					   "polocyAccept" => 'ACCEPT',
 					   "redirect" => $this->request->input('redirect',''),
+   					   "LOGIN_MUST_VERIFYED_EMAIL" => LOGIN_MUST_VERIFYED_EMAIL,
 					   "flowKey" => $this->newFlowKey()]
 					);
 		$this->session->set('errorMsg','');
@@ -398,6 +400,7 @@ class User extends Controller {
 				"userGroups" => $this->model->getGroups($record->id),
 				"allGroups" => $this->model->getAllGroups(),
 				"logedGroup" => $this->logedGroup,
+			    "LOGIN_MUST_VERIFYED_EMAIL" => LOGIN_MUST_VERIFYED_EMAIL,
 				"backtask" => $backtask
 			]);
 			$this->session->delete('errorMsg');

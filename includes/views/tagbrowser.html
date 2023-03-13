@@ -12,15 +12,21 @@
 			<tr>
 				<th>ID</th>
 				<th style="width:300px">{{ lng('NAME')}}</th>
+                <th>Termékek</th>
 				<th></th>
 			</tr>
 			<tr v-for="record in items" v-if="logedAdmin" style="border-style:solid; border-width:1px">
 				<td>{{ record.id }}</td>
 				<td>
-					<a v-bind:href="'index.php?task=tag.edit&id='+record.id+'&browserUrl='+encodeURI(browserUrl)" style="width:80%; max-width:80%">
+					<!-- a v-bind:href="'index.php?task=tag.edit&id='+record.id+'&browserUrl='+encodeURI(browserUrl)" style="width:80%; max-width:80%">
 						<var v-bind:style="'display:inline-block; '+getBehuzas(record.szint)">&nbsp;</var>{{ record.name }}
-					</a>
-				</td> 
+					</a --> 
+				</td>
+                <td>
+                    <a v-bind:href="HREF('product.tree',{page:1, filter:'fn||fs||filterTag|'+record.name})">
+                        <em class="fas fa-play"></em>
+                        </a>
+                    </td> 
 				<td>
 					<a class="btn btn-primary" v-bind:href="HREF('tag.edit',{id:record.id})"><em class="fas fa-edit"></em></a>&nbsp;
 					<button type="button" class="btn btn-danger" v-if="logedAdmin" v-on:click="delClick(record.id)">
@@ -33,6 +39,11 @@
 				<td>
 				<var v-bind:style="'display:inline-block; '+getBehuzas(record.szint)">&nbsp;</var>{{ record.name }}
 				</td>
+                <td>
+                    <a v-bind:href="HREF('product.tree',{page:1, filter:'fn||fs||filterTag|'+record.name})">
+                        <em class="fas fa-play"></em>
+                    </a>
+                </td>
 				<td></td>
 			</tr>
         </table>
@@ -64,8 +75,6 @@
                 result="paginatorItem"
             }
             window.localStorage.setItem('tags', JSON.stringify(this.items));
-            console.log('makePaginatorClass');
-            console.log(this.items);
             return result;
         },
         getBehuzas(szint) {

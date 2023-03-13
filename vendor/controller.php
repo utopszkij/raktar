@@ -13,6 +13,8 @@ define('INTEGER','INTEGER');
 define('NOFILTER','NOFILTER');
 define('RAW','RAW');
 
+include_once 'includes/urlprocess.php';
+
 /**
  * GET/ POST kezelő objektum
  */
@@ -199,9 +201,48 @@ class Controller {
     protected function validator($record): string {
         return '';
     }
+    
+    /**
+     * filter string to array
+     * @param string $s 'name|value....'
+     * @return array
+     */ 
+    protected function filterParse(string $s):array {
+		$result = [];
+		if ($s != '') {
+			$w = explode('|',$s);
+			$i = 0;
+			while ($i < count($w)) {
+				$fn = $w[$i];
+				$fv = $w[$i+1];
+				$i = $i + 2;
+				$result[$fn] = $fv;
+			}
+		} 
+		return $result;
+	}
+	
+	/**
+	 * filter array to string
+	 * @param array $a
+	 * @return string 'name|value....'
+	 */ 
+	protected function filterToStr(array $a): string {
+		$result = '';
+		if (count($a) > 0) {
+			$w = [];
+			foreach ($a as $fn => $fv) {
+				$w[] = $fn;
+				$w[] = $fv;
+			}
+			$result = implode('|',$w);
+		}
+		return $result;
+	}
 
     /**
      * browser
+     * GET| POST: page,order,filter,limit
      */
     public function items($order = 1) {
         // paraméter olvasása get vagy sessionból
@@ -210,15 +251,26 @@ class Controller {
         $limit = round((int)$_SESSION['screen_height'] / 80);
         $limit = $this->session->input($this->name.'limit',$limit);
         $limit = $this->request->input('limit',$limit);
-        $filter = $this->session->input($this->name.'filter','');
-        $filter = $this->request->input('filter',$filter);
         $order = $this->session->input($this->name.'order',$order);
         $order = $this->request->input('order',$order);
+
+		// filter kezelés	
+        $sFilter = $this->session->input($this->name.'filter',''); // 'name|value...'
+        $sFilterArray = $this->filterParse($sFilter); // [name => value,...]
+        $rFilter = $this->request->input('filter'); // 'name|value...' vagy 'all'
+        if ($rFilter == 'all') {
+			$sFilterArray = [];
+			$filter = '';
+		} else {
+			$rFilterArray = $this->filterParse($rFilter); // [name => value,...]
+			foreach ($rFilterArray as $fn => $fv) {
+				$sFilterArray[$fn] = $fv;
+			}
+			$filter = $this->filterToStr($sFilterArray); // 'name|value...'
+		}
+        
+		// adatok a paginátor számára
         $total = $this->model->getTotal($filter);
-        if ($page < 1) {
-            $page = 1;
-        }
-        // paginátor számára adat képzés (összes lap tömbbe)
         $pages = [];
         $p = 1;
         while ((($p - 1) * $limit) < $total) {
@@ -226,15 +278,22 @@ class Controller {
             $p++;
         }
         $p = $p - 1;
+
+        // hibás paraméter kezelés
         if ($page > $p) { 
             $page = $p; 
         }
+        if ($page < 1) {
+            $page = 1;
+        }
+
         // paraméter tárolás sessionba
         $this->session->set($this->name.'page',$page);
         $this->session->set($this->name.'limit',$limit);
         $this->session->set($this->name.'filter',$filter);
         $this->session->set($this->name.'order',$order);
-        // rekordok  olvasása az adatbázisból
+        
+        // rekordok olvasása az adatbázisból
         $items = $this->model->getItems($page,$limit,$filter,$order);
 
         // megjelenítés
@@ -300,6 +359,13 @@ class Controller {
             $record = $this->session->input('oldRecord');
         }
         $this->browserURL = $this->request->input('browserUrl', $this->browserURL);
+        
+        // ckeditor videó kezelés javítása
+        foreach ($this->ckeditorFields as $ckeditorField) {
+			$fn = $ckeditorField.'2';
+			$record->$fn = urlprocess($record->$ckeditorField);
+		}
+		                
         view($this->name.'form',[
             "flowKey" => $this->newFlowKey(),
             "record" => $record,
@@ -319,7 +385,11 @@ class Controller {
 		if ($record == '') {
 			$record = $this->model->emptyRecord();
 			foreach ($record as $fn => $fv) {
-				$record->$fn = $this->request->input($fn, $fv);
+				if (in_array($fn, $this->ckeditorFields)) {
+					$record->$fn = $this->request->input($fn, $fv,HTML);
+				} else {
+					$record->$fn = $this->request->input($fn, $fv);
+				}
 			}	
 		}
         if (!$this->checkFlowKey($this->browserURL)) {

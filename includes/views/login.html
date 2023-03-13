@@ -58,7 +58,7 @@
 		   </a>
 		</div>
 	 </div>
-	 <div class="row">
+	 <div class="row" v-if="LOGIN_MUST_VERIFYED_EMAIL">
 		<div class="col-12 text-center">
 		   <var v-on:click="resendClick()" class="link">
 				{{ lng('RESEND_ACTIVATOR') }}
