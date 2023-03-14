@@ -86,11 +86,14 @@
                     $w2 = [$w[5]];
                     foreach ($subTags as $subTag) {
                         $w2[] = $subTag->name;
-                    }    
+                    }
                     $db1->where('tags','in',$w2);
+                    foreach ($w2 as $w3) {    
+                        $db1->orWhere('tags','like','%'.$w3.'%');
+                    }    
                 }    
 			}	
-    
+    //echo $db1->getSql().'<br />';
             $result = $db1->offset((($page - 1) * $limit))
                     ->limit($limit)
                     ->orderBy($order)
