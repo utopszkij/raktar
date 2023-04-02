@@ -45,6 +45,10 @@ Aki ezzel a módszerrel nem ért egyet az az index.php -t modosítva használhat
 
 ### A programot mindenki csak saját felelősségére használhatja.
 
+## verzió v2.0.1
+2023.04.02. qr-code reader a termék keresőbe)
+### ****************************************
+
 ## verzió v2.0.0
 2022.02.26. használható (nem béta)
 ### *************************************

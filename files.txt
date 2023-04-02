@@ -6,19 +6,19 @@
 -rwxrwxrwx  1 utopszkij utopszkij  1237 2023-02-27 config.php
 -rwxrwxrwx  1 utopszkij utopszkij  1205 2022-07-28 config_test.php
 drwxrwxrwx  3 utopszkij utopszkij  4096 2022-08-11 doc
--rw-rw-r--  1 utopszkij utopszkij     0 2023-03-13 files.txt
+-rw-rw-r--  1 utopszkij utopszkij     0 2023-04-02 files.txt
 drwxrwxrwx  5 utopszkij utopszkij  4096 2023-03-07 images
 drwxrwxrwx  6 utopszkij utopszkij  4096 2023-02-24 includes
 -rwxrwxrwx  1 utopszkij utopszkij  5347 2023-02-23 index.js
--rwxrwxrwx  1 utopszkij utopszkij  1701 2023-02-23 index.php
+-rwxrwxrwx  1 utopszkij utopszkij  1701 2023-04-02 index.php
 drwxrwxrwx  2 utopszkij utopszkij  4096 2023-02-24 languages
 -rwxrwxrwx  1 utopszkij utopszkij 35149 2022-07-21 LICENSE
--rwxrwxrwx  1 utopszkij utopszkij  5305 2023-03-02 readme.md
+-rwxrwxrwx  1 utopszkij utopszkij  5417 2023-04-02 readme.md
 drwxrwxrwx  3 utopszkij utopszkij  4096 2023-01-27 styles
 drwxrwxrwx  2 utopszkij utopszkij  4096 2022-07-27 tests
 drwxrwxrwx  2 utopszkij utopszkij  4096 2023-03-02 tools
 -rw-r--r--  1 utopszkij utopszkij  3049 2023-02-24 upload.php
-drwxrwxrwx 14 utopszkij utopszkij  4096 2023-03-08 vendor
+drwxrwxrwx 15 utopszkij utopszkij  4096 2023-04-02 vendor
 
 ./doc:
 összesen 40
@@ -296,7 +296,7 @@ drwxrwxrwx 2 utopszkij utopszkij   4096 2022-08-29 search
 -rwxrwxr-x 1 utopszkij utopszkij 4824510 2023-02-21 storage_1.jpg
 -rwxrwxr-x 1 utopszkij utopszkij   39223 2023-02-20 storage_2.jpg
 drwxrwxrwx 6 utopszkij utopszkij    4096 2023-02-24 upload
-drwxr-xr-x 2 www-data  www-data     4096 2023-03-07 uploads
+drwxr-xr-x 2 www-data  www-data     4096 2023-04-02 uploads
 drwxrwxrwx 2 utopszkij utopszkij    4096 2023-02-22 users
 -rwxrwxrwx 1 utopszkij utopszkij   21662 2022-07-20 utopszkij_fw.ico
 -rwxrwxrwx 1 utopszkij utopszkij  187662 2022-07-20 utopszkij_fw.png
@@ -326,7 +326,8 @@ drwxr-xr-x 2 utopszkij utopszkij 4096 2023-02-24 24
 -rw-r--r-- 1 utopszkij utopszkij 522240 2023-02-24 orkenyegypercesek.doc
 
 ./images/uploads:
-összesen 812
+összesen 824
+-rw-r--r-- 1 www-data www-data   9173 2023-04-02 alakok.jpg
 -rw-r--r-- 1 www-data www-data 830901 2023-03-07 feri2.jpg
 
 ./images/users:
@@ -380,7 +381,7 @@ drwxrwxrwx 2 utopszkij utopszkij 4096 2023-03-13 views
 -rw-rw-r-- 1 utopszkij utopszkij 3059 2023-02-22 eventmodel.php
 -rwxrwxr-x 1 utopszkij utopszkij 1540 2023-02-20 eventtypemodel.php
 -rwxrwxrwx 1 utopszkij utopszkij 1609 2022-07-22 groupmodel.php
--rwxrwxr-x 1 utopszkij utopszkij 3900 2023-03-13 productmodel.php
+-rwxrwxr-x 1 utopszkij utopszkij 4066 2023-03-13 productmodel.php
 -rwxrwxrwx 1 utopszkij utopszkij 1665 2022-10-27 statisticmodel.php
 -rwxrwxr-x 1 utopszkij utopszkij 1520 2023-02-20 storagemodel.php
 -rwxrwxrwx 1 utopszkij utopszkij 2936 2023-03-12 tagmodel.php
@@ -402,7 +403,7 @@ drwxrwxrwx 2 utopszkij utopszkij 4096 2023-03-13 views
 -rwxrwxrwx 1 utopszkij utopszkij  2679 2023-02-26 footer.html
 -rwxrwxrwx 1 utopszkij utopszkij  2234 2023-02-19 groupbrowser.html
 -rwxrwxrwx 1 utopszkij utopszkij  2347 2023-02-18 groupform.html
--rwxrwxrwx 1 utopszkij utopszkij   975 2023-02-26 impressum_hu.html
+-rwxrwxrwx 1 utopszkij utopszkij  1052 2023-04-02 impressum_hu.html
 -rwxrwxrwx 1 utopszkij utopszkij 19919 2022-07-20 licence_hu.html
 -rwxrwxrwx 1 utopszkij utopszkij  3139 2023-02-27 login.html
 -rwxrwxrwx 1 utopszkij utopszkij  5142 2023-03-07 mainmenu.html
@@ -410,7 +411,7 @@ drwxrwxrwx 2 utopszkij utopszkij 4096 2023-03-13 views
 -rwxrwxrwx 1 utopszkij utopszkij 27499 2023-02-26 policy2_hu.html
 -rwxrwxrwx 1 utopszkij utopszkij  8474 2023-02-26 policy3_hu.html
 -rwxrwxrwx 1 utopszkij utopszkij 19770 2023-02-26 policy_hu.html
--rwxrwxr-x 1 utopszkij utopszkij  6225 2023-03-13 productbrowser.html
+-rwxrwxr-x 1 utopszkij utopszkij  7134 2023-04-02 productbrowser.html
 -rwxrwxr-x 1 utopszkij utopszkij 18989 2023-03-08 productform.html
 -rw-rw-r-- 1 utopszkij utopszkij  6566 2023-03-13 producttree.html
 -rwxrwxrwx 1 utopszkij utopszkij  7498 2023-02-23 profile.html
@@ -437,8 +438,8 @@ drwxrwxrwx 2 utopszkij utopszkij 4096 2023-03-08 default
 
 ./styles/default:
 összesen 12
--rwxrwxr-x 1 utopszkij utopszkij 6063 2023-03-08 main.php
--rwxrwxrwx 1 utopszkij utopszkij 3320 2023-02-26 style.css
+-rwxrwxr-x 1 utopszkij utopszkij 6123 2023-04-02 main.php
+-rwxrwxrwx 1 utopszkij utopszkij 3318 2023-03-15 style.css
 
 ./tests:
 összesen 44
@@ -468,7 +469,7 @@ drwxrwxrwx 2 utopszkij utopszkij 4096 2023-03-08 default
 -rwxrwxrwx 1 utopszkij utopszkij  325 2022-07-07 viewtest.sh
 
 ./vendor:
-összesen 116
+összesen 120
 -rw-rw-r--  1 utopszkij utopszkij   178 2023-02-21 autoload.php
 drwxrwxrwx  2 utopszkij utopszkij  4096 2022-11-26 axios
 drwxrwxrwx  4 utopszkij utopszkij  4096 2022-07-27 bootstrap
@@ -487,6 +488,7 @@ drwxrwxrwx  2 utopszkij utopszkij  4096 2019-11-16 jquery
 -rwxrwxrwx  1 utopszkij utopszkij  2818 2023-01-27 model.php
 drwxrwxr-x  4 utopszkij utopszkij  4096 2023-02-21 phpmailer
 drwxrwxrwx  2 utopszkij utopszkij  4096 2023-02-20 qrcode
+drwxrwxr-x  2 utopszkij utopszkij  4096 2023-04-02 qrcode_reader
 drwxrwxrwx  2 utopszkij utopszkij  4096 2022-11-26 swiper
 -rwxrwxrwx  1 utopszkij utopszkij  3295 2023-01-21 view.php
 -rwxrwxrwx  1 utopszkij utopszkij 10495 2022-07-19 viewTester.js
@@ -3321,6 +3323,12 @@ drwxrwxr-x 2 utopszkij utopszkij  4096 2022-12-08 src
 -rwxrwxrwx 1 utopszkij utopszkij 33168 2015-11-25 qrcode.js
 -rwxrwxrwx 1 utopszkij utopszkij 19927 2015-11-25 qrcode.min.js
 -rwxrwxrwx 1 utopszkij utopszkij  1096 2015-11-25 README.md
+
+./vendor/qrcode_reader:
+összesen 56
+-rw-rw-r-- 1 utopszkij utopszkij  1824 2023-04-02 index.html
+-rw-rw-r-- 1 utopszkij utopszkij 45419 2023-04-02 qr_packed.js
+-rw-rw-r-- 1 utopszkij utopszkij   103 2023-04-02 readme.txt
 
 ./vendor/swiper:
 összesen 1100

@@ -18,6 +18,7 @@ form .row {margin:20px 0px 20px 0px}
 .popupSuccess {background-color:rgb(80, 156, 96); color:rgb(24, 16, 16)}
 .popupSimple {background-color:silver; color:black;} 
 
+
 .paginator {display:inline-block; list-style: none;}
 .paginator li {margin-right:0px;}
 .paginator a {display:inline-block; text-decoration:none; color:black; 
@@ -62,12 +63,12 @@ pre code {display:block; max-height:14px; padding:0px; margin:0px; line-height:1
 #products .name {width:auto}
 #products .tags {width:200px}
 #products .buttons {width:auto}
-#products .navbar-toggler, #products .navbar-toggler:hover : {background-color::blue; color:white}
+#products .navbar-toggler, #products .navbar-toggler:hover {background-color:blue; color:white}
 
 #footer {background-color:black; color:white}
 #footer a {text-decoration:none; color:white}
 
-#scrolltotop {float:right; background-color:silver; opccity:0.5;}
+#scrolltotop {float:right; background-color:silver; opacity:0.5;}
 
 @media screen and (max-width: 992px) {
 	#products th {display:none}
