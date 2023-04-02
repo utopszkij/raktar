@@ -20,6 +20,14 @@
 			<div class="col-12">
 				<label>{{ lng('NAME_SUBSTRING') }}</label>
 				<input type="filterName" id="filterName" class="form-control" /> 
+				<!-- qrcode_reader button -->
+				<var style="display:inline-block; height:30px; width:30px; background-color:silver; cursor:pointer; font-size:28px">
+					<input type=file accept="image/*" __capture=environment __onclick="return showQRIntro();" 
+						onchange="app.openQRCamera(this);" tabindex=-1 
+						style="position:absolute; overflow:hidden; width:30px; height:30px; opacity:0; cursor:pointer">
+					<em class="fas fa-qrcode"></em>
+				</var>	
+
 			</div>
 			<div class="col-12">
 				<label>{{ lng('STORAGE') }}</label>
@@ -179,6 +187,22 @@
 				i++;
 			}
 			return result + tag.name;
-		}    
+		},
+		openQRCamera(node) {
+	  		var reader = new FileReader();
+	  		reader.onload = function() {
+			node.value = "";
+			qrcode.callback = function(res) {
+				if(res instanceof Error) {
+					alert("No QR code found. Please make sure the QR code is within the camera's frame and try again.");
+				} else {
+					node.parentNode.previousElementSibling.value = res;
+				}
+			};
+			qrcode.decode(reader.result);
+		};
+		reader.readAsDataURL(node.files[0]);
+		}
+    
     }
 </script>

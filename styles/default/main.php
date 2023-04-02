@@ -21,6 +21,8 @@
 	<script type="text/javascript" src="vendor/jquery/jquery-2.2.4.min.js"></script>
 	<!-- qrcode -->
     <script type="text/javascript" src="vendor/qrcode/qrcode.js"></script>
+	<script src='vendor/qrcode_reader/qr_packed.js'></script>
+
 
 	<link rel="stylesheet" href="<?php echo SITEURL; ?>/styles/default/style.css?t=<?php echo $fileVerzio; ?>">
 
