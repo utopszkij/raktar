@@ -53,6 +53,9 @@ class Order extends Controller {
         $order->phone = '';
         $order->address = '';
         $order->desc = '';
+        $order->worktype = '';
+        $db = new \RATWEB\DB\Query('worktypes');
+        $order->worktypes = $db->orderBy('name')->all();
         view('orderform',["flowKey" => $this->newFlowKey(),
             'order' => $order,
             "errorMsg" => $this->session->input('errorMsg',''),
@@ -71,11 +74,20 @@ class Order extends Controller {
         $order->phone = $this->request->input('phone','');
         $order->address = $this->request->input('address','');
         $order->desc = $this->request->input('desc','',HTML);
+        $order->worktype = $this->request->input('worktype','');
         $order->created = date('Y-m-d H:i:s');
         $error = $this->validator($order);
         if ($error == '') {
             // levél küldés;
             $this->mailer =  new PHPMailer(true);
+			$this->mailer->isSMTP();                                //Send using SMTP
+			$this->mailer->Host       = MAIL_HOST;                  //Set the SMTP server to send through
+			$this->mailer->SMTPAuth   = true;                       //Enable SMTP authentication
+			$this->mailer->Username   = MAIL_USERNAME;                  //SMTP username
+			$this->mailer->Password   = MAIL_PASSWORD;              //SMTP password
+			$this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;//Enable implicit TLS encryption
+			$this->mailer->Port       = MAIL_PORT;                  //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+			$this->mailer->CharSet    = 'utf-8';            
 
             $mailBody = '<div>
             <h2>Munka megrendelés</h2>
@@ -83,14 +95,11 @@ class Order extends Controller {
             <p>Email: <a href="mailto::'.$order->email.'">'.$order->email.'</a></p>
             <p>Telefon: '.$order->phone.'</p>
             <p>Helyszin: '.$order->address.'</p>
+            <p>Munka típusa: '.$order->worktype.'</p>
             <p>Leírás:</p>
             '.$order->desc.'
             <p>Levél küldés időpontja: '.$order->created.'</p>
             </div>';
-
-echo $mailBody;            
-
-
             $this->mailer->setFrom(MAIL_FROM_ADDRESS);
             $this->mailer->addAddress(ADMINEMAIL);
             $this->mailer->isHTML(true);          
