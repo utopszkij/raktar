@@ -1,0 +1,116 @@
+
+<div v-if="errorMsg != ''" class="alert alert-danger">
+    <div v-html="lng(errorMsg)"></div>
+</div>
+
+<div id="worktype">
+    <form id="worktypeForm" action="index.php" method="post" class="form" 
+        enctype="multipart/form-data"  style="display:none">
+        <input type="hidden" v-model="flowKey" name="flowKey" />
+        <input type="hidden" value="worktype.save" name="task" />			
+		
+					<div class="row">
+						<div class="col-12">
+							<label>{{ lng("ID") }}</label>:
+							<input type="number" name="id" v-model="record.id" disabled="disabled" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-12">
+							<label>{{ lng("NAME") }}</label>:
+							<input type="text" name="name" v-model="record.name"  required="required" />
+						</div>
+					</div>
+					
+        <div class="row formBUttons" v-if="logedAdmin">
+            <div class="col-12">
+                <button type="submit" class="btn btn-success">
+                    <em class="fas fa-check"></em>&nbsp;{{ lng('SAVE') }}
+                </button>&nbsp;
+                <a v-bind:href="previous" class="btn btn-secondary">
+                    <em class="fas fa-reply"></em>&nbsp;{{ lng('CANCEL') }}
+                </a>&nbsp;
+                <button type="button" 
+                   v-on:click="delClick()"
+                   v-if="record.id > 0"
+                   class="btn btn-danger">
+                    <em class="fas fa-eraser"></em>&nbsp;{{ lng('DELETE') }}
+                </button>
+            </div>
+        </div>
+        <div class="row formBUttons" v-if="!logedAdmin">
+            <div class="col-12">
+                <a v-bind:href="previous" class="btn btn-secondary">
+                    <em class="fas fa-reply"></em>&nbsp;{{ lng('BACK') }}
+                </a>
+            </div>
+        </div>
+    </form>    
+
+    <div id="worktypeShow">
+		
+        <div class="row">
+            <div class="col-12">
+                <label>{{ lng("ID") }}</label>:
+                <var v-html="record.id"></var>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <label>{{ lng("NAME") }}</label>:
+                <var v-html="record.name"></var>
+            </div>
+        </div>
+					
+        <div class="row formBUttons" v-if="logedAdmin">
+            <div class="col-12">
+                <button type="button" 
+                   v-on:click="editClick()"
+                   class="btn btn-primary">
+                    <em class="fas fa-edit"></em>&nbsp;{{ lng('EDIT') }}
+                </button>
+                <button type="button" 
+                   v-on:click="delClick()"
+                   class="btn btn-danger">
+                    <em class="fas fa-eraser"></em>&nbsp;{{ lng('DELETE') }}
+                </button>
+            </div>
+        </div>
+        <div class="row formBUttons" v-if="!logedAdmin">
+            <div class="col-12">
+                <a v-bind:href="previous" class="btn btn-secondary">
+                    <em class="fas fa-reply"></em>&nbsp;{{ lng('BACK') }}
+                </a>
+            </div>
+        </div>
+    </div>    
+    
+    
+</div>
+
+
+
+<script>
+   var methods = {
+		afterMount() {
+			if (this.record != undefined) {
+				if (this.record.id == 0) {
+					this.editClick();
+				}
+			}
+		},
+        delClick() {
+            popupConfirm(lng('SUREDELETE'), 
+            function() {
+                location=HREF('worktype.delete',{id:app.record.id, key:app.flowKey}); 
+            })
+        },
+        editClick() {
+            console.log(document.getElementById('worktypeShow'));
+			document.getElementById('worktypeForm').style='display:block';
+			document.getElementById('worktypeShow').style='display:none';
+		}    
+    };
+</script>

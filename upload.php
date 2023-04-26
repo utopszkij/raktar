@@ -15,7 +15,8 @@
 		mkdir($uploadDir,0755);
 	}
   foreach ($_FILES as $fn => $fv) {
-		$uploadFile = $uploadDir . clearFileName(basename($_FILES[$fn]['name']));
+	    $uploadName = date('Ymdhis').clearFileName(basename($_FILES[$fn]['name']));
+		$uploadFile = $uploadDir . $uploadName;
 		$uploadFileExt = pathinfo($uploadFile,PATHINFO_EXTENSION);
 		if (!in_array($uploadFileExt, Array('jpg','jpeg','png','gif',
 			'doc','docx','pdf','odt','txt'))) {
@@ -26,7 +27,7 @@
 			unlink($uploadFile);
 		}
 		if (move_uploaded_file($_FILES[$fn]['tmp_name'], $uploadFile)) {
-			$url = $uploadUrl.clearFileName(basename($_FILES[$fn]['name']));
+			$url = $uploadUrl.$uploadName;
 			echo JSON_encode(array('url'=>$url));
 			exit();
 		} else {

@@ -1,165 +1,161 @@
 
-<div v-if="errorMsg != ''" class="alert alert-danger">
-    <div v-html="lng(errorMsg)"></div>
-</div>
-
-<div id="blog">
-	<h2>{{ lng('BLOG') }}</h2>
-    <form id="blogForm" action="index.php" method="post" class="form" 
-        enctype="multipart/form-data"  style="display:none">
-        <input type="hidden" v-model="flowKey" name="flowKey" />
-        <input type="hidden" value="blog.save" name="task" />			
-		
-					<div class="row">
-						<div class="col-12">
-							<label>{{ lng("ID") }}</label>:
-							<input type="number" name="id" v-model="record.id" disabled="disabled" />
-							<input type="hidden" name="id" v-model="record.id" />
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-12">
-							<label>{{ lng("TITLE") }}</label>:
-							<input type="text" name="title" v-model="record.title"  required="required" />
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-12">
-						
-							<textarea cols="60" rows="5" name="body" id="body" 
-								style="height:500px" v-html="record.body"></textarea>
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-12">
-							<label>{{ lng("CREATED_BY") }}</label>:
-							<input type="text" name="created_name" v-model="record.created_name" required="required" disabled="disabled" />
-                            <input type="hidden" name="created_by" v-model="record.created_by" />
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-12">
-							<label>{{ lng("CREATED_AT") }}</label>:
-							<input type="date" name="created_at" v-model="record.created_at" required="required" disabled="disabled" />
-                            <input type="hidden" name="created_at" v-model="record.created_at" />
-						</div>
-					</div>
-					
-        <div class="row formButtons" v-if="logedAdmin">
+<div id="blog" class="edit">
+    <div class="alert alert-danger" v-if="errorMsg != ''" v-html="lng(errorMsg)"></div>
+    <div class="alert alert-success" v-if="successMsg != ''" v-html="lng(successMsg)"></div>
+    <div class="row">
+        <div class="col-12">
+            <h2>{{ lng('BLOG') }}</h2>	
+            <h3 v-if="blog.id == 0">{{ lng('ADD')}}</h3>		
+            <h3 v-if="blog.id > 0">{{ lng('EDIT')}}</h3>		
+        </div>
+    </div>
+    <form id="blogForm" action="index.php" method="post">
+        <input type="hidden" value="blog.blogsave" name="task" />			
+        <input type="hidden" v-model="blog.id" name="id" />
+        <input type="hidden" name="flowKey" v-model="flowKey" />
+        <div class="row">
+                <div class="col-md-3 col-sd-12">
+                    <label>{{ lng('TITLE') }}:</label>			
+                </div>
+                <div class="col-md-8 col-sd-12">
+                    <input type="text" required="required" v-model="blog.title"
+                     id="title" name="title" 
+                     class="form-control" style="width:100%" />
+                     <br /><br />
+                </div>
+                <div class="col-md-3 col-sd-12">
+                    <label>{{ lng('BODY') }}:</label>			
+                </div>
+                <div class="col-md-8 col-sd-12">
+                    <textarea v-model="blog.body"
+                     id="body" name="body" style="height:600px"></textarea> 
+                </div>
+                <div class="col-12">
+                    Támogatott video linkek: youtube,vimeo,tiktok
+                </div>
+                
+                <div class="col-12">
+                    &nbsp;{{ blog.createdAt }}
+                    &nbsp;{{ blog.creator.name }}
+                </div>
+        </div><!-- .row -->
+        <div class="row">
             <div class="col-12">
-                <button type="submit" class="btn btn-success">
+                <button type="button" class="btn btn-success" v-on:click="okClick()">
                     <em class="fas fa-check"></em>&nbsp;{{ lng('SAVE') }}
-                </button>&nbsp;
-                <a v-bind:href="previous" class="btn btn-secondary">
+                </button>
+                &nbsp;
+                <a href="index.php?task=blog.blogs" class="btn btn-secondary">
                     <em class="fas fa-reply"></em>&nbsp;{{ lng('CANCEL') }}
-                </a>&nbsp;
-                <button type="button" 
-                   v-on:click="delClick()"
-                   v-if="record.id > 0"
-                   class="btn btn-danger">
-                    <em class="fas fa-eraser"></em>&nbsp;{{ lng('DELETE') }}
-                </button>
-            </div>
-        </div>
-        <div class="row formButtons" v-if="!logedAdmin">
-            <div class="col-12">
-                <a v-bind:href="previous" class="btn btn-secondary">
-                    <em class="fas fa-reply"></em>&nbsp;{{ lng('BACK') }}
                 </a>
             </div>
         </div>
-    </form>    
+           
+    </form>
 
-    <div id="blogShow" class="form">
-		
-					<div class="row">
-						<div class="col-12">
-							<label>{{ lng("ID") }}</label>:
-							<var v-html="record.id"></var>
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-12">
-							<label>{{ lng("TITLE") }}</label>:
-							<var v-html="record.title"></var>
-						</div>
-					</div>
-                    
-					<div class="keret">
-					<div class="row">
-						<div class="col-12">
-							
-							<var v-html="record.body2"></var>
-						</div>
-					</div>
-                    </div>
-					<div class="row">
-						<div class="col-12">
-							<label>{{ lng("CREATED_BY") }}</label>:
-							<var v-html="record.created_name"></var>
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-12">
-							<label>{{ lng("CREATED_AT") }}</label>:
-							<var v-html="record.created_at"></var>
-						</div>
-					</div>
-					
-        <div class="row formButtons" v-if="logedAdmin">
-            <div class="col-12">
-                <button type="button" 
-                   v-on:click="editClick()"
-                   class="btn btn-primary">
-                    <em class="fas fa-edit"></em>&nbsp;{{ lng('EDIT') }}
-                </button>
-                <button type="button" 
-                   v-on:click="delClick()"
-                   class="btn btn-danger">
-                    <em class="fas fa-eraser"></em>&nbsp;{{ lng('DELETE') }}
-                </button>
-            </div>
-        </div>
-        <div class="row formButtons" v-if="!logedAdmin">
-            <div class="col-12">
-                <a v-bind:href="previous" class="btn btn-secondary">
-                    <em class="fas fa-reply"></em>&nbsp;{{ lng('BACK') }}
-                </a>
-            </div>
-        </div>
-    </div>    
-    
-    
-</div>
-
-
+</div> <!-- blogForm-->
 
 <script>
-    methods = {
-		afterMount() {
-			if (this.record != undefined) {
-				if (this.record.id == 0) {
-					this.editClick();
-				}
-			}
-		},
+var methods = {
         delClick() {
-            popupConfirm(lng('SUREDELETE'), 
-            function() {
-                location=HREF('blog.delete',{id:app.record.id, key:app.flowKey}); 
-            })
+			popupConfirm('Bitos, törölni akarod ezt a cikket? ('+this.blog.id+')', function() {
+				document.location = 'index.php?task=delblog&blog_id='+app.blog.id;		
+			});
+		},
+        afterMount() {
+            console.log('afterMount');
+            console.log(this.blog);
+/*
+		if (this.blog.id == 0) {
+			this.editClick();
+		}
+*/
+
+
+/*
+CKEDITOR.editorConfig = function( config ) {
+	config.toolbarGroups = [
+		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+		{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+		{ name: 'links', groups: [ 'links' ] },
+		{ name: 'insert', groups: [ 'insert' ] },
+		{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+		{ name: 'styles', groups: [ 'styles' ] },
+		{ name: 'colors', groups: [ 'colors' ] },
+		{ name: 'tools', groups: [ 'tools' ] },
+		{ name: 'others', groups: [ 'others' ] },
+		{ name: 'about', groups: [ 'about' ] }
+	];
+
+	config.removeButtons = 'Save,Templates,Cut,SelectAll,
+    Scayt,Form,Strike,Subscript,Superscript,CopyFormatting,
+    RemoveFormat,Outdent,Indent,Blockquote,
+    CreateDiv,BidiLtr,BidiRtl,Language,JustifyLeft,
+    JustifyCenter,JustifyRight,JustifyBlock,
+    Unlink,Anchor,Flash,HorizontalRule,Smiley,PageBreak,
+    Iframe,TextColor,BGColor,Format,Font,Maximize,ShowBlocks,About,Find,
+    Replace,Copy,Paste,PasteText,PasteFromWord,Print,Preview,NewPage,
+    Checkbox,Radio,TextField,Textarea,Select,Button,
+    ImageButton,HiddenField,Source';
+};
+*/
+
+
+
+            if (window.editor == undefined) {
+                ClassicEditor
+                .create( document.querySelector( 'textarea#body' ), {
+                    toolbar: [ 'heading', '|', 'bold' , 'italic', 'link', 'bulletedList', 'numberedList',
+                       'imageUpload','insertTable','sourceEditing','mediaEmbed','undo','redo'],
+                    language: 'hu',
+                    extraPlugins: [ MyCustomUploadAdapterPlugin ],
+                    mediaEmbed: {
+                        extraProviders: [
+                        {
+                                name: 'tiktok',
+                                url: /^tiktok\.com\/(.+)/,
+                                html: match => `video: https://tiktok.com/${ match[ 1 ] }`
+                            },
+                            {
+                                name: 'fb_watch',
+                                url: /^fb\.watch\/(.+)/,
+                                html: match => `fb.watch video`
+                            },
+                            {
+                                name: 'facebook',
+                                url: /^facebook\.com\/(.+)/,
+                                html: match => `facebook video`
+                            },
+                            {
+                                name: 'other',
+                                url: /(.+)/,
+                                html: match => `other video`
+                            }
+                            
+                        ]
+            		}
+                } )
+                .then( editor => {
+                    window.editor = editor;
+                } )
+                .catch( err => {
+                    console.error( err.stack );
+                } );
+            }
         },
-        editClick() {
-			document.getElementById('blogForm').style='display:block';
-			document.getElementById('blogShow').style='display:none';
-			window.ckeditorInit('textarea#body');
-			document.querySelector("input[name=\"title\"]").focus();
-		}    
-    }
+        okClick() {
+            var errorMsg = '';
+            if (document.getElementById('title').value == '') {
+                errorMsg += lng('TITLE_REQUESTED')+'<br>';
+            }
+            if (window.editor.getData() == '') {
+                errorMsg += lng('BODY_REQUESTED')+'<br>';
+            }
+            if (errorMsg != '') {
+                popupMsg(errorMsg,'popupError');
+            } else {
+                document.getElementById('blogForm').submit();
+            }
+        }
+};   
 </script>

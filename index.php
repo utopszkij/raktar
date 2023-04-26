@@ -29,14 +29,13 @@ importComponent('upgrade');
 $fw = new Fw();
 
 //+ ----------- verzio kezelés start ------------
-$fileVerzio = 'v2.0.1';
+$fileVerzio = 'v1.2.0';
 $upgrade = new \Upgrade();
 $dbverzio  = $upgrade->getDBVersion();
 $lastVerzio = $upgrade->getLastVersion();
 $upgrade->dbUpgrade($dbverzio);
 $branch = $upgrade->branch;
 //- ----------- verzio kezelés end ------------
-
 // képernyő méretek elérése
 if (isset($_COOKIE['screen_width'])) {
 	$_SESSION['screen_width'] = $_COOKIE['screen_width'];

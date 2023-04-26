@@ -45,6 +45,10 @@ Aki ezzel a módszerrel nem ért egyet az az index.php -t modosítva használhat
 
 ### A programot mindenki csak saját felelősségére használhatja.
 
+## verzió v2.1.0
+2023.04.??. blog comment, worktype, order
+### ****************************************
+
 ## verzió v2.0.1
 2023.04.02. qr-code reader a termék keresőbe)
 ### ****************************************
