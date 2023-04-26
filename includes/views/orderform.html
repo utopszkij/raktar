@@ -1,0 +1,129 @@
+
+<div id="order" class="edit">
+    <div class="alert alert-danger" v-if="errorMsg != ''" v-html="lng(errorMsg)"></div>
+    <div class="alert alert-success" v-if="successMsg != ''" v-html="lng(successMsg)"></div>
+    <div class="row">
+        <div class="col-12">
+            <h2>{{ lng('ORDER') }}</h2>	
+        </div>
+    </div>
+    <form id="orderForm" action="index.php" method="post">
+        <input type="hidden" value="order.send" name="task" />			
+        <input type="hidden" name="flowKey" v-model="flowKey" />
+        <div class="row">
+            <div class="col-md-3 col-sd-12">
+                <label>{{ lng('NAME') }}:</label>			
+            </div>
+            <div class="col-md-8 col-sd-12">
+                <input type="text" required="required" v-model="order.name"
+                 id="name" name="name" 
+                 class="form-control" style="width:100%" />
+                 <br /><br />
+            </div>
+
+            <div class="col-md-3 col-sd-12">
+                <label>{{ lng('EMAIL') }}:</label>			
+            </div>
+            <div class="col-md-8 col-sd-12">
+                <input type="text" required="required" v-model="order.email"
+                 id="email" name="email" 
+                 class="form-control" style="width:100%" />
+                 <br /><br />
+            </div>
+
+            <div class="col-md-3 col-sd-12">
+                <label>{{ lng('PHONE') }}:</label>			
+            </div>
+            <div class="col-md-8 col-sd-12">
+                <input type="text" required="required" v-model="order.phone"
+                 id="phone" name="phone" 
+                 class="form-control" style="width:100%" />
+                 <br /><br />
+            </div>
+
+            <div class="col-md-3 col-sd-12">
+                <label>{{ lng('ADDRESS') }}:</label>			
+            </div>
+            <div class="col-md-8 col-sd-12">
+                <input type="text" required="required" v-model="order.address"
+                 id="address" name="address" 
+                 class="form-control" style="width:100%" />
+                 <br /><br />
+            </div>
+
+            <div class="col-md-3 col-sd-12">
+                <label>{{ lng('DESC') }}:</label>			
+            </div>
+            <div class="col-md-8 col-sd-12">
+                    <textarea v-model="order.desc"
+                     id="desc" name="desc" style="width:100%; height:600px" reqired="required"></textarea> 
+            </div>
+        </div><!-- .row -->
+        <div class="row">
+            <div class="col-12 alter alter-info">
+                {{ lng('ORDER_INFO') }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button type="submit" class="btn btn-success">
+                    <em class="fas fa-check"></em>&nbsp;{{ lng('SEND') }}
+                </button>
+            </div>
+        </div>
+           
+    </form>
+
+</div> <!-- orderForm-->
+
+<script>
+var methods = {
+        afterMount() {
+            if (window.editor == undefined) {
+
+                ckeditorInit('#desc');
+
+                /*
+                ClassicEditor
+                .create( document.querySelector( 'desc' ), {
+                    toolbar: [ 'heading', '|', 'bold' , 'italic', 'link', 'bulletedList', 'numberedList',
+                       'imageUpload','insertTable','sourceEditing','mediaEmbed','undo','redo'],
+                    language: 'hu',
+                    extraPlugins: [ MyCustomUploadAdapterPlugin ],
+                    mediaEmbed: {
+                        extraProviders: [
+                        {
+                                name: 'tiktok',
+                                url: /^tiktok\.com\/(.+)/,
+                                html: match => `video: https://tiktok.com/${ match[ 1 ] }`
+                            },
+                            {
+                                name: 'fb_watch',
+                                url: /^fb\.watch\/(.+)/,
+                                html: match => `fb.watch video`
+                            },
+                            {
+                                name: 'facebook',
+                                url: /^facebook\.com\/(.+)/,
+                                html: match => `facebook video`
+                            },
+                            {
+                                name: 'other',
+                                url: /(.+)/,
+                                html: match => `other video`
+                            }
+                            
+                        ]
+            		}
+                } )
+                .then( editor => {
+                    window.editor = editor;
+                } )
+                .catch( err => {
+                    console.error( err.stack );
+                } );
+                */
+            }
+        }
+};   
+</script>

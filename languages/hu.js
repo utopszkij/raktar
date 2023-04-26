@@ -160,5 +160,39 @@ tokens = {
     "QUANTITY":"Mennyiség",
     "EVENT_DIRECTION":"Irány",
 
+    /* blog */
+    "BLOGS":"Cikkek",
+    "BLOG":"Cikk",
+    "TITLE":"Cím",
+    "TITLE_REQUSTED":"Címet meg kell adni",
+    "BODY":"Tartalom",
+    "BODY_REQUESTED":"Tartalmat meg kell adni",
+    "COMMENTS":"Hozzászólások",
+    "COMMENT":"Hozzászólás",
+    "COMMENT_BODY":"Hozzászólás",
+    "COMMENT_BODY_REQUESTED":"Hozzászólást meg kell adni",
+    "COMMENT_COUNT":"Hozzászólások",
+    "SEND":"Küld",
+    "TITLE_SUBSTRING":"Cím részlet",
+    "BODY_SUBSTRING":"Tartalom részlet",
+    "CREATOR_NAME":"Szerző",
+    "CREATED_BY_GE":"Ennél újabbak:",
+
+    /* worktype */
+    "WORKTYPE":"Munka tipus",
+    "WORKTYPES":"Munka tipusok",
+
+    /* order */
+    "ORDER":"Munka rendelés",
+    "PHONE":"Telefon",
+    "ADDRESS":"Helyszin",
+    "DESC":"A megrendelt munka minnél pontosabb leírása, fénykép is csatolható",
+    "ORDER_INFO":"Árajánlattal és a további egyeztetés céljából hamarosan felvesszük önnel a kapcsolatot a megadott elérhetőségek egyikén.",
+    "NAME_REQUESTED":"Név megadása kötelező",
+    "EMAIL_REQUESTED":"E-mail megadása kötelező",
+    "PHONE_REQUESTED":"Telefon megadása kötelező",
+    "ADDRESS_REQUESTED":"Helyszin megadása kötelező",
+    "DESC_REQUESTED":"Leírás megadása kötelező",
+
     "END":"Vége"
 };

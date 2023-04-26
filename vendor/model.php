@@ -96,7 +96,7 @@
                 $result = $record->id;
             }
             $this->errorMsg = $q->error;
-            return $result;
+            return (int) $result;
         }
 
         /**

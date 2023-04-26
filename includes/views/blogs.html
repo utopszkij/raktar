@@ -7,17 +7,17 @@
 					<h1 class="ribbon-banner"><span>{{ lng('BLOGS') }}</span></h1>
 				</div>
 				<div class="col-2">
-					<a href="#" id="filterFormToggle" v-on:click="filterFormShow()"
+					<button id="filterFormToggle" v-on:click="filterFormShow()"
 						class="btn btn-secondary" style="margin-right:2px"  v-bind:title="lng('SEARCH')">
 						<em class="fa fa-search"></em>
-					</a>
+					</button>
 				</div>
 			</div>	
 			<div class="row">&nbsp;</div>
 
 			<div class="filterForm" id="divFilterForm" style="display:none">
 				<form method="get" action="index.php" id="filterForm" class="form">
-					<input type="hidden" name="task" value="blogs" />
+					<input type="hidden" name="task" value="blog.blogs" />
 					<input type="hidden" name="page" value="1" />
 					<div>
 						<label>{{ lng('TITLE_SUBSTR') }}:</label>
@@ -51,9 +51,9 @@
 			<div class="row">
 				<div id="blogList" class="col-md-12">
                     <div class="bloghead" v-for="blog in blogs">
-                        <a v-bind:href="HREF('blog',{blog_id:blog.id})">
+                        <a v-bind:href="HREF('blog.blog',{blog_id:blog.id})">
                             <h3>{{ blog.title }}</h3>
-                            <p><img v-bind:src="blog.creator.avatar" class="avatar" />
+                            <p>
                                 &nbsp;
                                 {{ blog.createdAt }} <span v-bind:class="blog.creator.group">{{ blog.creator.name }}</span>  
                             </p>
@@ -61,14 +61,13 @@
                         </a>
                         <p>{{ lng('COMMENT_COUNT') }}: {{ blog.commentCount }}
 							&nbsp;&nbsp;&nbsp;		
-                           <em class="fas fa-thumbs-up"></em>&nbsp; {{ blog.likeCount }} 
                         </p>
                     </div>
                 </div>    
 				include paginator
 			</div>
 			<div style="text-align:center" v-if="loged > 0">
-				<a v-bind:href="HREF('addblog',{id:0})" class="btn btn-primary">
+				<a v-bind:href="HREF('blog.addblog',{id:0})" class="btn btn-primary">
 					<em class="fas fa-plus-circle"></em>&nbsp;{{ lng('ADD') }}</a>
 			</div>
 		</div>	

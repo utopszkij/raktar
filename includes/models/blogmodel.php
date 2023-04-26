@@ -12,78 +12,180 @@
         }
 
         /**
-         * üres group rekord
+         * logikai user rekord (users+profilok)
          */
         public function emptyRecord(): Record {
             $result = new Record();
-                    $result->id = 0;
-        $result->title = "";
-        $result->body = "";
-        $result->created_by = $_SESSION["loged"];
-        $result->created_at = "2023-03-03";
-
+            $result->id = 0;
+            $result->title = '';
+            $result->body = '';
+            $result->created_by = '';
+            $result->created_at = '';
             return $result;
         }
 
-		/** a filter str alapján bőviti a Query -t
-		 * rendszerint át kell definiálni a mező tipusoktól függően
-		 * @param Query
-		 * @param string $filter 'name|value...'
-		 */ 
-		protected function filterToQuery(Query &$db, string $filter) {
-            if ($filter != '') {        
-				$filter = explode('|',$filter);        
-				$i=0;
-				while ($i < count($filter)) {
-					if ($filter[$i+1] != '') {
-						if ($filter[$i] == 'title') {
-							$db->where($filter[$i],'like','%'.$filter[$i+1].'%');
-						} else {	
-							$db->where($filter[$i],'=',$filter[$i+1]);
-						}
-					}	
-					$i = $i + 2;
-				}
-			}
-		}
+        /**
+         * a $filter alapján Query -t alakit ki
+         * @param Query $q
+         * @param object $filter {titleStr, bodyStr, creatorName, createdAt}
+         */
+        protected function processBlogFilter(&$q, $filter) {
+            if ($filter->titleStr != '') {
+                $q->where('b.title','like','%'.$filter->titleStr.'%');
+            }
+            if ($filter->bodyStr != '') {
+                $q->where('b.body','like','%'.$filter->bodyStr.'%');
+            }
+            if ($filter->createdAt != '') {
+                $q->where('b.created_at','>=',$filter->createdAt);
+            }
+            if ($filter->creatorName != '') {
+                $q2 = new Query('users');
+                $user = $q2->where('username','=',$filter->creatorName)->first();
+                if (isset($user->id)) {
+                    $q->where('b.created_by','=',$user->id);
+                } else {
+                    $q->where('b.created_by','=',0);
+                }
+            }
+        }
 
         /**
-         * rekordok lapozható listája
-         * rendszerint át kell definiálni a szükséges oszlopok, mezők
-         * tábla összefüggések szerint
+         * user name lapján avatar kép url -t képez
+         * @param string $name
+         * @return string
+         */
+        public function userAvatar(int $user_id): string {
+            $result = 'images/users/noavatar.png';
+            /*
+            $q = new Query('profilok');
+            $p = $q->where('id','=',$user_id)->first();
+            if (isset($p->id)) {
+                if ($p->avatar != '') {
+                    $result = 'images/users/'.$p->avatar;
+                }
+            }
+            */
+            return $result;
+        }
+
+        /**
+         * blogg böngésző számára rekord set
          * @param int $page
+         * @param object $filter {titleStr, bodyStr, creatorName, createdAt}
          * @param int $limit
-         * @param string $filter 'name|value...' 
-         * @param string $order 
+         * @param string $oder
+         * @param string $orderDir 'ASC'|'DESC'
          * @return array
          */
-        public function getItems(int $page, int $limit, string $filter, string $order): array {
-			if ($page <= 0) $page = 1;
-            $db = new Query($this->table,'d');
-            $db->select(['id','title'])
-                    ->offset((($page - 1) * $limit))
+        public function getBlogs(int $page, $filter,
+                 int $limit, string $order, string $orderDir):array {
+            $q = new Query('blogs','b');
+            $this->processBlogFilter($q, $filter); 
+            $result = $q->select(['b.id','b.title','b.body',
+                               'b.created_by','b.created_at createdAt'])
+                    ->offset(($page-1)*$limit)
                     ->limit($limit)
-                    ->orderBy('title');
-            $this->filterToQuery($db,$filter);        
-            $result = $db->all();
+                    ->orderBy($order)
+                    ->orderDir($orderDir)
+                    ->all();
+
+            foreach ($result as $res) {
+                $q2 = new Query('users','u');
+                $user = $q2->select(['u.id','u.username'])
+                ->where('u.id','=',$res->created_by)->first();
+                $res->creator = new \stdClass();
+                if (isset($user->id)) {
+                    $res->creator->id = $user->id;
+                    $res->creator->name = $user->username;
+                    $res->creator->avatar = $this->userAvatar($user->id);
+                    $res->creator->group = 'admin';
+                } else {
+                    $res->creator->id = 0;
+                    $res->creator->name = '';
+                    $res->creator->avatar = 'images/users/noavatar.png';
+                    $res->creator->group = '';
+                }
+                // userGroup TEST
+
+                $q2 = new Query('blogcomments');
+                $res->commentCount = count(
+                    $q2->select(['id'])
+                    ->where('blog_id','=',$res->id)
+                    ->all()
+                );
+                $q2 = new Query('likes');
+                $res->likeCount = 0;
+            }
             return $result;        
         }
 
         /**
-         * Összes rekord száma
+         * filter object alapján összes rekord számot ad vissza
+         * @param object $filter {titleStr, bodyStr, creatorName, createdAt}
          * @return int
          */
-        public function getTotal($filter = ''): int {
-            $db = new Query($this->table);
-            $db->select(['id']);
-            $this->filterToQuery($db,$filter);
-            return $db->count();
+        public function getBlogsTotal($filter):int {
+            $q = new Query('blogs','b');
+            $this->processBlogFilter($q,$filter); 
+            return count($q->select(['id'])->all());
         }
-        public function getById(int $id):Record{
-            $result = parent::getById($id);
-            $db = new Query("users");
-            $result->created_name = $db->where('id','=',$result->created_by)->first()->username;
+
+        /**
+         * id alapján blog rekord és néhány kapcsolodó infó olvasása
+         * @param int $id
+         * @return object
+        */
+        public function getById(int $id):Record {
+            $q = new Query('blogs');
+            $result = $q->where('id','=',$id)->first();
+            if (isset($result->id)) {
+                $q2 = new Query('users','u');
+                $user = $q2->select(['u.id','u.username'])
+                ->where('u.id','=',$result->created_by)->first();
+                $result->creator = new \stdClass();
+                if (isset($user->id)) {
+                    $result->creator->id = $user->id;
+                    $result->creator->name = $user->username;
+                    $result->creator->avatar = $this->userAvatar($user->id);
+                    $result->creator->group = 'admin';
+                } else {
+                    $result->creator->id = 0;
+                    $result->creator->name = '';
+                    $result->creator->avatar = 'images/users/noavatar.png';
+                    $result->creator->group = '';
+                }
+                // usergroup   TEST
+
+                $q2 = new Query('blogcomments');
+                $result->commentCount = count(
+                    $q2->select(['id'])
+                    ->where('blog_id','=',$result->id)
+                    ->all()
+                );
+                $q2 = new Query('likes');
+                $result->likeCount = 0;
+                $result->userLike = false;
+            }
             return $result;
+        }
+
+        /**
+         * id alapján blog rekord és alrekordjainak törlése
+         * @param int $id
+         * @return bool
+        */
+        public function delById(int $id):bool {
+            $result = true;
+            $q = new Query('blogs');
+            $q->where('id','=',$id)->delete();
+            $q2 = new Query('blogcomments');
+            $q2->where('blog_id','=',$id)->delete();
+            $q2 = new Query('likes');
+            $q2->where('target_id','=',$id)
+            ->where('target_type','=','blog')
+            ->delete();
+            return ($q->error == '');
         }
 
 }    
