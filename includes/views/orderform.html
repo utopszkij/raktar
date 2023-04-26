@@ -52,6 +52,18 @@
             </div>
 
             <div class="col-md-3 col-sd-12">
+                <label>Munka tipus:</label>			
+            </div>
+            <div class="col-md-8 col-sd-12">
+                <select required="required" v-model="order.worktype"
+                 id="worktype" name="worktype" 
+                 class="form-control">
+                 <option v-for="worktype in order.worktypes" v-bind:value="worktype.name">{{ worktype.name }}</option>
+                </select> 
+                 <br /><br />
+            </div>
+
+            <div class="col-md-3 col-sd-12">
                 <label>{{ lng('DESC') }}:</label>			
             </div>
             <div class="col-md-8 col-sd-12">
@@ -83,46 +95,6 @@ var methods = {
 
                 ckeditorInit('#desc');
 
-                /*
-                ClassicEditor
-                .create( document.querySelector( 'desc' ), {
-                    toolbar: [ 'heading', '|', 'bold' , 'italic', 'link', 'bulletedList', 'numberedList',
-                       'imageUpload','insertTable','sourceEditing','mediaEmbed','undo','redo'],
-                    language: 'hu',
-                    extraPlugins: [ MyCustomUploadAdapterPlugin ],
-                    mediaEmbed: {
-                        extraProviders: [
-                        {
-                                name: 'tiktok',
-                                url: /^tiktok\.com\/(.+)/,
-                                html: match => `video: https://tiktok.com/${ match[ 1 ] }`
-                            },
-                            {
-                                name: 'fb_watch',
-                                url: /^fb\.watch\/(.+)/,
-                                html: match => `fb.watch video`
-                            },
-                            {
-                                name: 'facebook',
-                                url: /^facebook\.com\/(.+)/,
-                                html: match => `facebook video`
-                            },
-                            {
-                                name: 'other',
-                                url: /(.+)/,
-                                html: match => `other video`
-                            }
-                            
-                        ]
-            		}
-                } )
-                .then( editor => {
-                    window.editor = editor;
-                } )
-                .catch( err => {
-                    console.error( err.stack );
-                } );
-                */
             }
         }
 };   
