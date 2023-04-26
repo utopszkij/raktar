@@ -36,7 +36,6 @@ $lastVerzio = $upgrade->getLastVersion();
 $upgrade->dbUpgrade($dbverzio);
 $branch = $upgrade->branch;
 //- ----------- verzio kezelés end ------------
-
 // képernyő méretek elérése
 if (isset($_COOKIE['screen_width'])) {
 	$_SESSION['screen_width'] = $_COOKIE['screen_width'];
