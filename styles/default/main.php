@@ -26,7 +26,7 @@
 
 	<link rel="stylesheet" href="<?php echo SITEURL; ?>/styles/default/style.css?t=<?php echo $fileVerzio; ?>">
 
-	<!-- multi language -->
+	<!-- multi language, ? szürés -->
 	<?php
 		if (defined('LNG')) {
 			if (file_exists('languages/'.LNG.'.js')) {
@@ -40,6 +40,11 @@
 			} else {
 				echo '<script> tokens = {}; </script>';
 			}	
+		}
+		// ha esetleg ? van a taskban, akkor azt levágjuk
+		if (strpos($task,'?')) {
+			$w = explode('?',$task);
+			$task = $w[0];
 		}
 	?>
 	

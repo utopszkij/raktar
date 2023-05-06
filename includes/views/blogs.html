@@ -20,12 +20,12 @@
 					<input type="hidden" name="task" value="blog.blogs" />
 					<input type="hidden" name="page" value="1" />
 					<div>
-						<label>{{ lng('TITLE_SUBSTR') }}:</label>
+						<label>{{ lng('TITLE_SUBSTRING') }}:</label>
 						<input type="text" name="titlestr" id="titleStr" 
 							   v-model="filter.titleStr" class="form-control"/>
 					</div>
 					<div>
-						<label>{{ lng('BODY_SUBSTR') }}:</label>
+						<label>{{ lng('BODY_SUBSTRING') }}:</label>
 						<input type="text" name="bodystr" id="bodyStr" 
 							   v-model="filter.bodyStr" class="form-control"/>
 					</div>
@@ -55,10 +55,10 @@
                             <h3>{{ blog.title }}</h3>
                             <p>
                                 &nbsp;
-                                {{ blog.createdAt }} <span v-bind:class="blog.creator.group">{{ blog.creator.name }}</span>  
+                                {{ blog.createdAt }} <img v-bind:src="blog.creator.avatar" class="avatar" style="width:32px" /><span v-bind:class="blog.creator.group">{{ blog.creator.name }}</span>  
                             </p>
                             <div class="blogBody" v-html="blog.body"></div>
-                        </a>
+                        </a><br>
                         <p>{{ lng('COMMENT_COUNT') }}: {{ blog.commentCount }}
 							&nbsp;&nbsp;&nbsp;		
                         </p>
