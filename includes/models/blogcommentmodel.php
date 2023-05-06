@@ -119,7 +119,7 @@
                 if (isset($user->id)) {
                     $res->creator->id = $user->id;
                     $res->creator->name = $user->username;
-                    $res->creator->avatar = $this->userAvatar($user);
+                    $res->creator->avatar = 'images/users/'.$user->avatar;
                 } else {
                     $res->creator->id = 0;
                     $res->creator->name = '';
@@ -162,7 +162,7 @@
                     $result->creator->name = '';
                     $result->creator->avatar = 'images/users/noavatar.png';
                 }
-                $result->createdAt = substr($result->createdAt,0,10);
+                $result->createdAt = substr($result->created_at,0,10);
             }
             return $result;
         }

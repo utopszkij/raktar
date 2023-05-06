@@ -45,8 +45,14 @@ Aki ezzel a módszerrel nem ért egyet az az index.php -t modosítva használhat
 
 ### A programot mindenki csak saját felelősségére használhatja.
 
+## verzió v2.1.1
+2023.05.06. blok hibajavitás
+-blog törlés engedélyezése, 
+-nem lehet két azonos című blog bejegyzéser
+### ****************************************
+
 ## verzió v2.1.0
-2023.04.??. blog comment, worktype, order
+2023.04.28. blog comment, worktype, order
 ### ****************************************
 
 ## verzió v2.0.1

@@ -3,7 +3,8 @@
 		<div v-if="blog.title != 'Vélemények'">	
             <div class="row">
 				<h1 class="ribbon-banner"><span><em class="fas fa-feather"></em>&nbsp;{{ lng('BLOG') }}</span></h1>
-			</div>	
+			</div>
+            <div class="keret">	
 			<div class="row">
                 <div class="col-12"class="ribbon-banner">
                     <h2>{{ blog.title }}</h2>
@@ -28,6 +29,7 @@
                         </button>
                     </div>
                 </div> 
+            </div>
             </div>     
         </div><!-- nem "Vélemények"-->  
         <divv class="row">&nbsp;</divv>
@@ -35,7 +37,8 @@
                 <div class="row">
                     <h1 class="ribbon-banner"><span><em class="fas fa-feather"></em>&nbsp;Látogatói vélemények az oldalról</span></h1>
                 </div>	
-        </div><!-- Vélemények -->        
+        </div><!-- Vélemények -->
+                <div class="keret">        
                 <div class="row comments">
                     <h3 class="ribbon-banner" v-if="blog.title != 'Vélemények'">
                         <em class="fas fa-comment"></em>
@@ -44,6 +47,7 @@
                     <div v-bind:class="'blogCommentList col-md-12 '+getCommentClass(comment)" 
                          v-for="comment in comments">
                         <p>
+							<img v-bind:src="comment.creator.avatar" v-if="comment.creator.avatar != ''" style="width:32px" />
                         {{ comment.creator.name }} {{ comment.createdAt }}
                         </p>
                         <div class="commentBody" v-html="comment.body"></div>
@@ -103,6 +107,7 @@
                         </form>
                     </div>
                 </div><!-- comments -->
+                </div>
                 <div class="row" v-if="blog.title != 'Vélemények'">
                     <div class="col-12">
                         <a class="btn btn-secondary" v-bind:href="HREF('blog.blogs',{})">

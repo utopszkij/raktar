@@ -55,6 +55,12 @@ class Blog extends Controller {
         if ($record->body == '') {
             $result .= 'BODY_REQUESTED<br>';
         }
+        $oldRecs = $this->model->getBy('title',$record->title);
+        if (count($oldRecs) > 0) {
+            if ($oldRecs[0]->id != $record->id) {
+                $result .= 'THIS_TITLE_ALREDY_EXISTS<br>';
+            }
+        }
         return $result;
     }
 
@@ -481,7 +487,8 @@ class Blog extends Controller {
 	 */ 
 	public function delblog() {
         if (($this->session->input('logedGroup') == 'admin') |
-            ($this->session->input('logedGroup') == 'moderator')) {
+            ($this->session->input('logedGroup') == 'moderator') |
+            (strpos($this->session->input('logedGroup'),'admin') > 0)) {
             $id = $this->request->input('blog_id',0);
             $this->model->delById($id);
             $this->session->set('successMsg','DELETED');

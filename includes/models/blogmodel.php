@@ -181,10 +181,12 @@
             $q->where('id','=',$id)->delete();
             $q2 = new Query('blogcomments');
             $q2->where('blog_id','=',$id)->delete();
+            /*
             $q2 = new Query('likes');
             $q2->where('target_id','=',$id)
             ->where('target_type','=','blog')
             ->delete();
+            */
             return ($q->error == '');
         }
 
