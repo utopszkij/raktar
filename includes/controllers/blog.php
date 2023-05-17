@@ -3,6 +3,7 @@ use \RATWEB\DB\Query;
 use \RATWEB\DB\Record;
 
 include_once __DIR__.'/../models/blogmodel.php';
+include_once __DIR__.'/../models/categorymodel.php';
 include_once __DIR__.'/../models/blogcommentmodel.php';
 include_once __DIR__.'/../urlprocess.php';
 
@@ -104,6 +105,7 @@ class Blog extends Controller {
         $filter->bodyStr = $this->request->input('bodystr', $this->session->input($name.'bodyStr',''));
         $filter->creatorName = $this->request->input('creatorname', $this->session->input($name.'creatorName',''));
         $filter->createdAt = $this->request->input('createdat', $this->session->input($name.'createdAt',''));
+        $filter->category = $this->request->input('category', $this->session->input($name.'category',''));
 
         // $page és $filter tárolása sessionba
         $this->session->set($name.'page',$page);
@@ -162,7 +164,7 @@ class Blog extends Controller {
                 }
         }
         
-
+        $categoryModel = new CategoryModel();
         view('blogs',[
             "loged" => $this->session->input('loged',0),
             "logedGroup" => $this->session->input('logedGroup',''),
@@ -173,7 +175,8 @@ class Blog extends Controller {
             "task" => 'blogs',
             "filter" => $filter,
             "errorMsg" => $this->session->input('errorMsg',''),
-            "successMsg" => $this->session->input('successMsg','')
+            "successMsg" => $this->session->input('successMsg',''),
+            "allCategories" => $categoryModel->getItems(0,1000,'','name')
         ]);
         $this->session->set('errorMsg','');
         $this->session->set('successMsg','');
@@ -391,10 +394,24 @@ class Blog extends Controller {
             }    
             $record->title = $this->request->input('title','',HTML);
             $record->body = $this->request->input('body','',HTML);
+
+            // bajelölt categoryes checkbokok a képernyöről
+            // a képernyőn a checkbox name: 'category_##' value a cetogory id
+            $categories = [];
+            for ($i=0; $i<30; $i++) {
+                $s = $this->request->input('category_'.$i,0);
+                if ($s > 0) {
+                    $categories[] = $s; 
+                }
+            }
             $errorMsg = ($this->validator($record));
             if ($errorMsg == '') {    
-                $this->model->save($record);
+                unset($record->allCategories);
+                unset($record->categories);
+                $id = $this->model->save($record);
+                // categoryes tárolása
                 $errorMsg = $this->model->errorMsg;
+                $this->model->saveCategories($id, $categories);
             }    
             if ($errorMsg == '') {    
                 $this->session->set('successMsg', 'SAVED');

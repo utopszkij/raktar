@@ -3,6 +3,7 @@ use \RATWEB\DB\Query;
 use \RATWEB\DB\Record;
 
 include_once __DIR__.'/../models/usermodel.php';
+include_once __DIR__.'/../models/blogmodel.php';
 
 class Home extends Controller {
 
@@ -22,13 +23,23 @@ class Home extends Controller {
 		$this->session->set('errorMsg','');
 		$this->session->set('successMsg','');
 
+		//+ friss hír megjelenítés start
 		$q = new \RATWEB\DB\Query('users');
 		$rec = $q->where('username','=',ADMIN)->first();
 		if (!isset($rec->id)) {
 			echo '<div class="alert alert-warning">Regisztráld az "'.ADMIN.'" felhasználót!</div>';
 		} 
+		$blogModel = new BlogModel();
+		$news = $blogModel->getBy('title','Friss hírek');
+		if (count($news) > 0) {
+			$newBody = $news[0]->body;
+		} else {
+			$newBody = '';
+		}
+		//- friss hyr megjelenités end
 
 		view('description',[
+			"newBody" => $newBody,
 			"errorMsg" => $errorMsg,
 			"successMsg" => $successMsg
 		]);

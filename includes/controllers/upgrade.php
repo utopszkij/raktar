@@ -244,6 +244,33 @@ class Upgrade {
 		}	
 	}
 
+	protected function do_v2_2_0($dbverzio) {
+		if ($this->versionAdjust($dbverzio) < $this->versionAdjust('v2.2.0')) {
+
+			$table = new Table('categories');
+			$table->id();
+			$table->integer('parent');
+			$table->string('name');
+			$table->createInDB();
+			if ($table->error != '') {
+				echo $table->error.'<br>';
+			}	
+
+			$table = new Table('blog_category');
+			$table->id();
+			$table->integer('blog_id');
+			$table->integer('category_id');
+			$table->createInDB();
+			if ($table->error != '') {
+				echo $table->error.'<br>';
+			}	
+		
+			$this->setDbVersion('v2.2.0');
+		}	
+	}
+
+
+
 	/**
 	 * szükség szerint adatbázis alterek, új táblák létrehozása
 	 * adatbázisban tárolt dbverzio frissitése
@@ -253,6 +280,7 @@ class Upgrade {
 		$this->do_v1_0($dbverzio);
 		$this->do_v1_1_0($dbverzio);
 		$this->do_v1_2_0($dbverzio);
+		$this->do_v2_2_0($dbverzio);
 		// ide jönek a későbbi verziokhoz szükséges db alterek növekvő verzió szerint
 	}
 

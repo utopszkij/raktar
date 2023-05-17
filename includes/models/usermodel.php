@@ -23,6 +23,8 @@
             $result->email = '';
             $result->realname = '';
             $result->group = '';
+            $result->error_count = 0;
+            $result->locktime = 0;
             return $result;
         }
 

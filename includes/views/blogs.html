@@ -35,6 +35,14 @@
 							   v-model="filter.creatorName" class="form-control"/>
 					</div>
 					<div>
+						<label>Karegória:</label>
+						<select name="category" id="category" 
+							   v-model="filter.category" class="form-control">
+							<option value="">&nbsp;</option>
+							<option v-for="cat in allCategories" v-bind:value="cat.id" v-html="catStyle(cat)"></option>   
+						</select>	   
+					</div>
+					<div>
 						<label>{{ lng('CREATED_BY_GE') }}:</label>
 						<input type="date" name="createdat" id="createdAt" 
 							   v-model="filter.createdAt" class="form-control"/>
@@ -59,9 +67,7 @@
                             </p>
                             <div class="blogBody" v-html="blog.body"></div>
                         </a><br>
-                        <p>{{ lng('COMMENT_COUNT') }}: {{ blog.commentCount }}
-							&nbsp;&nbsp;&nbsp;		
-                        </p>
+                        <p><strong>{{ blog.categories }}</strong> {{ lng('COMMENT_COUNT') }}: {{ blog.commentCount }}</p>
                     </div>
                 </div>    
 				include paginator
@@ -94,6 +100,7 @@
             document.getElementById('bodyStr').value = '';
 			document.getElementById('creatorName').value = '';
 			document.getElementById('createdAt').value = '';
+			document.getElementById('category').selectedIndex = 0;
 			document.getElementById('filterForm').submit();
 		},
         afterMount() {
@@ -107,10 +114,17 @@
 			if ((app.filter.titleStr != '') | 
 			    (app.filter.bodyStr != '') | 
 				(app.filter.creatorName != '') |
+				(app.filter.category != '') |
 				(app.filter.createdAt != '')) {
-				console.log('AAAA');	
 				app.filterFormShow();
 			}
+		},
+		catStyle(cat) {
+			var s = '';
+			for (var i=0; i<cat.szint; i++) {
+				s += '&nbsp;&nbsp;&nbsp;';
+			}
+			return s+cat.name;
 		}
     }
 

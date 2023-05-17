@@ -45,6 +45,10 @@ Aki ezzel a módszerrel nem ért egyet az az index.php -t modosítva használhat
 
 ### A programot mindenki csak saját felelősségére használhatja.
 
+## verzió v2.2.0
+2023.05.20. blok cimke rendszer
+### ****************************************
+
 ## verzió v2.1.1
 2023.05.06. blok hibajavitás
 -blog törlés engedélyezése, 
