@@ -38,6 +38,12 @@
                     &nbsp;{{ blog.createdAt }}
                     &nbsp;{{ blog.creator.name }}
                 </div>
+                <div class="col-12">
+                    <var v-for="(cat,i) in blog.allCategories">
+                        <input type="checkbox" v-bind:value="cat.id" v-bind:checked="catChecked(cat.id)" v-bind:name="'category_'+i">{{ cat.name }}
+                        &nbsp; &nbsp;
+                    </var>
+                </div>
         </div><!-- .row -->
         <div class="row">
             <div class="col-12">
@@ -63,8 +69,6 @@ var methods = {
 			});
 		},
         afterMount() {
-            console.log('afterMount');
-            console.log(this.blog);
 /*
 		if (this.blog.id == 0) {
 			this.editClick();
@@ -156,6 +160,15 @@ CKEDITOR.editorConfig = function( config ) {
             } else {
                 document.getElementById('blogForm').submit();
             }
+        },
+        catChecked(catId) {
+            result = false;
+            for (i=0; i<this.blog.categories.length; i++) {
+                if (this.blog.categories[i].category_id == catId) {
+                    result = true;
+                }
+            }
+            return result;
         }
 };   
 </script>

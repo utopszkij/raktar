@@ -1,0 +1,44 @@
+<div id="categories">
+    <div v-if="errorMsg != ''" class="alert alert-danger">
+        <div v-html="errorMsg"></div>
+    </div>
+    <div v-if="successMsg != ''" class="alert alert-success">
+        <div v-html="successMsg"></div>
+    </div>
+    
+    <h2 class="ribbon-banner"><span><em class="fa fa-sitemap" aria-hidden="true"></em>&nbsp;Cikk karegóriák</span></h2>
+    <ul>
+        <li v-for="record in items" v-if="logedAdmin">
+            <a v-bind:href="'index.php?task=category.edit&id='+record.id+'&browserUrl='+encodeURI(browserUrl)">
+                <var v-bind:style="'display:inline-block; '+getBehuzas(record.szint)">&nbsp;</var>{{ record.name }}
+            </a> 
+        </li>
+        <li v-for="record in items" v-if="!logedAdmin">
+            <var v-bind:style="'display:inline-block; '+getBehuzas(record.szint)">&nbsp;</var>{{ record.name }}
+        </li>
+    </ul>
+    include paginator
+    <div v-if="logedAdmin">Modosításhoz, törléshez kattints a névre!<br />
+        <a v-bind:href="'index.php?task=category.new&browserUrl='+encodeURI(browserUrl)" class="btn btn-primary">
+            <em class="fas fa-plus"></em>&nbsp;Új kategória</a>
+        </a>
+    </div>    
+</div>
+
+<script>
+    methods = {
+        makePaginatorClass(p,page) {
+            var result = '';
+            if (p == page) {
+                result="actPaginatorItem";
+            } else {
+                result="paginatorItem"
+            }
+            window.localStorage.setItem('cimkek', JSON.stringify(this.items));
+            return result;
+        },
+        getBehuzas(szint) {
+            return 'width:'+(szint*25)+'px';
+        }
+    }
+</script>

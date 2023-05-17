@@ -1,0 +1,76 @@
+<div class="alert alert-danger" v-if="loged == 0">
+    Kategória kezléséhez be kell jelentkezni!
+</div>	
+
+<div v-if="errorMsg != ''" class="alert alert-danger">
+    <div v-html="errorMsg"></div>
+</div>
+
+<div id="cimke">
+    <form id="categoryForm" action="index.php?task=category.categorysave" method="post" 
+        enctype="multipart/form-data">
+        <input type="hidden" value="category.categorysave" name="task" />			
+        <input type="hidden" v-model="record.id" name="id" />
+        <input type="hidden" v-model="flowKey" name="flowKey" />
+        <input type="hidden" v-model="browserUrl" name="browserUrl" />
+        <div class="row">
+            <div class="form-outline col-12">
+                    <h1 class="ribbon-banner"><span>Cikk kategória</span><h1>	
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-outline col-12">
+                <label>Tulajdonos:</label>
+                <select name="parent" id="parent" class="form-control" v-model="record.parent">
+					<option value="0">---</option>
+					<option v-bind:value="item.id" v-for="item in record.all">{{ item.name }}</option>
+                </select>    
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-outline col-12">
+				<label>Név:</label>
+                <input name="name" class="form-control" v-model="record.name" type="text" required="required" />
+            </div>
+        </div>
+        <div class="row formBUttons" v-if="logedAdmin">
+            <div class="col-12">
+                <button type="submit" class="btn btn-success">
+                    <em class="fas fa-check"></em>&nbsp;Mentés
+                </button>&nbsp;
+                <a v-bind:href="previous" class="btn btn-secondary">
+                    <em class="fas fa-reply"></em>&nbsp;Mégsem
+                </a>&nbsp;
+                <button type="button" v-on:click="delClick()"
+                   v-if="record.id > 0"
+                   class="btn btn-danger">
+                    <em class="fas fa-eraser"></em>&nbsp;Töröl
+                </button>
+            </div>
+            <div>
+                <strong>Figyelem! Kategória felvitele, modosítása után az érintett cikkeket is kézzel modosítani kell!
+                    <br />Törlésnél az érintett cikkeből automatikusan törlődik a törölt kategória jelölés.
+                </strong>
+            </div>
+        </div>
+        <div class="row formBUttons" v-if="! logedAdmin">
+            <div class="col-12">
+                <a v-bind:href="previous" class="btn btn-secondary">
+                    <em class="fas fa-reply"></em>&nbsp;Vissza
+                </a>
+            </div>
+    </div>
+</form>    
+</div>
+
+<script>
+    methods = {
+        afterMount() {
+        },        
+        delClick() {
+            popupConfirm('Biztos törölni akarod?',function() {
+                location = 'index.php?task=category.categorydelete&id='+app.record.id+'&browserUrl='+encodeURI(app.browserUrl);
+            });
+        }
+    }
+</script>
