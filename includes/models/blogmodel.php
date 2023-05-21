@@ -165,13 +165,13 @@
             $result = $q->where('id','=',$id)->first();
             if (isset($result->id)) {
                 $q2 = new Query('users','u');
-                $user = $q2->select(['u.id','u.username'])
+                $user = $q2->select(['u.id','u.username','u.avatar'])
                 ->where('u.id','=',$result->created_by)->first();
                 $result->creator = new \stdClass();
                 if (isset($user->id)) {
                     $result->creator->id = $user->id;
                     $result->creator->name = $user->username;
-                    $result->creator->avatar = $this->userAvatar($user->id);
+                    $result->creator->avatar = $user->avatar;
                     $result->creator->group = 'admin';
                 } else {
                     $result->creator->id = 0;

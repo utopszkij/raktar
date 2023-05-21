@@ -8,7 +8,7 @@
 			<div class="row">
                 <div class="col-12"class="ribbon-banner">
                     <h2>{{ blog.title }}</h2>
-                    <p>
+                    <p> <img v-bind:src="'images/users/'+blog.creator.avatar" class="avatar" style="max-height:32px" />
                         <span v-bind:class="blog.creator.group">{{ blog.creator.name }}</span> 
                         &nbsp;{{ blog.created_at }} 
                     </p>
