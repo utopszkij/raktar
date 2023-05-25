@@ -45,6 +45,10 @@ Aki ezzel a módszerrel nem ért egyet az az index.php -t modosítva használhat
 
 ### A programot mindenki csak saját felelősségére használhatja.
 
+## verzió v2.2.1
+2023.05.25. cikkek paginátor hiba javitás
+### ****************************************
+
 ## verzió v2.2.0
 2023.05.20. blok cimke rendszer
 ### ****************************************
