@@ -174,10 +174,11 @@ class Product extends Controller {
 			if ($this->accessRight('edit', $record)) {
 				$error = $this->validator($record);
 				if ($error == '') {
+                    // v2.2.2
+                    $newRecord = ($record->id == 0);
 					$id = $this->model->save($record);
 		            $this->session->delete('oldRecord');
 					$record->id = $id;
-					
 					// kép file tárolás
 					if (isset($_FILES['image'])) {
 						if ($_FILES['image']['name'] != '') {
@@ -193,7 +194,6 @@ class Product extends Controller {
 							}					
 						}
 					}
-
 					// kép file tárolás
 					if (isset($_FILES['image2'])) {
 						if ($_FILES['image2']['name'] != '') {
@@ -209,7 +209,6 @@ class Product extends Controller {
 							}					
 						}
 					}
-
 					// csatolt dokumentumok tárolása
 					for ($i=0; $i<5; $i++) {
 						if (isset($_FILES['attachment'.$i])) {
@@ -225,9 +224,21 @@ class Product extends Controller {
 							}
 						}
 					}
-					
 					$this->session->set('successMsg','SAVED');
-					$this->items();
+                    // v.2.2.2 új felvitel után kezdő készlet megadás
+                    if ($newRecord) {
+                        // kezdő készlet megadás
+                        echo 'REDIRECT '.SITEURL.'/index.php?task=event.plus&product_id='.$id.'
+                        <script>
+                        location="'.SITEURL.'/index.php?task=event.plus&product_id='.$id.'";
+                        </script>
+                        </body>
+                        </html>
+                        ';
+                        exit();
+                    } else {
+					  $this->items();
+                    }  
 				} else {
 					$this->session->set('errorMsg',$error);
 					$this->items();
