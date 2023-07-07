@@ -21,7 +21,7 @@
                         v-model="record.sort_name" type="text" required="true"
                         :disabled="(!logedAdmin)" />
                 &nbsp;
-                <a class="btn btn-secondary" v-bind:href="HREF('event.items',{'page':1,'filter':'|'+record.id+'||'})">
+                <a class="btn btn-secondary" v-bind:href="HREF('event.items',{'page':1,'filter':'product_id|'+record.id})">
 					<em class="fas fa-clock"></em>{{ lng('EVENTS') }}
                 </a>        
             </div>
@@ -205,7 +205,7 @@
                         v-model="record.sort_name" type="text" required="true"
                         :disabled="true" />
                 &nbsp;
-                <a class="btn btn-secondary" v-bind:href="HREF('event.items',{'page':1,'filter':'|'+record.id+'||'})">
+                <a class="btn btn-secondary" v-bind:href="HREF('event.items',{'page':1,'filter':'product_id|'+record.id})">
 					<em class="fas fa-clock"></em>{{ lng('EVENTS') }}
                 </a>        
             </div>

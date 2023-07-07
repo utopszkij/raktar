@@ -46,6 +46,11 @@ Aki ezzel a módszerrel nem ért egyet az az index.php -t modosítva használhat
 ### A programot mindenki csak saját felelősségére használhatja.
 
 ## verzió v2.2.1
+2023.07.05. új termék felvitel után automatikusan
+bejön a készlet növelő képernyő
+### ****************************************
+
+## verzió v2.2.1
 2023.05.25. cikkek paginátor hiba javitás
 ### ****************************************
 

@@ -66,7 +66,7 @@
 					 </a>
 				</td>    
 				<td>
-					{{ item.stock }}
+					{{ item.stock }} <var v-if="(item.stock > 0)">{{ item.unit }}</var>
 				</td>    
 				<td>
 					{{ item.code }}
@@ -91,7 +91,7 @@
 								<button type="button" class="btn btn-danger" v-if="logedAdmin" v-on:click="delClick(item.id)">
 									<em class="fas fa-eraser" v-bind:title="lng('DELETE')"></em>
 								</button>&nbsp;
-								<a v-bind:href="HREF('event.items',{'page':1,'filter':'|'+item.id+'||'})" class="btn btn-secondary">
+								<a v-bind:href="HREF('event.items',{'page':1,'filter':'product_id|'+item.id})" class="btn btn-secondary">
 									<em class="fas fa-clock" v-bind:title="lng('EVENTS')"></em>
 								</a>&nbsp;
 								<button type="button" class="btn btn-success" v-if="logedAdmin" v-on:click="plusClick(item.id)">

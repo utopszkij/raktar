@@ -35,7 +35,7 @@
          * rekordok lapozható listája
          * @param int $page
          * @param int $limit
-         * @param string $filter 'name|product_id|dateMin|dateMax
+         * @param string $filter 'field_name|fieldValue
          * @param string $order 
          * @return array
          */
@@ -53,18 +53,22 @@
 			} else {
 				$w = ['','','',''];
 			}	
-			if ($w[0] != '') {
-				$db->where('e.event_type','like','%'.$w[0].'%');
-			}	
-			if ($w[1] != '') {
-				$db->where('e.product_id','=',$w[1]);
-			}	
-			if ($w[2] != '') {
-				$db->where('e.evant_date','>=',$w[2]);
-			}	
-			if ($w[3] != '') {
-				$db->where('e.evant_date','<=',$w[3]);
-			}	
+            $i = 0;
+            while ($i < count($w)) {
+                if ($w[0] == 'event_type') {
+                    $db->where('e.event_type','like','%'.$w[1].'%');
+                }	
+                if ($w[0] == 'product_id') {
+                    $db->where('e.product_id','=',$w[1]);
+                }	
+                if ($w[0] == 'event_date_min') {
+                    $db->where('e.evant_date','>=',$w[1]);
+                }	
+                if ($w[0] == 'event_date_max') {
+                    $db->where('e.evant_date','<=',$w[1]);
+                }	
+                $i = $i + 2;
+            }
             $result = $db->offset((($page - 1) * $limit))
                     ->limit($limit)
                     ->orderBy('event_date')

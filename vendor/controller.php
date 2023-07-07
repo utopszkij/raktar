@@ -263,12 +263,11 @@ class Controller {
 			$filter = '';
 		} else {
 			$rFilterArray = $this->filterParse($rFilter); // [name => value,...]
-			foreach ($rFilterArray as $fn => $fv) {
+            foreach ($rFilterArray as $fn => $fv) {
 				$sFilterArray[$fn] = $fv;
 			}
 			$filter = $this->filterToStr($sFilterArray); // 'name|value...'
 		}
-        
 		// adatok a paginátor számára
         $total = $this->model->getTotal($filter);
         $pages = [];
