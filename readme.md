@@ -45,7 +45,11 @@ Aki ezzel a módszerrel nem ért egyet az az index.php -t modosítva használhat
 
 ### A programot mindenki csak saját felelősségére használhatja.
 
-## verzió v2.2.1
+## verzió v2.2.3
+Cikk felvételnél a szövegszerkesztő ablak funciók bövítése
+### ******************************************************
+
+## verzió v2.2.2
 2023.07.05. új termék felvitel után automatikusan
 bejön a készlet növelő képernyő
 ### ****************************************
