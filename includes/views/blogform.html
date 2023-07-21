@@ -107,6 +107,8 @@ CKEDITOR.editorConfig = function( config ) {
 
 
             if (window.editor == undefined) {
+                window.ckeditorInit('textarea#body');
+                /*
                 ClassicEditor
                 .create( document.querySelector( 'textarea#body' ), {
                     toolbar: [ 'heading', '|', 'bold' , 'italic', 'link', 'bulletedList', 'numberedList',
@@ -145,6 +147,7 @@ CKEDITOR.editorConfig = function( config ) {
                 .catch( err => {
                     console.error( err.stack );
                 } );
+                */
             }
         },
         okClick() {
