@@ -59,7 +59,7 @@ class Category extends Controller {
         if ($error == '') {
             $this->save($record); 
             $this->session->set('errorMsg','');
-            $this->session->set('successMsg','Tárolva');
+            // $this->session->set('successMsg','Tárolva');
         } else {
             $this->session->set('errorMsg',$error);
             if ($record->id == 0) {

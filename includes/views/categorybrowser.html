@@ -1,9 +1,9 @@
 <div id="categories">
     <div v-if="errorMsg != ''" class="alert alert-danger">
-        <div v-html="errorMsg"></div>
+        <div v-html="lng(errorMsg)"></div>
     </div>
     <div v-if="successMsg != ''" class="alert alert-success">
-        <div v-html="successMsg"></div>
+        <div v-html="lng(successMsg)"></div>
     </div>
     
     <h2 class="ribbon-banner"><span><em class="fa fa-sitemap" aria-hidden="true"></em>&nbsp;Cikk karegóriák</span></h2>
