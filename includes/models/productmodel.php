@@ -120,6 +120,21 @@
 			$q = new Query($table);
 			return $q->orderBy($order)->all();
 		}
+
+        public function getById(int $id): Record {
+            $result = parent::getById($id);
+            $db = new Query('events');
+            $recs = $db->where('product_id','=',$id)
+                    ->select(['sum(quantity) quantity'])
+                    ->groupBy(['product_id'])
+                    ->all();
+            if (count($recs) > 0) {        
+                $result->quantity = $recs[0]->quantity;        
+            } else {
+                $result->quantity = 0;
+            }    
+            return $result;
+        }
         
 }    
 ?>
