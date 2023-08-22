@@ -16,7 +16,7 @@
         </div>
         <div class="row">
             <div class="form-outline col-12">
-                <label>{{ lng('CODE') }}:&nbsp;</label>
+                <label>{{ lng('PRODUCT_NAME') }}:&nbsp;</label>
                 <input name="sort_name" class="form-control" id="sort_name"
                         v-model="record.sort_name" type="text" required="true"
                         :disabled="(!logedAdmin)" />
@@ -132,6 +132,7 @@
                         :disabled="(!logedAdmin)">
                     <option v-bind:value="unitRec.code" v-for="unitRec in units">{{ unitRec.code }}</option>    
                 </select>
+                <span v-if="record.id > 0">készlet: {{ record.quantity }}</span>
             </div>
         </div>
         <div class="row">
@@ -200,7 +201,7 @@
         </div>
         <div class="row">
             <div class="form-outline col-12">
-                <label>{{ lng('CODE') }}:&nbsp;</label>
+                <label>{{ lng('PRODUCT_NAME') }}:&nbsp;</label>
                 <input name="sort_name" class="form-control" focus="focus"
                         v-model="record.sort_name" type="text" required="true"
                         :disabled="true" />
@@ -246,7 +247,7 @@
         <div class="row">
             <div class="form-outline col-12">
                 <label>{{ lng('DESCRIPTION') }}:&nbsp;</label>
-                <div class="keret"><var v-html="record.description2"></var></div>        
+                <var v-html="record.description2"></var>       
                 <div>&nbsp;</div>
             </div>
         </div>
@@ -283,6 +284,7 @@
                         :disabled="true">
                     <option v-bind:value="unitRec.code" v-for="unitRec in units">{{ unitRec.code }}</option>    
                 </select>
+                &nbsp;készlet:{{ record.quantity }}
             </div>
         </div>
         <div class="row">
@@ -343,7 +345,8 @@
 				if (this.record.id == 0) {
 				  this.editClick();
 				}  
-			}		
+			}
+            console.log(this.record);		
 		},
 		showQrcode() {
 			if ((this.record.qrcode != '') & (this.qrCodeShow == false)) {

@@ -45,6 +45,10 @@ Aki ezzel a módszerrel nem ért egyet az az index.php -t modosítva használhat
 
 ### A programot mindenki csak saját felelősségére használhatja.
 
+## verzió v2.2.4
+Termék adatlapon és modosytó képernyőn látható a készlet is.
+### ******************************************************
+
 ## verzió v2.2.3
 Cikk felvételnél a szövegszerkesztő ablak funciók bövítése
 ### ******************************************************
