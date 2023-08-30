@@ -270,6 +270,14 @@ class Product extends Controller {
      *  $fullTree paramétert is a a modelnek)
      */
     public function items($order = 1) {
+
+        // csak bejelentkezett user használhatja
+        //if ($this->loged <= 0) {
+        //    echo '<div class="alert alert-danger">Ezt a funkciót csak bejelenkzett felhasználók használhatják.</div>';
+        //    return;
+        //}
+        
+
         // paraméter olvasása get vagy sessionból
         $page = $this->session->input($this->name.'page',1);
         $page = $this->request->input('page',$page);

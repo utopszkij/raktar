@@ -81,7 +81,7 @@
                     <a v-bind:href="HREF('user.logout',{})" class="nav-link">
                       <em class="fas fa-sign-out-alt"></em>&nbsp;{{ lng('LOGOUT') }}</a>
                   </li>&nbsp;
-                  <li class="nav-item">
+                  <li class="nav-item" v-if="USERREGIST">
                     <a v-bind:href="HREF('user.regist',{})" class="nav-link">
                       <em class="fas fa-key"></em>&nbsp;{{ lng('REGISTRATION') }}</a>
                   </li>
