@@ -90,6 +90,14 @@ class Blog extends Controller {
     *    blog (itemClick)
     */
 	public function blogs() {
+
+        // csak bejelentkezett user használhatja
+        //if ($this->loged <= 0) {
+        //    echo '<div class="alert alert-danger">Ezt a funkciót csak bejelenkzett felhasználók használhatják.</div>';
+        //    return;
+        //}
+        
+
         $page = 1;
         $filter = new \stdClass();
         $filter->titleStr = '';
@@ -187,6 +195,7 @@ class Blog extends Controller {
 	* GET: blog_id, page
     */
 	public function blog() {
+
         $name = 'blogcomments_';
         $limit = 8;
         $blog_id = $this->request->input('blog_id',0);

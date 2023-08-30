@@ -37,7 +37,7 @@
         	</button>   
 		</div>
 	</div>	
-    <div class="row text-center">
+    <div class="row text-center" v-if="USERREGIST">
     	<div class="col-12">
 			<a v-bind:href="'https://netpolgar.hu/auth/facebook?state='+SITEURL+'/'+atob(redirect)"
 				class="btn btn-primary" style="width:250px"> 
@@ -51,7 +51,7 @@
 	</div>	
 	</form>
     <div class="alert alert-info">{{ lng('REGISTHELP2') }}</div>
-    <div class="row">
+    <div class="row" v-if="USERREGIST">
 		<div class="col-12 text-center">
 		   <a v-bind:href="HREF('user.regist',{'redirect':redirect})">
 				{{ lng('DOREGIST') }}

@@ -18,10 +18,10 @@
                 <a class="nav-link" href="index.php">
                 <em class="fas fa-home"></em>&nbsp;{{ lng('HOME') }}</a>
               </li>
-              <li class="nav-item">
+              <!-- li class="nav-item">
                 <a class="nav-link" v-bind:href="HREF('home.description',{})">
                 <em class="fas fa-book"></em>&nbsp;{{ lng('DESCRIPTION') }}</a>
-              </li>
+              </li -->
               <!-- li class="nav-item">
                 <a class="nav-link" href="index.php?task=home.swdoc">
                 <em class="fas fa-code"></em>&nbsp;{{ lng('SWDOC') }}</a>
@@ -81,7 +81,7 @@
                     <a v-bind:href="HREF('user.logout',{})" class="nav-link">
                       <em class="fas fa-sign-out-alt"></em>&nbsp;{{ lng('LOGOUT') }}</a>
                   </li>&nbsp;
-                  <li class="nav-item">
+                  <li class="nav-item" v-if="USERREGIST">
                     <a v-bind:href="HREF('user.regist',{})" class="nav-link">
                       <em class="fas fa-key"></em>&nbsp;{{ lng('REGISTRATION') }}</a>
                   </li>

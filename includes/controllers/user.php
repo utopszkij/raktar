@@ -74,6 +74,7 @@ class User extends Controller {
 					  "SITEURL" => SITEURL,
 					  "redirect" => $this->request->input('redirect',''),
 					  "LOGIN_MUST_VERIFYED_EMAIL" => LOGIN_MUST_VERIFYED_EMAIL,
+					  "USERREGIST" => USERREGIST,
 					  "flowkey" => $this->newFlowKey()]);
 		$this->session->set('errorMsg','');
 		$this->session->set('successMsg','');

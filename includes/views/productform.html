@@ -317,11 +317,18 @@
                     v-on:click="editClick()">
                     <em class="fas fa-edit"></em>&nbsp;{{ lng('EDIT') }}
                 </button>&nbsp;
-                <a v-bind:href="previous" class="btn btn-secondary">
-                    <em class="fas fa-reply"></em>&nbsp;{{ lng('BACK') }}
-                </a>
             </div>
         </div>
+
+        <div class="row formBUttons">
+            <button type="button" class="btn btn-secondary col-2"
+                v-on:click="eventClick()">
+                <em class="fas fa-clock"></em>&nbsp;{{ lng('EVENTS') }}
+            </button>&nbsp;
+            <a v-bind:href="previous" class="btn btn-secondary col-2">
+                <em class="fas fa-reply"></em>&nbsp;{{ lng('BACK') }}
+            </a>
+        </div>    
     </div> <!-- formShow" -->
      
        
@@ -432,6 +439,10 @@
 			this.showQrcode();
 			$('#footer').html('<a href="index.php?task=product.edit&id='+this.record.id+'">&lt;&lt;Vissza</a>');
 			window.print();
-		}   
+		},
+        eventClick() {
+            var filter = 'product_id|'+this.record.id;
+            location = HREF('event.items',{page:1, filter:filter});
+        }   
     }
 </script>

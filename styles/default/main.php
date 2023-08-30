@@ -86,6 +86,13 @@
 	}
 	?>
 
+	<?php
+	// USERREGIST config beállítás
+	if (!DEFINED('USERREGIST')) {
+		DEFINE('USERREGIST',true);
+	}
+	?>
+
 	<div class="container" id="container">
 		<div class="row">
 			<div class="col-12">
@@ -100,6 +107,7 @@
 					}
 					view('mainmenu',[
 						'MULTIUSER' => MULTIUSER,
+						'USERREGIST' => USERREGIST,
 						'loged' => $_SESSION['loged'],
 						'logedAvatar' => $_SESSION['logedAvatar'],
 						'logedName' => $_SESSION['logedName'],
