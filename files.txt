@@ -6,14 +6,14 @@
 -rwxrwxrwx  1 utopszkij utopszkij  1316 2023-08-30 config.php
 -rwxrwxrwx  1 utopszkij utopszkij  1205 2022-07-28 config_test.php
 drwxrwxrwx  3 utopszkij utopszkij  4096 2022-08-11 doc
--rw-rw-r--  1 utopszkij utopszkij     0 2023-08-30 files.txt
+-rw-rw-r--  1 utopszkij utopszkij     0 2023-09-01 files.txt
 drwxrwxrwx  5 utopszkij utopszkij  4096 2023-08-30 images
 drwxrwxrwx  6 utopszkij utopszkij  4096 2023-04-26 includes
 -rwxrwxrwx  1 utopszkij utopszkij  5347 2023-02-23 index.js
--rwxrwxrwx  1 utopszkij utopszkij  1700 2023-08-30 index.php
+-rwxrwxrwx  1 utopszkij utopszkij  1700 2023-09-01 index.php
 drwxrwxrwx  2 utopszkij utopszkij  4096 2023-07-26 languages
 -rwxrwxrwx  1 utopszkij utopszkij 35149 2022-07-21 LICENSE
--rwxrwxrwx  1 utopszkij utopszkij  6479 2023-08-30 readme.md
+-rwxrwxrwx  1 utopszkij utopszkij  6720 2023-09-01 readme.md
 drwxrwxrwx  3 utopszkij utopszkij  4096 2023-01-27 styles
 drwxrwxrwx  2 utopszkij utopszkij  4096 2022-07-27 tests
 drwxrwxrwx  2 utopszkij utopszkij  4096 2023-03-02 tools
@@ -285,139 +285,139 @@ drwxrwxrwx 2 utopszkij utopszkij   4096 2022-08-29 search
 
 ./images:
 összesen 39716
--rw-r--r-- 1 utopszkij utopszkij  722771 2023-03-08 header.jpg
--rw-r--r-- 1 utopszkij utopszkij 1006299 2023-03-08 header.png
--rw-r--r-- 1 utopszkij utopszkij    3885 2023-03-08 loader.gif
--rw-r--r-- 1 utopszkij utopszkij   76292 2023-03-08 logo.png
--rw-r--r-- 1 utopszkij utopszkij   32830 2023-03-08 noimage.png
--rw-r--r-- 1 utopszkij utopszkij   30588 2023-03-19 product_100.jpg
--rw-r--r-- 1 utopszkij utopszkij   14628 2023-03-19 product_101.jpg
--rw-r--r-- 1 utopszkij utopszkij   37241 2023-03-19 product_102.jpg
--rw-r--r-- 1 utopszkij utopszkij   20334 2023-03-19 product_103.jpg
--rw-r--r-- 1 utopszkij utopszkij   59645 2023-03-19 product_104.jpg
--rw-r--r-- 1 utopszkij utopszkij   15255 2023-03-19 product_105.jpg
--rw-r--r-- 1 utopszkij utopszkij   24944 2023-03-19 product_106.jpg
--rw-r--r-- 1 utopszkij utopszkij   34856 2023-03-19 product_107.jpg
--rw-r--r-- 1 utopszkij utopszkij   25933 2023-03-19 product_108.jpg
--rw-r--r-- 1 utopszkij utopszkij    7003 2023-03-19 product_109.jpg
--rw-r--r-- 1 utopszkij utopszkij 1401008 2023-02-22 product_10.jpg
--rw-r--r-- 1 utopszkij utopszkij 4816749 2023-03-08 product_10.png
--rw-r--r-- 1 utopszkij utopszkij   22314 2023-03-19 product_110.jpg
--rw-r--r-- 1 utopszkij utopszkij   44657 2023-03-19 product_111.jpg
--rw-r--r-- 1 utopszkij utopszkij   21910 2023-03-19 product_112.jpg
--rw-r--r-- 1 utopszkij utopszkij   20111 2023-03-19 product_113.jpg
--rw-r--r-- 1 utopszkij utopszkij   22820 2023-03-19 product_114.jpg
--rw-r--r-- 1 utopszkij utopszkij   27019 2023-03-19 product_115.jpg
--rw-r--r-- 1 utopszkij utopszkij   31455 2023-03-19 product_116.jpg
--rw-r--r-- 1 utopszkij utopszkij   51642 2023-03-19 product_117.jpg
--rw-r--r-- 1 utopszkij utopszkij   13494 2023-03-19 product_118.jpg
--rw-r--r-- 1 utopszkij utopszkij   10775 2023-03-19 product_119.jpg
--rw-r--r-- 1 utopszkij utopszkij  372878 2023-03-08 product_11.jpg
--rw-r--r-- 1 utopszkij utopszkij    7291 2023-03-19 product_120.jpg
--rw-r--r-- 1 utopszkij utopszkij   18933 2023-03-19 product_121.jpg
--rw-r--r-- 1 utopszkij utopszkij   13403 2023-03-19 product_122.jpg
--rw-r--r-- 1 utopszkij utopszkij   36710 2023-03-19 product_123.jpg
--rw-r--r-- 1 utopszkij utopszkij   10449 2023-03-19 product_124.jpg
--rw-r--r-- 1 utopszkij utopszkij   17240 2023-03-19 product_125.jpg
--rw-r--r-- 1 utopszkij utopszkij    6991 2023-03-19 product_126.jpg
--rw-r--r-- 1 utopszkij utopszkij   30392 2023-03-19 product_127.jpg
--rw-r--r-- 1 utopszkij utopszkij   11468 2023-03-19 product_128.jpg
--rw-r--r-- 1 utopszkij utopszkij   10885 2023-03-19 product_129.jpg
--rw-r--r-- 1 utopszkij utopszkij    8475 2023-03-19 product_130.jpg
--rw-r--r-- 1 utopszkij utopszkij   18377 2023-03-26 product_131.jpg
--rw-r--r-- 1 utopszkij utopszkij    8116 2023-03-26 product_132.jpg
--rw-r--r-- 1 utopszkij utopszkij   19367 2023-03-26 product_133.jpg
--rw-r--r-- 1 utopszkij utopszkij   22074 2023-03-26 product_134.jpg
--rw-r--r-- 1 utopszkij utopszkij   40059 2023-03-26 product_135.jpg
--rw-r--r-- 1 utopszkij utopszkij   26413 2023-03-26 product_136.jpg
--rw-r--r-- 1 utopszkij utopszkij   21988 2023-03-26 product_137.jpg
--rw-r--r-- 1 utopszkij utopszkij   13116 2023-03-26 product_138.jpg
--rw-r--r-- 1 utopszkij utopszkij   38404 2023-03-26 product_139.jpg
--rw-r--r-- 1 utopszkij utopszkij   17002 2023-03-08 product_13.gif
--rw-r--r-- 1 utopszkij utopszkij   32397 2023-03-26 product_140.jpg
--rw-r--r-- 1 utopszkij utopszkij    9927 2023-03-26 product_141.jpg
--rw-r--r-- 1 utopszkij utopszkij   22440 2023-03-26 product_142.jpg
--rw-r--r-- 1 utopszkij utopszkij   12157 2023-03-26 product_143.jpg
--rw-r--r-- 1 utopszkij utopszkij   19498 2023-03-26 product_144.jpg
--rw-r--r-- 1 utopszkij utopszkij    7143 2023-03-26 product_145.jpg
--rw-r--r-- 1 utopszkij utopszkij   18154 2023-03-26 product_146.jpg
--rw-r--r-- 1 utopszkij utopszkij   15841 2023-03-26 product_147.jpg
--rw-r--r-- 1 utopszkij utopszkij   34882 2023-03-26 product_148.jpg
--rw-r--r-- 1 utopszkij utopszkij   15657 2023-03-26 product_149.jpg
--rw-r--r-- 1 utopszkij utopszkij 3518444 2023-03-08 product_14.jpg
--rw-r--r-- 1 utopszkij utopszkij   10614 2023-03-26 product_150.jpg
--rw-r--r-- 1 utopszkij utopszkij   60622 2023-03-26 product_151.jpg
--rw-r--r-- 1 utopszkij utopszkij   97991 2023-07-03 product_152.png
--rw-r--r-- 1 utopszkij utopszkij   11288 2023-07-09 product_154.jpg
--rw-r--r-- 1 utopszkij utopszkij   22388 2023-07-09 product_155.jpg
--rw-r--r-- 1 utopszkij utopszkij  593358 2023-08-14 product_156.png
--rw-r--r-- 1 utopszkij utopszkij  562469 2023-08-14 product_157.png
--rw-r--r-- 1 utopszkij utopszkij  499747 2023-08-14 product_158.png
--rw-r--r-- 1 utopszkij utopszkij   20870 2023-03-08 product_15.jpeg
--rw-r--r-- 1 utopszkij utopszkij   20870 2023-03-08 product_18.jpeg
--rw-r--r-- 1 utopszkij utopszkij   20870 2023-03-08 product_19.jpeg
--rw-r--r-- 1 utopszkij utopszkij  295227 2023-03-08 product_1.jpg
--rw-r--r-- 1 utopszkij utopszkij    6148 2023-03-15 product_21.png
--rw-r--r-- 1 utopszkij utopszkij 1401008 2023-03-08 product_3.jpg
--rw-r--r-- 1 utopszkij utopszkij 1567599 2023-03-08 product_4.jpg
--rw-r--r-- 1 utopszkij utopszkij  313215 2023-03-15 product_59.png
--rw-r--r-- 1 utopszkij utopszkij   12723 2023-03-15 product_60.jpg
--rw-r--r-- 1 utopszkij utopszkij   40059 2023-03-15 product_61.jpg
--rw-r--r-- 1 utopszkij utopszkij   46764 2023-03-16 product_62.jpg
--rw-r--r-- 1 utopszkij utopszkij   99415 2023-03-16 product_63.png
--rw-r--r-- 1 utopszkij utopszkij   18759 2023-03-16 product_64.jpg
--rw-r--r-- 1 utopszkij utopszkij    5548 2023-03-16 product_65.jpg
--rw-r--r-- 1 utopszkij utopszkij   18147 2023-03-16 product_66.jpg
--rw-r--r-- 1 utopszkij utopszkij    5548 2023-03-16 product_67.jpg
--rw-r--r-- 1 utopszkij utopszkij    9773 2023-03-16 product_68.jpg
--rw-r--r-- 1 utopszkij utopszkij   20587 2023-03-16 product_69.jpg
--rw-r--r-- 1 utopszkij utopszkij  103901 2023-03-08 product_6.jpeg
--rw-r--r-- 1 utopszkij utopszkij 2462950 2023-03-08 product_6.jpg
--rw-r--r-- 1 utopszkij utopszkij 3506558 2023-03-08 product_6.png
--rw-r--r-- 1 utopszkij utopszkij  170798 2023-03-16 product_70.jpg
--rw-r--r-- 1 utopszkij utopszkij   11611 2023-03-16 product_71.jpg
--rw-r--r-- 1 utopszkij utopszkij   36006 2023-03-16 product_72.jpg
--rw-r--r-- 1 utopszkij utopszkij    8239 2023-03-16 product_73.jpg
--rw-r--r-- 1 utopszkij utopszkij   15148 2023-03-16 product_74.jpg
--rw-r--r-- 1 utopszkij utopszkij   53785 2023-03-16 product_75.jpg
--rw-r--r-- 1 utopszkij utopszkij   10027 2023-03-16 product_76.jpg
--rw-r--r-- 1 utopszkij utopszkij   20763 2023-03-16 product_77.jpg
--rw-r--r-- 1 utopszkij utopszkij    8881 2023-03-16 product_78.jpg
--rw-r--r-- 1 utopszkij utopszkij   28139 2023-03-16 product_79.jpg
--rw-r--r-- 1 utopszkij utopszkij   15491 2023-03-16 product_80.jpg
--rw-r--r-- 1 utopszkij utopszkij   11563 2023-03-16 product_81.png
--rw-r--r-- 1 utopszkij utopszkij   19541 2023-03-16 product_82.jpg
--rw-r--r-- 1 utopszkij utopszkij   21638 2023-03-16 product_83.jpg
--rw-r--r-- 1 utopszkij utopszkij    7971 2023-03-16 product_84.jpg
--rw-r--r-- 1 utopszkij utopszkij   14696 2023-03-16 product_85.jpg
--rw-r--r-- 1 utopszkij utopszkij   26723 2023-03-16 product_86.jpg
--rw-r--r-- 1 utopszkij utopszkij   33125 2023-03-16 product_87.jpg
--rw-r--r-- 1 utopszkij utopszkij   17247 2023-03-16 product_88.jpg
--rw-r--r-- 1 utopszkij utopszkij   31283 2023-03-16 product_89.jpg
--rw-r--r-- 1 utopszkij utopszkij 4816749 2023-03-08 product_8.png
--rw-r--r-- 1 utopszkij utopszkij   33614 2023-03-16 product_90.jpg
--rw-r--r-- 1 utopszkij utopszkij    7543 2023-03-16 product_91.jpg
--rw-r--r-- 1 utopszkij utopszkij   10542 2023-03-16 product_92.jpg
--rw-r--r-- 1 utopszkij utopszkij   26156 2023-03-16 product_93.jpg
--rw-r--r-- 1 utopszkij utopszkij    8557 2023-03-16 product_94.jpg
--rw-r--r-- 1 utopszkij utopszkij   28764 2023-03-16 product_95.jpg
--rw-r--r-- 1 utopszkij utopszkij   28333 2023-03-16 product_96.jpg
--rw-r--r-- 1 utopszkij utopszkij   14466 2023-03-16 product_97.jpg
--rw-r--r-- 1 utopszkij utopszkij    8164 2023-03-19 product_98.jpg
--rw-r--r-- 1 utopszkij utopszkij   23927 2023-03-19 product_99.jpg
--rw-r--r-- 1 utopszkij utopszkij 4816749 2023-03-08 product_9.png
--rw-r--r-- 1 utopszkij utopszkij    3035 2023-03-08 sponzor.png
--rw-r--r-- 1 utopszkij utopszkij 4824510 2023-03-08 storage_1.jpg
--rw-r--r-- 1 utopszkij utopszkij   39223 2023-03-08 storage_2.jpg
-drwxrwxrwx 9 utopszkij utopszkij    4096 2023-08-30 upload
-drwxr-xr-x 2 www-data  www-data     4096 2023-08-30 uploads
-drwxrwxrwx 2 utopszkij utopszkij    4096 2023-08-30 users
--rw-r--r-- 1 utopszkij utopszkij   21662 2023-03-08 utopszkij_fw.ico
--rw-r--r-- 1 utopszkij utopszkij  187662 2023-03-08 utopszkij_fw.png
--rw-r--r-- 1 utopszkij utopszkij   17588 2023-03-08 utopszkij_fw_smal.png
+-rw-r--r--  1 utopszkij utopszkij  722771 2023-03-08 header.jpg
+-rw-r--r--  1 utopszkij utopszkij 1006299 2023-03-08 header.png
+-rw-r--r--  1 utopszkij utopszkij    3885 2023-03-08 loader.gif
+-rw-r--r--  1 utopszkij utopszkij   76292 2023-03-08 logo.png
+-rw-r--r--  1 utopszkij utopszkij   32830 2023-03-08 noimage.png
+-rw-r--r--  1 utopszkij utopszkij   30588 2023-03-19 product_100.jpg
+-rw-r--r--  1 utopszkij utopszkij   14628 2023-03-19 product_101.jpg
+-rw-r--r--  1 utopszkij utopszkij   37241 2023-03-19 product_102.jpg
+-rw-r--r--  1 utopszkij utopszkij   20334 2023-03-19 product_103.jpg
+-rw-r--r--  1 utopszkij utopszkij   59645 2023-03-19 product_104.jpg
+-rw-r--r--  1 utopszkij utopszkij   15255 2023-03-19 product_105.jpg
+-rw-r--r--  1 utopszkij utopszkij   24944 2023-03-19 product_106.jpg
+-rw-r--r--  1 utopszkij utopszkij   34856 2023-03-19 product_107.jpg
+-rw-r--r--  1 utopszkij utopszkij   25933 2023-03-19 product_108.jpg
+-rw-r--r--  1 utopszkij utopszkij    7003 2023-03-19 product_109.jpg
+-rw-r--r--  1 utopszkij utopszkij 1401008 2023-02-22 product_10.jpg
+-rw-r--r--  1 utopszkij utopszkij 4816749 2023-03-08 product_10.png
+-rw-r--r--  1 utopszkij utopszkij   22314 2023-03-19 product_110.jpg
+-rw-r--r--  1 utopszkij utopszkij   44657 2023-03-19 product_111.jpg
+-rw-r--r--  1 utopszkij utopszkij   21910 2023-03-19 product_112.jpg
+-rw-r--r--  1 utopszkij utopszkij   20111 2023-03-19 product_113.jpg
+-rw-r--r--  1 utopszkij utopszkij   22820 2023-03-19 product_114.jpg
+-rw-r--r--  1 utopszkij utopszkij   27019 2023-03-19 product_115.jpg
+-rw-r--r--  1 utopszkij utopszkij   31455 2023-03-19 product_116.jpg
+-rw-r--r--  1 utopszkij utopszkij   51642 2023-03-19 product_117.jpg
+-rw-r--r--  1 utopszkij utopszkij   13494 2023-03-19 product_118.jpg
+-rw-r--r--  1 utopszkij utopszkij   10775 2023-03-19 product_119.jpg
+-rw-r--r--  1 utopszkij utopszkij  372878 2023-03-08 product_11.jpg
+-rw-r--r--  1 utopszkij utopszkij    7291 2023-03-19 product_120.jpg
+-rw-r--r--  1 utopszkij utopszkij   18933 2023-03-19 product_121.jpg
+-rw-r--r--  1 utopszkij utopszkij   13403 2023-03-19 product_122.jpg
+-rw-r--r--  1 utopszkij utopszkij   36710 2023-03-19 product_123.jpg
+-rw-r--r--  1 utopszkij utopszkij   10449 2023-03-19 product_124.jpg
+-rw-r--r--  1 utopszkij utopszkij   17240 2023-03-19 product_125.jpg
+-rw-r--r--  1 utopszkij utopszkij    6991 2023-03-19 product_126.jpg
+-rw-r--r--  1 utopszkij utopszkij   30392 2023-03-19 product_127.jpg
+-rw-r--r--  1 utopszkij utopszkij   11468 2023-03-19 product_128.jpg
+-rw-r--r--  1 utopszkij utopszkij   10885 2023-03-19 product_129.jpg
+-rw-r--r--  1 utopszkij utopszkij    8475 2023-03-19 product_130.jpg
+-rw-r--r--  1 utopszkij utopszkij   18377 2023-03-26 product_131.jpg
+-rw-r--r--  1 utopszkij utopszkij    8116 2023-03-26 product_132.jpg
+-rw-r--r--  1 utopszkij utopszkij   19367 2023-03-26 product_133.jpg
+-rw-r--r--  1 utopszkij utopszkij   22074 2023-03-26 product_134.jpg
+-rw-r--r--  1 utopszkij utopszkij   40059 2023-03-26 product_135.jpg
+-rw-r--r--  1 utopszkij utopszkij   26413 2023-03-26 product_136.jpg
+-rw-r--r--  1 utopszkij utopszkij   21988 2023-03-26 product_137.jpg
+-rw-r--r--  1 utopszkij utopszkij   13116 2023-03-26 product_138.jpg
+-rw-r--r--  1 utopszkij utopszkij   38404 2023-03-26 product_139.jpg
+-rw-r--r--  1 utopszkij utopszkij   17002 2023-03-08 product_13.gif
+-rw-r--r--  1 utopszkij utopszkij   32397 2023-03-26 product_140.jpg
+-rw-r--r--  1 utopszkij utopszkij    9927 2023-03-26 product_141.jpg
+-rw-r--r--  1 utopszkij utopszkij   22440 2023-03-26 product_142.jpg
+-rw-r--r--  1 utopszkij utopszkij   12157 2023-03-26 product_143.jpg
+-rw-r--r--  1 utopszkij utopszkij   19498 2023-03-26 product_144.jpg
+-rw-r--r--  1 utopszkij utopszkij    7143 2023-03-26 product_145.jpg
+-rw-r--r--  1 utopszkij utopszkij   18154 2023-03-26 product_146.jpg
+-rw-r--r--  1 utopszkij utopszkij   15841 2023-03-26 product_147.jpg
+-rw-r--r--  1 utopszkij utopszkij   34882 2023-03-26 product_148.jpg
+-rw-r--r--  1 utopszkij utopszkij   15657 2023-03-26 product_149.jpg
+-rw-r--r--  1 utopszkij utopszkij 3518444 2023-03-08 product_14.jpg
+-rw-r--r--  1 utopszkij utopszkij   10614 2023-03-26 product_150.jpg
+-rw-r--r--  1 utopszkij utopszkij   60622 2023-03-26 product_151.jpg
+-rw-r--r--  1 utopszkij utopszkij   97991 2023-07-03 product_152.png
+-rw-r--r--  1 utopszkij utopszkij   11288 2023-07-09 product_154.jpg
+-rw-r--r--  1 utopszkij utopszkij   22388 2023-07-09 product_155.jpg
+-rw-r--r--  1 utopszkij utopszkij  593358 2023-08-14 product_156.png
+-rw-r--r--  1 utopszkij utopszkij  562469 2023-08-14 product_157.png
+-rw-r--r--  1 utopszkij utopszkij  499747 2023-08-14 product_158.png
+-rw-r--r--  1 utopszkij utopszkij   20870 2023-03-08 product_15.jpeg
+-rw-r--r--  1 utopszkij utopszkij   20870 2023-03-08 product_18.jpeg
+-rw-r--r--  1 utopszkij utopszkij   20870 2023-03-08 product_19.jpeg
+-rw-r--r--  1 utopszkij utopszkij  295227 2023-03-08 product_1.jpg
+-rw-r--r--  1 utopszkij utopszkij    6148 2023-03-15 product_21.png
+-rw-r--r--  1 utopszkij utopszkij 1401008 2023-03-08 product_3.jpg
+-rw-r--r--  1 utopszkij utopszkij 1567599 2023-03-08 product_4.jpg
+-rw-r--r--  1 utopszkij utopszkij  313215 2023-03-15 product_59.png
+-rw-r--r--  1 utopszkij utopszkij   12723 2023-03-15 product_60.jpg
+-rw-r--r--  1 utopszkij utopszkij   40059 2023-03-15 product_61.jpg
+-rw-r--r--  1 utopszkij utopszkij   46764 2023-03-16 product_62.jpg
+-rw-r--r--  1 utopszkij utopszkij   99415 2023-03-16 product_63.png
+-rw-r--r--  1 utopszkij utopszkij   18759 2023-03-16 product_64.jpg
+-rw-r--r--  1 utopszkij utopszkij    5548 2023-03-16 product_65.jpg
+-rw-r--r--  1 utopszkij utopszkij   18147 2023-03-16 product_66.jpg
+-rw-r--r--  1 utopszkij utopszkij    5548 2023-03-16 product_67.jpg
+-rw-r--r--  1 utopszkij utopszkij    9773 2023-03-16 product_68.jpg
+-rw-r--r--  1 utopszkij utopszkij   20587 2023-03-16 product_69.jpg
+-rw-r--r--  1 utopszkij utopszkij  103901 2023-03-08 product_6.jpeg
+-rw-r--r--  1 utopszkij utopszkij 2462950 2023-03-08 product_6.jpg
+-rw-r--r--  1 utopszkij utopszkij 3506558 2023-03-08 product_6.png
+-rw-r--r--  1 utopszkij utopszkij  170798 2023-03-16 product_70.jpg
+-rw-r--r--  1 utopszkij utopszkij   11611 2023-03-16 product_71.jpg
+-rw-r--r--  1 utopszkij utopszkij   36006 2023-03-16 product_72.jpg
+-rw-r--r--  1 utopszkij utopszkij    8239 2023-03-16 product_73.jpg
+-rw-r--r--  1 utopszkij utopszkij   15148 2023-03-16 product_74.jpg
+-rw-r--r--  1 utopszkij utopszkij   53785 2023-03-16 product_75.jpg
+-rw-r--r--  1 utopszkij utopszkij   10027 2023-03-16 product_76.jpg
+-rw-r--r--  1 utopszkij utopszkij   20763 2023-03-16 product_77.jpg
+-rw-r--r--  1 utopszkij utopszkij    8881 2023-03-16 product_78.jpg
+-rw-r--r--  1 utopszkij utopszkij   28139 2023-03-16 product_79.jpg
+-rw-r--r--  1 utopszkij utopszkij   15491 2023-03-16 product_80.jpg
+-rw-r--r--  1 utopszkij utopszkij   11563 2023-03-16 product_81.png
+-rw-r--r--  1 utopszkij utopszkij   19541 2023-03-16 product_82.jpg
+-rw-r--r--  1 utopszkij utopszkij   21638 2023-03-16 product_83.jpg
+-rw-r--r--  1 utopszkij utopszkij    7971 2023-03-16 product_84.jpg
+-rw-r--r--  1 utopszkij utopszkij   14696 2023-03-16 product_85.jpg
+-rw-r--r--  1 utopszkij utopszkij   26723 2023-03-16 product_86.jpg
+-rw-r--r--  1 utopszkij utopszkij   33125 2023-03-16 product_87.jpg
+-rw-r--r--  1 utopszkij utopszkij   17247 2023-03-16 product_88.jpg
+-rw-r--r--  1 utopszkij utopszkij   31283 2023-03-16 product_89.jpg
+-rw-r--r--  1 utopszkij utopszkij 4816749 2023-03-08 product_8.png
+-rw-r--r--  1 utopszkij utopszkij   33614 2023-03-16 product_90.jpg
+-rw-r--r--  1 utopszkij utopszkij    7543 2023-03-16 product_91.jpg
+-rw-r--r--  1 utopszkij utopszkij   10542 2023-03-16 product_92.jpg
+-rw-r--r--  1 utopszkij utopszkij   26156 2023-03-16 product_93.jpg
+-rw-r--r--  1 utopszkij utopszkij    8557 2023-03-16 product_94.jpg
+-rw-r--r--  1 utopszkij utopszkij   28764 2023-03-16 product_95.jpg
+-rw-r--r--  1 utopszkij utopszkij   28333 2023-03-16 product_96.jpg
+-rw-r--r--  1 utopszkij utopszkij   14466 2023-03-16 product_97.jpg
+-rw-r--r--  1 utopszkij utopszkij    8164 2023-03-19 product_98.jpg
+-rw-r--r--  1 utopszkij utopszkij   23927 2023-03-19 product_99.jpg
+-rw-r--r--  1 utopszkij utopszkij 4816749 2023-03-08 product_9.png
+-rw-r--r--  1 utopszkij utopszkij    3035 2023-03-08 sponzor.png
+-rw-r--r--  1 utopszkij utopszkij 4824510 2023-03-08 storage_1.jpg
+-rw-r--r--  1 utopszkij utopszkij   39223 2023-03-08 storage_2.jpg
+drwxrwxrwx 11 utopszkij utopszkij    4096 2023-08-30 upload
+drwxr-xr-x  2 www-data  www-data     4096 2023-08-30 uploads
+drwxrwxrwx  2 utopszkij utopszkij    4096 2023-08-30 users
+-rw-r--r--  1 utopszkij utopszkij   21662 2023-03-08 utopszkij_fw.ico
+-rw-r--r--  1 utopszkij utopszkij  187662 2023-03-08 utopszkij_fw.png
+-rw-r--r--  1 utopszkij utopszkij   17588 2023-03-08 utopszkij_fw_smal.png
 
 ./images/upload:
-összesen 28
+összesen 36
 drwxr-xr-x 2 utopszkij utopszkij 4096 2023-02-24 0
 drwxrwxr-x 2 utopszkij utopszkij 4096 2023-08-30 1
 drwxrwxr-x 2 utopszkij utopszkij 4096 2023-08-30 12
@@ -425,6 +425,8 @@ drwxrwxr-x 2 utopszkij utopszkij 4096 2023-08-30 15
 drwxr-xr-x 2 utopszkij utopszkij 4096 2023-02-24 22
 drwxr-xr-x 2 utopszkij utopszkij 4096 2023-02-24 23
 drwxr-xr-x 2 utopszkij utopszkij 4096 2023-02-24 24
+drwxr-xr-x 2 www-data  www-data  4096 2023-08-30 blog24
+drwxr-xr-x 2 www-data  www-data  4096 2023-08-30 blog28
 
 ./images/upload/0:
 összesen 0
@@ -456,6 +458,14 @@ drwxr-xr-x 2 utopszkij utopszkij 4096 2023-02-24 24
 -rw-r--r-- 1 utopszkij utopszkij 943350 2023-02-24 1-2.odusszeiagyanu.pdf
 -rw-r--r-- 1 utopszkij utopszkij    729 2023-02-24 komedia.txt
 -rw-r--r-- 1 utopszkij utopszkij 522240 2023-02-24 orkenyegypercesek.doc
+
+./images/upload/blog24:
+összesen 824
+-rw-r--r-- 1 www-data www-data 839759 2023-08-30 penny-nyugta.pdf
+
+./images/upload/blog28:
+összesen 28
+-rw-r--r-- 1 www-data www-data 25135 2023-08-30 hanyemberttudeltartaniafold.odt
 
 ./images/uploads:
 összesen 10588
@@ -519,7 +529,7 @@ drwxrwxrwx 2 utopszkij utopszkij    4096 2023-08-30 views
 
 ./includes/controllers:
 összesen 136
--rwxrwxrwx 1 utopszkij utopszkij 21552 2023-08-29 blog.php
+-rwxrwxrwx 1 utopszkij utopszkij 23566 2023-08-30 blog.php
 -rwxrwxrwx 1 utopszkij utopszkij  2572 2023-07-26 category.php
 -rwxrwxr-x 1 utopszkij utopszkij  2998 2023-03-01 demo.php
 -rw-rw-r-- 1 utopszkij utopszkij  8007 2023-02-22 event.php
@@ -527,12 +537,12 @@ drwxrwxrwx 2 utopszkij utopszkij    4096 2023-08-30 views
 -rwxrwxrwx 1 utopszkij utopszkij  1763 2023-02-18 group.php
 -rwxrwxrwx 1 utopszkij utopszkij  2801 2023-05-06 home.php
 -rw-rw-r-- 1 utopszkij utopszkij  4672 2023-04-26 order.php
--rwxrwxr-x 1 utopszkij utopszkij 15942 2023-08-29 product.php
+-rwxrwxr-x 1 utopszkij utopszkij 15925 2023-08-30 product.php
 -rwxrwxr-x 1 utopszkij utopszkij  4298 2023-02-23 storage.php
 -rwxrwxrwx 1 utopszkij utopszkij  1186 2023-02-18 tag.php
 -rwxrwxr-x 1 utopszkij utopszkij  2585 2023-02-19 unit.php
 -rwxrwxrwx 1 utopszkij utopszkij 17333 2023-05-16 upgrade.php
--rwxrwxrwx 1 utopszkij utopszkij 16939 2023-08-30 user.php
+-rwxrwxrwx 1 utopszkij utopszkij 17143 2023-08-31 user.php
 -rw-rw-r-- 1 utopszkij utopszkij  3084 2023-04-26 worktype.php
 
 ./includes/extras:
@@ -564,10 +574,10 @@ drwxrwxrwx 2 utopszkij utopszkij    4096 2023-08-30 views
 -rw-rw-r-- 1 utopszkij utopszkij 2273 2023-04-26 worktypemodel.php
 
 ./includes/views:
-összesen 312
+összesen 316
 -rwxrwxrwx 1 utopszkij utopszkij  2652 2023-04-26 blogcommentform.html
--rwxrwxrwx 1 utopszkij utopszkij  6804 2023-07-21 blogform.html
--rwxrwxrwx 1 utopszkij utopszkij  9151 2023-05-21 blog.html
+-rwxrwxrwx 1 utopszkij utopszkij  8347 2023-08-30 blogform.html
+-rwxrwxrwx 1 utopszkij utopszkij 10470 2023-08-30 blog.html
 -rwxrwxrwx 1 utopszkij utopszkij  5015 2023-05-17 blogs.html
 -rwxrwxrwx 1 utopszkij utopszkij  1667 2023-07-26 categorybrowser.html
 -rwxrwxrwx 1 utopszkij utopszkij  3059 2023-05-16 categoryform.html
