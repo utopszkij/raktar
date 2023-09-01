@@ -5,6 +5,7 @@ use \RATWEB\DB\Record;
 include_once __DIR__.'/../models/blogmodel.php';
 include_once __DIR__.'/../models/categorymodel.php';
 include_once __DIR__.'/../models/blogcommentmodel.php';
+include_once __DIR__.'/../uploader.php';
 include_once __DIR__.'/../urlprocess.php';
 
 class Blog extends Controller {
@@ -204,6 +205,13 @@ class Blog extends Controller {
         $this->session->set($name.'page',$page);
         $blog->bodyHtml = urlprocess($this->closeHtmlTags($blog->body));
 
+        // attachmentek olvasása
+        $attachments = [];
+        if (is_dir('images/upload/blog'.$blog->id)) {
+			$attachments = array_diff(scandir('images/upload/blog'.$blog->id), array('.', '..'));
+		}
+        
+
         $commentModel = new BlogcommentModel();
         if (isset($blog->id)) {
             $comments = $commentModel->getComments($page, $blog->id, $limit, 'created_at','DESC');
@@ -227,6 +235,7 @@ class Blog extends Controller {
             "loged" => $this->session->input('loged',0),
             "logedGroup" => $this->session->input('logedGroup',0),
             "blog" => $blog,
+            "attachments" => $attachments,
             "comments" => $comments,
             "total" => $total,
             "page" => $page,
@@ -289,6 +298,7 @@ class Blog extends Controller {
         view('blogform',["flowKey" => $this->newFlowKey(),
             'blog' => $blog,
             "errorMsg" => $this->session->input('errorMsg',''),
+            "attachments" => [],
             "successMsg" => $this->session->input('successMsg','')
         ]);
 	}
@@ -318,10 +328,18 @@ class Blog extends Controller {
         $id = $this->request->input('blog_id',0);
         $blog = $this->model->getById($id);
         if (isset($blog->id)) {
+
+            // attachmentek olvasása
+            $attachments = [];
+            if (is_dir('images/upload/blog'.$blog->id)) {
+                $attachments = array_diff(scandir('images/upload/blog'.$blog->id), array('.', '..'));
+            }
+
             $this->session->set('errorMsg', '');
             $this->session->set('successMsg', '');
             view('blogform',["flowKey" => $this->newFlowKey(),
                 'blog' => $blog,
+                'attachments' => $attachments,
                 "errorMsg" => $this->session->input('errorMsg',''),
                 "successMsg" => $this->session->input('successMsg','')
             ]);
@@ -422,6 +440,23 @@ class Blog extends Controller {
                 $errorMsg = $this->model->errorMsg;
                 $this->model->saveCategories($id, $categories);
             }    
+
+            // attachmentek tárolása
+            for ($i=0; $i<5; $i++) {
+                if (isset($_FILES['attachment'.$i])) {
+                    if ($_FILES['attachment'.$i]['name'] != '') {
+                        $uploader = new Uploader();
+                        $res = $uploader->doUpload('attachment'.$i, 
+                                            'images/upload/blog'.$id, 
+                                            '', 
+                                            ['doc','pdf','docx','odt','txt','xlsx']); 
+                        if ($res->error != '') {
+                            echo 'image upload error '.$res->error; exit();
+                        }					
+                    }
+                }
+            }
+
             if ($errorMsg == '') {    
                 $this->session->set('successMsg', 'SAVED');
                 $this->session->set('errorMsg', '');
@@ -517,6 +552,16 @@ class Blog extends Controller {
             (strpos($this->session->input('logedGroup'),'admin') > 0)) {
             $id = $this->request->input('blog_id',0);
             $this->model->delById($id);
+
+            // attachmentek törlése
+            $attachments = [];
+            if (is_dir('images/upload/blog'.$blog->id)) {
+                $attachments = array_diff(scandir('images/upload/blog'.$blog->id), array('.', '..'));
+                foreach ($attachments as $attachemnt) {
+                    unlink('images/upload/blog'.$blog->id.'/'.$attachment);
+                }
+            }
+            
             $this->session->set('successMsg','DELETED');
             $this->session->set('errorMsg','');
             $this->blogs();    
@@ -530,6 +575,17 @@ class Blog extends Controller {
             $this->session->set('errorMsg','');
         }
 	}
+
+   	/**
+	 * attachment törlése
+    */ 
+	public function delattach() {
+		$id = $this->request->input('id','0');
+		$attachment = $this->request->input('attachment','');
+		unlink('images/upload/blog'.$id.'/'.$attachment);
+		$this->edit();
+	}
+
 
 	/**
 	 * blog komment törlése

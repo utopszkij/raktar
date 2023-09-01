@@ -93,6 +93,10 @@ class User extends Controller {
 	}
 	
 	public function regist() {
+		if (!USERREGIST) {
+			echo '<div class="alert alert-danger">Regist disabled.</div>';
+			return;
+		}
 		$record = new Record();
 		$record->id = 0;
 		$record->username = '';
@@ -169,6 +173,10 @@ class User extends Controller {
 	}
 	
 	public function doregist() {
+		if (!USERREGIST) {
+			echo '<div class="alert alert-danger">Regist disabled.</div>';
+			return;
+		}
 		$this->checkFlowKey($this->browserURL);
 		$record = new Record();
 		$record->id = 0; 

@@ -259,7 +259,6 @@ class Product extends Controller {
 		$attachment = $this->request->input('attachment','');
 		unlink('images/upload/'.$id.'/'.$attachment);
 		$this->edit();
-		$this->edit();
 	}
 
 	/**

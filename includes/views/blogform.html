@@ -9,7 +9,7 @@
             <h3 v-if="blog.id > 0">{{ lng('EDIT')}}</h3>		
         </div>
     </div>
-    <form id="blogForm" action="index.php" method="post">
+    <form id="blogForm" action="index.php" method="post" enctype="multipart/form-data">
         <input type="hidden" value="blog.blogsave" name="task" />			
         <input type="hidden" v-model="blog.id" name="id" />
         <input type="hidden" name="flowKey" v-model="flowKey" />
@@ -44,6 +44,29 @@
                         &nbsp; &nbsp;
                     </var>
                 </div>
+
+                <div class="form-outline col-12" style="background-color:blanchedalmond">
+                    <label>{{ lng('ATTACHMENTS') }}:&nbsp;</label>
+                    <div style="display:inline-block; width:auto">
+                        Megengedett: doc, docx, pdf, txt, odt<br />
+                        <input type="file" name="attachment0" /><br />
+                        <input type="file" name="attachment1" /><br />
+                        <input type="file" name="attachment2" /><br />
+                        <input type="file" name="attachment3" /><br />
+                        <input type="file" name="attachment4" /><br />
+                    </div>
+                    <div style="display:inline-block; width:auto">
+                        <p v-for="attachment in attachments">
+                            <a v-bind:href="'images/upload/'+record.id+'/'+attachment" 
+                                target="_new" />{{ attachment}}
+                            </a>
+                            <button type="button" class="btn btn-danger" v-on:click="attachDelClick(attachment)" 
+                                v-bind:title="lng('DELETE')">X</button>
+                        </p>
+                    </div>	
+                </div>
+    
+
         </div><!-- .row -->
         <div class="row">
             <div class="col-12">
@@ -172,6 +195,13 @@ CKEDITOR.editorConfig = function( config ) {
                 }
             }
             return result;
-        }
+        },
+        attachDelClick(attachment) {
+            popupConfirm(lng('SUREDELETE')+' '+attachment, 
+            function() {
+                location=HREF('blog.delattach',{id:app.record.id, attachment:attachment, key:app.flowKey}); 
+            })
+		}
+
 };   
 </script>

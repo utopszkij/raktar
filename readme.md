@@ -45,6 +45,13 @@ Aki ezzel a módszerrel nem ért egyet az az index.php -t modosítva használhat
 
 ### A programot mindenki csak saját felelősségére használhatja.
 
+## verzió v2.2.6
+1. USERREGIST konfigurációs beállítás javítása. (url-ből sem
+érhető el a regisztrálás funkció)
+2. File csatolási lehetőség a cikkekhez
+2023.09.01.
+### ******************************************************
+
 ## verzió v2.2.5
 USERREGIST konfigurációs beállítás felvétele.
 ### ******************************************************
