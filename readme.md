@@ -45,6 +45,11 @@ Aki ezzel a módszerrel nem ért egyet az az index.php -t modosítva használhat
 
 ### A programot mindenki csak saját felelősségére használhatja.
 
+## verzió v2.2.7
+webp kép formátum támogatása
+2023.10.03.
+### ******************************************************
+
 ## verzió v2.2.6
 1. USERREGIST konfigurációs beállítás javítása. (url-ből sem
 érhető el a regisztrálás funkció)

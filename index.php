@@ -29,7 +29,7 @@ importComponent('upgrade');
 $fw = new Fw();
 
 //+ ----------- verzio kezelés start ------------
-$fileVerzio = 'v2.2.6';
+$fileVerzio = 'v2.2.7';
 $upgrade = new \Upgrade();
 $dbverzio  = $upgrade->getDBVersion();
 $lastVerzio = $upgrade->getLastVersion();

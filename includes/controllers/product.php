@@ -185,7 +185,7 @@ class Product extends Controller {
 							$uploader = new Uploader();
 							$res = $uploader->doUpload('image', 'images', 
 												'product_'.$id.'.*', 
-												['jpg','jpeg','png','gif']); 
+												['jpg','jpeg','png','gif','webp']); 
 							if ($res->error == '') {
 								$record->image_link = 'images/'.$res->name;
 								$this->model->save($record);
@@ -200,7 +200,7 @@ class Product extends Controller {
 							$uploader = new Uploader();
 							$res = $uploader->doUpload('image2', 'images', 
 												'product_'.$id.'.*', 
-												['jpg','jpeg','png','gif']); 
+												['jpg','jpeg','png','gif','webp']); 
 							if ($res->error == '') {
 								$record->image_link = 'images/'.$res->name;
 								$this->model->save($record);

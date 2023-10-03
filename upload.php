@@ -18,7 +18,7 @@
 	    $uploadName = date('Ymdhis').clearFileName(basename($_FILES[$fn]['name']));
 		$uploadFile = $uploadDir . $uploadName;
 		$uploadFileExt = pathinfo($uploadFile,PATHINFO_EXTENSION);
-		if (!in_array($uploadFileExt, Array('jpg','jpeg','png','gif',
+		if (!in_array($uploadFileExt, Array('jpg','jpeg','png','gif','webp',
 			'doc','docx','pdf','odt','txt'))) {
 			echo JSON_encode(array('error'=>'upload not enabled'));
 			exit();	

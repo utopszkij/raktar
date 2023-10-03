@@ -129,7 +129,7 @@
                     // az ékezetes fájl nevekkel baj van :(
                     $target_file = $target_dir.$record->id.'.'.$uploadFileExt;
                     
-                    if (!in_array($uploadFileExt, Array('jpg','jpeg','png','gif'))) {
+                    if (!in_array($uploadFileExt, Array('jpg','jpeg','png','gif','webp'))) {
                         echo JSON_encode(array('error'=>'upload not enabled'));
                         exit();	
                     }
