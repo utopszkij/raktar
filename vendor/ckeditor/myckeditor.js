@@ -10,7 +10,7 @@
 
 			// URL ahol a file upload feldolgozo php van
 			this.url = 'upload.php';
-			this.uploads = ['jpg','jpeg','png','odt'];
+			this.uploads = ['jpg','jpeg','png','odt','webp'];
 		}
 
 		// Starts the upload process.

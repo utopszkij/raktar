@@ -104,7 +104,7 @@ class Home extends Controller {
 		"ADATFELDOLGOZO" => ADATFELDOLGOZO, 
 		"SITEURL" => SITEURL,
 		"SIGNO" => SIGNO]);
-		view('impressum',[]);
+		// view('impressum',[]);
 	}
 
 	/**
