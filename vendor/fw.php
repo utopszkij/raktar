@@ -12,7 +12,7 @@ class Fw {
 		global $components;
 		if (!defined('REWRITE')) { define('REWRITE',true); }
 		if (!defined('LNG')) { define('LNG','hu'); }
-		}
+		
 		
 		// SEO barát URL kezelés
 		// url = ....../task/xxx/parname/parValue....
