@@ -45,6 +45,11 @@ Aki ezzel a módszerrel nem ért egyet az az index.php -t modosítva használhat
 
 ### A programot mindenki csak saját felelősségére használhatja.
 
+## verzió v2.3.0
+strukturált tároló
+2023.10.273.
+### ******************************************************
+
 ## verzió v2.2.7
 webp kép formátum támogatása
 2023.10.03.

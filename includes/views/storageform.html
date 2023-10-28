@@ -26,6 +26,14 @@
         </div>
         <div class="row">
             <div class="form-outline col-12">
+                <label>{{ lng('SUBNAME') }}:&nbsp;</label>
+                <input name="subname" class="form-control" 
+                        v-model="record.subname" type="text"
+                        :disabled="(!logedAdmin)" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-outline col-12">
                 <label>{{ lng('CODE') }}:&nbsp;</label>
                 <input name="code" class="form-control" 
                         v-model="record.code" type="text" required="required"
