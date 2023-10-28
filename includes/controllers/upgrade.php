@@ -269,6 +269,20 @@ class Upgrade {
 		}	
 	}
 
+	protected function do_v2_3_0($dbverzio) {
+		if ($this->versionAdjust($dbverzio) < $this->versionAdjust('v2.3.0')) {
+
+			$table = new Table('storages');
+			$table->string('subname');
+			$table->alterInDB();
+			if ($table->error != '') {
+				echo $table->error.'<br>';
+			}	
+		
+			$this->setDbVersion('v2.3.0');
+		}	
+	}
+
 
 
 	/**
@@ -281,6 +295,7 @@ class Upgrade {
 		$this->do_v1_1_0($dbverzio);
 		$this->do_v1_2_0($dbverzio);
 		$this->do_v2_2_0($dbverzio);
+		$this->do_v2_3_0($dbverzio);
 		// ide jönek a későbbi verziokhoz szükséges db alterek növekvő verzió szerint
 	}
 

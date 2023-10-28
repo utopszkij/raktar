@@ -22,6 +22,7 @@
             $result->code = '';
             $result->qrcode = '';
             $result->image_link = '';
+            $result->subname = '';
             return $result;
         }
 
@@ -38,10 +39,25 @@
             $db = new Query($this->table,'d');
             $result = $db->offset((($page - 1) * $limit))
                     ->limit($limit)
+                    ->orderBy('name, subname')
+                    ->all();
+            return $result;        
+        }
+
+        /**
+         * names adatok listája
+         * @return [{name,count},...]
+         */
+        public function getNames() {
+            $db = new Query($this->table,'d');
+            $result = $db->select(['name','count(id)'])
+                    ->groupBy(['name'])
                     ->orderBy('name')
                     ->all();
             return $result;        
         }
+
+
 
         /**
          * Összes rekord száma

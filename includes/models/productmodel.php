@@ -52,7 +52,8 @@
             $db1 = new Query($this->table,'p');
             $db1->join('LEFT OUTER','events','e','e.product_id','=','p.id')
 				->join('LEFT OUTER','storages','s','s.id','=','p.storage_id')
-				->select(['p.id','p.sort_name','p.image_link','s.code','p.tags','sum(e.quantity) stock', 'p.unit'])
+				->select(['p.id','p.sort_name','p.image_link',
+                    'concat(s.code," ",s.subname) code' ,'p.tags','sum(e.quantity) stock', 'p.unit'])
 				->groupBy(['p.id','p.sort_name','p.tags','s.code','p.unit']);
 			if ($filter != '') {
 				$w = explode('|',$filter);

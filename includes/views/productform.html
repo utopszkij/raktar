@@ -138,12 +138,22 @@
         <div class="row">
             <div class="form-outline col-12">
                 <label>{{ lng('STORAGE') }}:&nbsp;</label>
-                <select name="storage_id" class="form-control" 
-                        v-model="record.storage_id" 
-                        :disabled="(!logedAdmin)">
-                    <option v-bind:value="storageRec.id" v-for="storageRec in storages">{{ storageRec.code }}</option>    
+                <select name="storage_name" class="form-control" onchange="app.storageChange()"
+                        :disabled="(!logedAdmin)" id="storage_id">
                 </select>
             </div>
+        </div>
+        <div class="row">
+            <div class="form-outline col-12">
+                <label>{{ lng('SUBNAME') }}:&nbsp;</label>
+                <select name="storage_id" class="form-control" 
+                        v-model="record.storage_id" 
+                        :disabled="(!logedAdmin)" id="sub_storage_id">
+                </select>
+            </div>
+        </div>
+        <div class="row">
+			<div class="col-12">At azonos tároló helyhez tartozó helyekben a "Tároló hely" adat pontosan, betütől betüre azonos legyen!</div>
         </div>
         <div class="row">
             <div class="form-outline col-12">
@@ -290,11 +300,7 @@
         <div class="row">
             <div class="form-outline col-12">
                 <label>{{ lng('STORAGE') }}:&nbsp;</label>
-                <select name="storage_id" class="form-control" 
-                        v-model="record.storage_id" 
-                        :disabled="true">
-                    <option v-bind:value="storageRec.id" v-for="storageRec in storages">{{ storageRec.code }}</option>    
-                </select>
+				<input tye="text" disabled="disabled" class="form-control" v-bind:value="showStorage()" />
             </div>
         </div>
         <div class="row attachments">
@@ -353,9 +359,67 @@
 				  this.editClick();
 				}  
 			}
+            // storage_id select optionsok feltöltése az storages tömbből (distinct)
+            var lastName = '@';
+            var sel = $('#storage_id');
+            var i = 0;
+            this.name = '';
+            for(i in this.storages) {
+                if (this.storages[i].name != lastName) {
+                    sel.append($('<option>', {
+                        value: this.storages[i].name,
+                        text: this.storages[i].name
+                    }));
+                    if (this.record.storage_id == this.storages[i].id) {
+                        this.name = this.storages[i].name;
+                    }
+                    lastName = this.storages[i].name;
+                }
+            }
+
+            // record.storage_id alapján a stoage_id select beállítása
+            sel.val(name);
+
+            // sub_storage_id select options feltöltése storages tömbből (filter this.name)
+            // sub_storage_id beállítása (record.storage_id.subname filterrel)
+            this.subStorageInit();
+
             console.log(this.record);		
 		},
-		showQrcode() {
+        subStorageInit() {
+            // sub_storage_id select optionsok feltöltés
+            // sub_storage_id select beállítása 
+            var sel = $('#sub_storage_id');
+            var id = 0;
+            sel.empty();
+            for(i in this.storages) {
+                if (this.storages[i].name == this.name) {
+                    sel.append($('<option>', {
+                        value: this.storages[i].id,
+                        text: this.storages[i].subname
+                    }));
+                    if (this.record.storage_id == this.storages[i].id) {
+                        id = this.storages[i].id;
+                    }
+                }
+            }
+            sel.val(id);
+        },
+        storageChange() {
+            // storage select change
+            this.name = $('#storage_id').val();
+            this.subStorageInit();
+        },
+        showStorage() {
+			var result = '';
+            for(i in this.storages) {
+                if (this.storages[i].id == this.record.storage_id) {
+                   result = this.storages[i].name+' '+this.storages[i].subname;
+                }
+            }
+            return result;
+		},
+        showQrcode() {
 			if ((this.record.qrcode != '') & (this.qrCodeShow == false)) {
 				var qrcode = new QRCode(document.getElementById("qrcode"), {
 					width : 140,

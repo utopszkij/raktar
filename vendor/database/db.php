@@ -918,7 +918,7 @@ class Table {
 	 * @return bool sikeres vagy nem
 	 */
 	public function alterInDB() {
-		$sqlStr = 'ALTER TABLE `'.$this->name.'` (';
+		$sqlStr = 'ALTER TABLE `'.$this->name.'` ';
 		$term = '';
 		foreach ($this->fields as $field) {
 			$sqlStr .= 'ADD COLUMN '.$term.$field->sql();
@@ -929,7 +929,7 @@ class Table {
 		}
 		$q = new Query('dbverzio');
 		$q->exec($sqlStr);
-		$this->error = $q->error;
+		$this->error = $q->error.' sql='.$q->getSql();
 		return ($this->error == '');
 	}
 

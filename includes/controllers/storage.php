@@ -34,6 +34,7 @@ class Storage extends Controller {
         $this->editURL = 'index.php?task=storage.edit';
         $this->browserTask = 'storage.items';
         $this->model = new StorageModel();
+		$this->ckeditorFields = [];
 	}
 
     /**

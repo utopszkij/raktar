@@ -12,16 +12,21 @@
 			<tr><th style="width:30px">ID</th>
 				<th style="width:60px">{{ lng('CODE') }}</th>
 				<th style="width:60px">{{ lng('NAME') }}</th>
+				<th style="width:60px">{{ lng('SUBNAME') }}</th>
 				<th></th>
 			</tr>
 			<tr v-for="item in items">
 				<td>{{ item.id }}</td>
 				<td>{{ item.code }}</td>
 				<td> <a v-bind:href="HREF('product.items',{'page':1, 'filter':'|'+item.code+'|'})">
-						{{ item.name }}
-					 </a>
-				</td>    
-				<td>
+                    {{ item.name }}
+                 </a>
+                </td>    
+                <td> <a v-bind:href="HREF('product.items',{'page':1, 'filter':'|'+item.code+'|'})">
+                    {{ item.subname }}
+                     </a>
+                </td>    
+                <td>
 					<a class="btn btn-primary" v-if="logedAdmin" v-bind:href="HREF('storage.edit',{id:item.id, backtask:'storage.items'})">
 						<em class="fas fa-edit" v-bind:title="lng('EDIT')"></em><span>{{ lng('EDIT') }}</span>
 					</a>

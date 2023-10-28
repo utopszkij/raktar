@@ -137,12 +137,14 @@ tokens = {
     "QRCODE":"QR kód",
     "IMAGE":"Kép file feltöltés",
     "OR_IMAGE_LINK":"vagy kép URL",
+    "SUBNAME":"hely",
 
     /* product */
     "PRODUCT":"Termék",
     "PRODUCTS":"Termékek",
     "DOCUMENT_ID":"Dokumentum száma",
 	"DOCUMENT_LINK":"Dokumentum url",
+    "PRODUCT_NAME":"Termék neve",
 	"UNIT_PRICE":"Egységár",
 	"FILTERING":"Szűrés",
 	"NAME_SUBSTRING":"Név részlet",

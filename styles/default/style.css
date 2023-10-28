@@ -18,6 +18,7 @@ form .row {margin:20px 0px 20px 0px}
 .popupSuccess {background-color:rgb(80, 156, 96); color:rgb(24, 16, 16)}
 .popupSimple {background-color:silver; color:black;} 
 
+.alert-infp img {width-max:50%}
 
 .paginator {display:inline-block; list-style: none;}
 .paginator li {margin-right:0px;}
