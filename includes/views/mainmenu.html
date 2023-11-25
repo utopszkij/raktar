@@ -55,7 +55,10 @@
                           <a class="dropdown-item" v-bind:href="HREF('storage.items',{})">{{ lng('STORAGES') }}</a>
                           <a class="dropdown-item" v-bind:href="HREF('worktype.items',{})">{{ lng('WORKTYPES') }}</a>
                           <a class="dropdown-item" v-bind:href="HREF('category.items',{})">Cikk kategóriák</a>
-                      </div>
+                          <a class="dropdown-item" v-if="isAdmin" 
+                              v-bind:href="HREF('event.items',{page:1,filter:''})">
+                            {{ lng('EVENTS') }}</a>
+                  </div>        
               </li>	
             </ul>
             <ul class="navbar-nav mr-auto mb-2 mb-lg-0 text-right">

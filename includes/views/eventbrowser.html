@@ -7,11 +7,49 @@
     </div>
     
     <h2 class="ribbon-banner"><span>{{ lng('EVENTS') }}</span></h2>
-    <h3 v-if="items.length > 0">{{ items[0].sort_name }}</h3>
-    <div class="row">
+
+	<form class="form col-12">
+		<h3>{{ lng('FILTER') }}</h3>
+		<div class="col-12">
+			<label>{{ lng('PRODUCT_NAME_SUBSTRING') }}</label>:&nbsp;
+			<input type="text" id="sort_name" class="form-control" /> 
+		</div>
+		<div class="col-12">
+			<label>{{ lng('DIRECTION') }}</label>:&nbsp;
+			<select id="direction" class="form-control">
+				<option value=""></option>
+				<option value="INPUT">{{ lng('INPUT') }}</option>
+				<option value="OUTPUT">{{ lng('OUTPUT') }}</option>
+			</select>
+		</div>
+		<div class="col-12">
+			<label>{{ lng('EVENT_DATE_MIN') }}</label>:&nbsp;
+			<input type="date" id="event_date_min" class="form-control" /> 
+		</div>
+		<input type="hidden" id="product_id" />
+		<div class="col-12">
+			<label>{{ lng('EVENT_DATE_MAX') }}</label>:&nbsp;
+			<input type="date" id="event_date_max" class="form-control" /> 
+			<a v-on:click="goFilter()" 
+				class="btn btn-primary">
+				<em class="fas fa-search" v-bind:title="lng('GOFILTER')"></em></a>
+			<a v-on:click="delFilter()" 
+				class="btn btn-secondary">
+				<em class="fas fa-times" v-bind:title="lng('DELFILTER')"></em></a>
+		</div>
+	</form>
+
+
+    <h3 v-if="(items.length > 0)">
+		<span v-if="(filter.indexOf('product_id') >= 0)">
+			{{ items[0].sort_name }}
+		</span>	
+	</h3>
+
+	<div class="row">
 		<table class="col-12 table table-bordered table-striped" style="width:auto" v-if="items.length > 0">
 			<tr><th style="width:30px">ID</th>
-				<th style="width:60px">{{ lng('EVENT_DIRECTION') }}</th>
+				<th style="width:250px">{{ lng('EVENT_DIRECTION') }}</th>
 				<th style="width:120px">{{ lng('EVENT_TYPE') }}</th>
 				<th style="width:60px">{{ lng('EVENT_DATE') }}</th>
 				<th style="width:60px">{{ lng('QUANTITY') }}</th>
@@ -20,7 +58,11 @@
 			</tr>
 			<tr v-for="item in items">
 				<td>{{ item.id }}</td>
-				<td>{{ lng(item.direction) }}</td>
+				<td>{{ lng(item.direction) }} <br />
+					<a v-bind:href="HREF('product.edit',{id:item.product_id})">
+						{{ item.sort_name }}
+					</a>
+				</td>
 				<td>{{ item.event_type }}</td>
 				<td>{{ item.event_date }}</td>
 				<td>{{ item.quantity }}</td>
@@ -59,6 +101,26 @@
 			for (i=0; i < this.items.length; i++) {
 				this.items[i].event_date = this.items[i].event_date.substring(0,10);
 			}
+			// filter kezelés
+			if (this.filter) {
+				if (this.filter != '') {
+					var i = 0;
+					var fn = '';
+					var w = this.filter.split('|');
+					while (w.length < 6) {
+						w.push('');
+					}
+					var i = 0;
+					while (i < (w.length - 1)) {
+						fn = w[i];
+						if ($('#'+fn)) {
+							$('#'+fn).val(w[i+1]);
+						}
+						i = i + 2;
+					}
+				}
+			}
+
 		},	
         makePaginatorClass(p,page) {
             var result = '';
@@ -74,7 +136,24 @@
             function() {
                 location=HREF('event.delete',{'id':id, key:app.flowKey}); 
             })
-        }    
+        },    
+        goFilter() {
+// nincs kész!			
+			// filter str kialakitása
+			var filterStr = 'sort_name|'+$('#sort_name').val()+'|'+
+							'direction|'+$('#direction').val()+'|'+
+							'event_date_min|'+$('#event_date_min').val()+'|'+
+							'event_date_max|'+$('#event_date_max').val();
+			// url hivás filter, page paraméterrekkel
+			window.location=HREF('event.items',{"page":1,"filter": filterStr});
+			return false;
+		},
+		delFilter() {
+			// filter JSON string kialakitása
+			// url hivás filter, page paraméterrekkel
+			window.location=HREF('event.items',{"page":1,"filter":"all"});
+			return false;
+		},
         
     }
 </script>
