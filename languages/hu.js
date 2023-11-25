@@ -161,7 +161,11 @@ tokens = {
     "EVENT_DATE":"Dátum",
     "QUANTITY":"Mennyiség",
     "EVENT_DIRECTION":"Irány",
-
+    "FILTER":"Szűrés",
+    "PRODUCT_NAME_SUBSTRING":"Termék név részlet",
+    "EVENT_DATE_MIN":"Esemény dátum min.",
+    "EVENT_DATE_MAX":"Esemény dátum max.",
+    
     /* blog */
     "BLOGS":"Cikkek",
     "BLOG":"Cikk",

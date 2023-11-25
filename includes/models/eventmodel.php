@@ -44,7 +44,8 @@
             $db = new Query($this->table,'e');
             $db->join('LEFT OUTER','products','p','p.id','=','e.product_id')
 				->join('LEFT OUTER','eventtypes','et','et.id','=','e.event_type')
-				->select(['e.id','e.direction','et.name event_type','e.product_id','e.quantity','e.event_date','p.sort_name','p.unit']);
+				->select(['e.id','e.direction','et.name event_type',
+                'e.product_id','e.quantity','e.event_date','p.sort_name','p.unit']);
 			if ($filter != '') {
 				$w = explode('|',$filter);
 				while (count($w) < 4) {
@@ -55,17 +56,30 @@
 			}	
             $i = 0;
             while ($i < count($w)) {
-                if ($w[0] == 'event_type') {
-                    $db->where('e.event_type','like','%'.$w[1].'%');
+                if ($w[$i] == 'direction') {
+                    if ($w[$i+1] != '') {
+                        $db->where('e.direction','=',$w[$i+1]);
+                    }    
                 }	
-                if ($w[0] == 'product_id') {
-                    $db->where('e.product_id','=',$w[1]);
+                if ($w[$i] == 'sort_name') {
+                    if ($w[$i+1] != '') {
+                        $db->where('p.sort_name','like','%'.$w[$i+1].'%');
+                    }    
                 }	
-                if ($w[0] == 'event_date_min') {
-                    $db->where('e.evant_date','>=',$w[1]);
+                if ($w[$i] == 'product_id') {
+                    if ($w[$i+1] != '') {
+                        $db->where('e.product_id','=',$w[$i+1]);
+                    }    
                 }	
-                if ($w[0] == 'event_date_max') {
-                    $db->where('e.evant_date','<=',$w[1]);
+                if ($w[$i] == 'event_date_min') {
+                    if ($w[$i+1] != '') {
+                        $db->where('e.event_date','>=',$w[$i+1]);
+                    }    
+                }	
+                if ($w[$i] == 'event_date_max') {
+                    if ($w[$i+1] != '') {
+                        $db->where('e.event_date','<=',$w[$i+1]);
+                    }    
                 }	
                 $i = $i + 2;
             }
