@@ -18,9 +18,9 @@
 			<tr v-for="record in items" v-if="logedAdmin" style="border-style:solid; border-width:1px">
 				<td>{{ record.id }}</td>
 				<td>
-					<!-- a v-bind:href="'index.php?task=tag.edit&id='+record.id+'&browserUrl='+encodeURI(browserUrl)" style="width:80%; max-width:80%">
+					<a v-bind:href="'index.php?task=tag.edit&id='+record.id+'&browserUrl='+encodeURI(browserUrl)" style="width:80%; max-width:80%">
 						<var v-bind:style="'display:inline-block; '+getBehuzas(record.szint)">&nbsp;</var>{{ record.name }}
-					</a --> 
+					</a> 
 				</td>
                 <td>
                     <a v-bind:href="HREF('product.tree',{page:1, filter:'fn||fs||filterTag|'+record.name})">
@@ -47,9 +47,6 @@
 				<td></td>
 			</tr>
         </table>
-    </div>
-    <div v-if="items.length > 0">
-		include paginator
     </div>
     <div v-if="items.length == 0">
 		<div class="alert alert-info">{{ lng('NOT_ITEMS') }}</div>
