@@ -138,9 +138,21 @@
         <div class="row">
             <div class="form-outline col-12">
                 <label>{{ lng('STORAGE') }}:&nbsp;</label>
-                <select name="storage_name" class="form-control" onchange="app.storageChange()"
+                <select name="storage_id" class="form-control" onchange="app.storageChange()"
                         :disabled="(!logedAdmin)" id="storage_id">
                 </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-outline col-12">
+                <label>{{ lng('ERROR_STOCK') }}:&nbsp;</label>
+				<input name="error_stock" type="number" class="form-control" v-bind:value="record.error_stock" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-outline col-12">
+                <label>{{ lng('WARNING_STOCK') }}:&nbsp;</label>
+				<input name="warning_stock" type="number" class="form-control" v-bind:value="record.warning_stock" />
             </div>
         </div>
         <div class="row">
@@ -300,7 +312,19 @@
         <div class="row">
             <div class="form-outline col-12">
                 <label>{{ lng('STORAGE') }}:&nbsp;</label>
-				<input tye="text" disabled="disabled" class="form-control" v-bind:value="showStorage()" />
+				<input name="storage" type="text" disabled="disabled" class="form-control" v-bind:value="showStorage()" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-outline col-12">
+                <label>{{ lng('ERROR_STOCK') }}:&nbsp;</label>
+				<input name="error_stock" type="number" disabled="disabled" class="form-control" v-bind:value="record.error_stock" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-outline col-12">
+                <label>{{ lng('WARNING_STOCK') }}:&nbsp;</label>
+				<input name="warning_stock" type="number" disabled="disabled" class="form-control" v-bind:value="record.warning_stock" />
             </div>
         </div>
         <div class="row attachments">
@@ -363,22 +387,27 @@
             var lastName = '@';
             var sel = $('#storage_id');
             var i = 0;
+            var j = 0; // options index
             this.name = '';
             for(i in this.storages) {
                 if (this.storages[i].name != lastName) {
                     sel.append($('<option>', {
-                        value: this.storages[i].name,
+                        value: this.storages[i].id,
                         text: this.storages[i].name
                     }));
                     if (this.record.storage_id == this.storages[i].id) {
                         this.name = this.storages[i].name;
+                        sel.attr('selectedIndex',j);
                     }
+                    j++;
                     lastName = this.storages[i].name;
                 }
             }
 
             // record.storage_id alapján a stoage_id select beállítása
-            sel.val(name);
+            if (this.record.storage_id > 0) {
+                sel.val(this.record.storage_id);
+            }    
 
             // sub_storage_id select options feltöltése storages tömbből (filter this.name)
             // sub_storage_id beállítása (record.storage_id.subname filterrel)

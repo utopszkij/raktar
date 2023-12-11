@@ -47,17 +47,16 @@
 	</h3>
 
 	<div class="row">
-		<table class="col-12 table table-bordered table-striped" style="width:auto" v-if="items.length > 0">
+		<table class="col-12 table table-bordered table-striped" v-if="items.length > 0">
 			<tr><th style="width:30px">ID</th>
 				<th style="width:250px">{{ lng('EVENT_DIRECTION') }}</th>
 				<th style="width:120px">{{ lng('EVENT_TYPE') }}</th>
 				<th style="width:60px">{{ lng('EVENT_DATE') }}</th>
 				<th style="width:60px">{{ lng('QUANTITY') }}</th>
-				<th style="width:60px">{{ lng('UNIT') }}</th>
 				<th></th>
 			</tr>
 			<tr v-for="item in items">
-				<td>{{ item.id }}</td>
+				<td>#{{ item.id }}</td>
 				<td>{{ lng(item.direction) }} <br />
 					<a v-bind:href="HREF('product.edit',{id:item.product_id})">
 						{{ item.sort_name }}
@@ -65,8 +64,7 @@
 				</td>
 				<td>{{ item.event_type }}</td>
 				<td>{{ item.event_date }}</td>
-				<td>{{ item.quantity }}</td>
-				<td>{{ item.unit }}</td>
+				<td>{{ item.quantity }} {{ item.unit}}</td>
 				<td>
 					<a class="btn btn-primary" v-if="logedAdmin" v-bind:href="HREF('event.edit',{id:item.id, backtask:'event.items'})">
 						<em class="fas fa-edit" v-bind:title="lng('EDIT')"></em>
