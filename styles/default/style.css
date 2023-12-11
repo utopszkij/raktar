@@ -59,12 +59,37 @@ pre code {display:block; max-height:14px; padding:0px; margin:0px; line-height:1
 .grx {width:7%}
 #products .row {margin:0px 0px 0px  0px}
 #products .id {width:60px}
-#products .stock {width:60px}
+#products .stock {width:200px}
 #products .storage {width:60px}
 #products .name {width:auto}
 #products .tags {width:200px}
 #products .buttons {width:auto}
 #products .navbar-toggler, #products .navbar-toggler:hover {background-color:blue; color:white}
+
+.stock-error {color:red}
+.stock-warning {color:orange}
+.stock-ok {color:green}
+.stock-error svg,
+.stock-warning svg,
+.stock-ok svg {
+  animation-name: pulsate;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+}
+@keyframes pulsate {
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.2);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
 
 #footer {background-color:black; color:white; border-radius:8px;}
 #footer a {text-decoration:none; color:white}
@@ -80,6 +105,16 @@ pre code {display:block; max-height:14px; padding:0px; margin:0px; line-height:1
 	#products th {display:none}
 	#products td {display:block}
 	#header, .header {height:40px}
+
+  #events table {width:100%}
+  #events th {display:none}
+  #events tr {display:block; width:100%}
+	#events td {display:block; width:100%}
+	#events .header {height:40px}
+  #events form {border-style:solid; border-width:1px; padding:5px}
+  #events form .form-control {display:block}
+  #events form label {width:auto; text-align:left}
+
 
 }
 

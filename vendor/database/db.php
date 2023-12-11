@@ -918,14 +918,16 @@ class Table {
 	 * @return bool sikeres vagy nem
 	 */
 	public function alterInDB() {
-		$sqlStr = 'ALTER TABLE `'.$this->name.'` ';
+		$sqlStr = 'ALTER TABLE `'.$this->name.'` ADD COLUMN (';
 		$term = '';
 		foreach ($this->fields as $field) {
-			$sqlStr .= 'ADD COLUMN '.$term.$field->sql();
+			$sqlStr .= $term.$field->sql();
 			$term = ',';
 		}
+		$sqlStr .= ') ';
+		// lehet, hogy itt csak egy index definició a megmgedett :(
 		foreach ($this->indexes as $index) {
-			$sqlStr .= ',ADD INDEX ('.implode(',',$index).')';
+			$sqlStr .= ' ADD INDEX ('.implode(',',$index).')';
 		}
 		$q = new Query('dbverzio');
 		$q->exec($sqlStr);

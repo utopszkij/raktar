@@ -153,6 +153,8 @@ tokens = {
 	"ONLY_PHONE":"csak telefonon",
 	"STOCK":"készlet",
 	"ATTACHMENTS":"Csatolt fájlok",
+    "ERROR_STOCK":"Hibajelzési készlet",
+    "WARNING_STOCK":"Figyelmeztetési készlet",
 
     /* event */
     "EVENT":"Esemény",

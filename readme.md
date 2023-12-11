@@ -45,6 +45,11 @@ Aki ezzel a módszerrel nem ért egyet az az index.php -t modosítva használhat
 
 ### A programot mindenki csak saját felelősségére használhatja.
 
+## verzió v2.4.0
+készlet figyelés
+2023.12.11.
+### ******************************************************
+
 ## verzió v2.3.2
 cimke böngésző hiba javítás
 2023.11.25.

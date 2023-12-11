@@ -66,7 +66,17 @@
 					 </a>
 				</td>    
 				<td>
-					{{ item.stock }} <var v-if="(item.stock > 0)">{{ item.unit }}</var>
+					<div class="stock-error" v-if="(item.error_stock >= item.stock)">
+						<em class="fas fa-exclamation-triangle"></em> {{ item.stock }} {{ item.unit }} Szerezd be!
+					</div>
+					<div class="stock-ok" v-if="(item.stock > item.warning_stock)">
+						<em class="fas fa-thumbs-up"></em> {{ item.stock }} {{ item.unit }}
+					</div>
+					<div v-if="(item.warning_stock >= item.stock)">
+						<div class="stock-warning" v-if="(item.stock > item.error_stock)">
+							<em class="fas fa-shopping-basket"></em> {{ item.stock }} {{ item.unit }} Szerezd be!
+						</div>
+					</div>
 				</td>    
 				<td>
 					{{ item.code }}
@@ -124,15 +134,16 @@
     methods = {
 		afterMount() {
 			// filter kezelés
+			var i = 0;
 			if (this.filter) {
 				if (this.filter != '') {
-					var i = 0;
+					i = 0;
 					var fn = '';
 					var w = this.filter.split('|');
 					while (w.length < 6) {
 						w.push('');
 					}
-					var i = 0;
+					i = 0;
 					while (i < (w.length - 1)) {
 						fn = w[i];
 						if ($('#'+fn)) {
@@ -140,6 +151,14 @@
 						}
 						i = i + 2;
 					}
+				}
+			}
+			// stock, error_stock, warning_stock legyen number!
+			if (this.items) {
+				for (i=0; i<this.items.length; i++) {
+					this.items[i].stock = Number(this.items[i].stock);
+					this.items[i].warning_stock = Number(this.items[i].warning_stock);
+					this.items[i].error_stock = Number(this.items[i].error_stock);
 				}
 			}
 		},
