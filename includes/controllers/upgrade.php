@@ -288,7 +288,7 @@ class Upgrade {
 			$table = new Table('products');
 			$table->integer('warning_stock');
 			$table->integer('error_stock');
-			// $table->alterInDB();
+			$table->alterInDB();
 			if ($table->error != '') {
 				echo $table->error.'<br>'; exit();
 			}	
