@@ -285,19 +285,19 @@ class Upgrade {
 
 	protected function do_v2_4_0($dbverzio) {
 		if ($this->versionAdjust($dbverzio) < $this->versionAdjust('v2.4.0')) {
-
 			$table = new Table('products');
 			$table->integer('warning_stock');
 			$table->integer('error_stock');
-			$table->alterInDB();
+			// $table->alterInDB();
 			if ($table->error != '') {
-				echo $table->error.'<br>';
+				echo $table->error.'<br>'; exit();
 			}	
 			$q = new Query('products');
+			$q->exec('SET SQL_SAFE_UPDATES = 0');	
 			$q->exec('update products
-			set warning_stock = 5, error_stocK = 1');
+			set warning_stock = 5, error_stock = 1');
 			if ($q->error != '') {
-				echo $q->error.'<br>';
+				echo $q->error.'<br>'; exit();
 			}	
 			$this->setDbVersion('v2.4.0');
 		}	
