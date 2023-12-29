@@ -45,6 +45,11 @@ Aki ezzel a módszerrel nem ért egyet az az index.php -t modosítva használhat
 
 ### A programot mindenki csak saját felelősségére használhatja.
 
+## verzió v2.4.1
+"Beszerzendő" termék lista
+2023.12.29.
+### ******************************************************
+
 ## verzió v2.4.0
 készlet figyelés
 2023.12.11.

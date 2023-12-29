@@ -50,13 +50,22 @@
         public function getItems(int $page, int $limit, string $filter, 
             string $order = 'sort_name', bool $fullTree = true): array {
 			if ($page <= 0) $page = 1;
-			
+
+            $db = new Query('eventtypes','e');
+            $rec = $db->where('direction','=','SHOPING')->first();
+            if ($rec->id) {
+                $beszerzendoId = $rec->id;
+            } else {
+                $beszerzendoId = 0;
+            }
+
             $db1 = new Query($this->table,'p');
             $db1->join('LEFT OUTER','events','e','e.product_id','=','p.id')
 				->join('LEFT OUTER','storages','s','s.id','=','p.storage_id')
 				->select(['p.id','p.sort_name','p.image_link','p.warning_stock','p.error_stock',
                     'concat(s.code," ",s.subname) code' ,'p.tags','sum(e.quantity) stock', 'p.unit'])
 				->groupBy(['p.id','p.sort_name','p.tags','s.code','p.unit','p.warning_stock','p.error_stock']);
+            $db1->where('e.event_type','<>',$beszerzendoId);    
 			if ($filter != '') {
 				$w = explode('|',$filter);
 				while (count($w) < 8) {
@@ -126,8 +135,17 @@
 
         public function getById(int $id): Record {
             $result = parent::getById($id);
+            $db = new Query('eventtypes','e');
+            $rec = $db->where('direction','=','SHOPING')->first();
+            if ($rec->id) {
+                $beszerzendoId = $rec->id;
+            } else {
+                $beszerzendoId = 0;
+            }
+
             $db = new Query('events');
             $recs = $db->where('product_id','=',$id)
+                    ->where('event_type','<>',$beszerzendoId)
                     ->select(['sum(quantity) quantity'])
                     ->groupBy(['product_id'])
                     ->all();

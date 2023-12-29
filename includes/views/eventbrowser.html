@@ -11,6 +11,10 @@
 	<form class="form col-12">
 		<h3>{{ lng('FILTER') }}</h3>
 		<div class="col-12">
+			<label>{{ lng('PRODUCT_ID') }}</label>:&nbsp;
+			<input type="text" id="product_id" class="form-control" /> 
+		</div>
+		<div class="col-12">
 			<label>{{ lng('PRODUCT_NAME_SUBSTRING') }}</label>:&nbsp;
 			<input type="text" id="sort_name" class="form-control" /> 
 		</div>
@@ -20,13 +24,13 @@
 				<option value=""></option>
 				<option value="INPUT">{{ lng('INPUT') }}</option>
 				<option value="OUTPUT">{{ lng('OUTPUT') }}</option>
+				<option value="SHOPING">{{ lng('SHOPING') }}</option>
 			</select>
 		</div>
 		<div class="col-12">
 			<label>{{ lng('EVENT_DATE_MIN') }}</label>:&nbsp;
 			<input type="date" id="event_date_min" class="form-control" /> 
 		</div>
-		<input type="hidden" id="product_id" />
 		<div class="col-12">
 			<label>{{ lng('EVENT_DATE_MAX') }}</label>:&nbsp;
 			<input type="date" id="event_date_max" class="form-control" /> 
