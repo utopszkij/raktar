@@ -167,6 +167,9 @@ tokens = {
     "PRODUCT_NAME_SUBSTRING":"Termék név részlet",
     "EVENT_DATE_MIN":"Esemény dátum min.",
     "EVENT_DATE_MAX":"Esemény dátum max.",
+    "SHOPING":"Beszerzendő",
+    "LIST":"lista",
+    "PRODUCT_ID":"Termék kód",
     
     /* blog */
     "BLOGS":"Cikkek",

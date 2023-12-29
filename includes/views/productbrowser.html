@@ -101,7 +101,7 @@
 								<button type="button" class="btn btn-danger" v-if="logedAdmin" v-on:click="delClick(item.id)">
 									<em class="fas fa-eraser" v-bind:title="lng('DELETE')"></em>
 								</button>&nbsp;
-								<a v-bind:href="HREF('event.items',{'page':1,'filter':'product_id|'+item.id})" class="btn btn-secondary">
+								<a v-bind:href="HREF('event.items',{'page':1,'filter':'product_id|'+item.id+'|sort_name|'+item.sort_name})" class="btn btn-secondary">
 									<em class="fas fa-clock" v-bind:title="lng('EVENTS')"></em>
 								</a>&nbsp;
 								<button type="button" class="btn btn-success" v-if="logedAdmin" v-on:click="plusClick(item.id)">
@@ -109,6 +109,9 @@
 								</button>&nbsp;
 								<button type="button" class="btn btn-secondary" v-if="logedAdmin" v-on:click="minusClick(item.id)">
 									<em class="fas fa-minus" v-bind:title="lng('OUTPUT')"></em>
+								</button>
+								<button type="button" class="btn btn-secondary" v-if="logedAdmin" v-on:click="shopingClick(item.id)">
+									<em class="fas fa-shopping-basket" v-bind:title="lng('SHOPING')"></em>
 								</button>
 							</li>
 						  </ul>
@@ -182,6 +185,9 @@
         },    
         minusClick(id) {
             location=HREF('event.minus',{'product_id':id, key:app.flowKey}); 
+        },
+        shopingClick(id) {
+            location=HREF('event.shoping',{'product_id':id, key:app.flowKey}); 
         },
         goFilter() {
 			// filter str kialakitása

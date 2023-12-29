@@ -131,6 +131,40 @@ class Event extends Controller {
 	}
 
     /**
+     * beszerzendő képernyő
+     * GET: product_id
+     */ 
+    public function shoping() {
+        $record = $this->model->emptyRecord();
+        $record->product_id = $this->request->input('product_id',0,INTEGER);
+        $record->direction = 'SHOPING';
+        if (!$this->accessRight('new',$record) & !$this->accessRight('show',$record)) {
+            $this->session->set('errorMsg','ACCESDENIED');
+            $this->items();
+        }
+        if ($this->session->isset('oldRecord')) {
+            $record = $this->session->input('oldRecord');
+        }
+        $this->browserURL = $this->request->input('browserUrl', $this->browserURL);
+        $eventtypes = $this->model->getEventTypes('SHOPING');
+
+        $product = $this->model->getProduct($record->product_id);
+        view($this->name.'form',[
+            "flowKey" => $this->newFlowKey(),
+            "record" => $record,
+            "product" => $product,
+            "eventtypes" => $eventtypes,
+            "logedAdmin" => (strpos($this->logedGroup,'admin') > 0),
+            "loged" => $this->loged,
+            "previous" => $this->browserURL,
+            "browserUrl" => $this->browserURL,
+            "errorMsg" => $this->session->input('errorMsg',''),
+        ]);
+        $this->session->delete('errorMsg');
+	}
+
+
+    /**
      * kiadás képernyő
      * GET: product_id
      */ 

@@ -34,7 +34,7 @@ class Eventtype extends Controller {
         $this->editURL = 'index.php?task=eventtype.edit';
         $this->browserTask = 'eventtype.items';
         $this->model = new EventtypeModel();
-        
+        $this->ckeditorFields = [];
 	}
 
     /**

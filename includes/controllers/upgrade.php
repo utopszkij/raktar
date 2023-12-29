@@ -303,6 +303,18 @@ class Upgrade {
 		}	
 	}
 
+	protected function do_v2_4_1($dbverzio) {
+		if ($this->versionAdjust($dbverzio) < $this->versionAdjust('v2.4.1')) {
+			$q = new Query('eventtypes');
+			$q->exec('insert into eventtypes
+			values (0,"Beszerzendő","SHOPING",0,0)');
+			if ($q->error != '') {
+				echo $q->error.'<br>'; exit();
+			}	
+			$this->setDbVersion('v2.4.1');
+		}	
+	}
+
 
 
 	/**
@@ -317,6 +329,7 @@ class Upgrade {
 		$this->do_v2_2_0($dbverzio);
 		$this->do_v2_3_0($dbverzio);
 		$this->do_v2_4_0($dbverzio);
+		$this->do_v2_4_1($dbverzio);
 		// ide jönek a későbbi verziokhoz szükséges db alterek növekvő verzió szerint
 	}
 
