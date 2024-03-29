@@ -161,6 +161,7 @@ class Controller {
     protected $addURL;
     protected $editURL;
     protected $browserTask;
+    protected $ckeditorFields = [];
 
     function __construct() {
         $this->request = new Request();
