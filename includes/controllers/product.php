@@ -1,6 +1,12 @@
 <?php
 use \RATWEB\DB\Query;
 use \RATWEB\DB\Record;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+require 'vendor/phpmailer/src/Exception.php';
+require 'vendor/phpmailer/src/PHPMailer.php';
+require 'vendor/phpmailer/src/SMTP.php';
 
 include_once __DIR__.'/../models/productmodel.php';
 include_once __DIR__.'/../models/tagmodel.php';
@@ -354,6 +360,68 @@ class Product extends Controller {
         $this->session->delete('successMsg');
         $this->session->delete('oldRecord');
     }
+    
+    /**
+     * cikk lista küldése emailben
+     */ 
+    public function sendMail() {
+        // rekordok olvasása az adatbázisból
+        $items = $this->model->getItems(1,100000,'','sort_name',true);
+        // html mail body összeállítása
+        $mailBody = '<style type="text/css"> 
+        table {font-size:14pt}
+        td { border-style:solid; border-width:1px } 
+        </style>';
+        $mailBody .= '<h2>Raktár készlet</h2><table>';
+        foreach ($items as $item) {
+				$mailBody .= '<tr>';
+				$mailBody .= '<td>'.$item->id.'</td>';
+				$mailBody .= '<td>'.$item->sort_name.'</td>';
+				$mailBody .= '<td>'.$item->stock.'</td>';
+				$mailBody .= '<td>'.$item->unit.'</td>';
+				if (($item->warning_stock > 0) & (($item->unit == 'l') | ($item->unit == 'ml'))) {
+					$mailBody .= '<td>'.round(100*$item->stock/$item->warning_stock).'%</td>';
+				} else {
+					$mailBody .= '<td></td>';
+				}
+				if ($item->stock < $item->warning_stock) {
+					$mailBody .= '<td>Szerezd be!</td>';
+				} else {
+					$mailBody .= '<td></td>';
+				}
+				$mailBody .= '</tr>';
+		}
+		$mailBody .= '</table>'.date('Y-m-d H:i');
+        
+        // email küldés az adminnak MAIL_USERNAME cimre
+            // levél küldés;
+            $this->mailer =  new PHPMailer(true);
+			$this->mailer->isSMTP();                                //Send using SMTP
+			$this->mailer->Host       = MAIL_HOST;                  //Set the SMTP server to send through
+			$this->mailer->SMTPAuth   = true;                       //Enable SMTP authentication
+			$this->mailer->Username   = MAIL_USERNAME;                  //SMTP username
+			$this->mailer->Password   = MAIL_PASSWORD;              //SMTP password
+			$this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;//Enable implicit TLS encryption
+			$this->mailer->Port       = MAIL_PORT;                  //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+			$this->mailer->CharSet    = 'utf-8';            
+
+            $this->mailer->setFrom(MAIL_FROM_ADDRESS);
+            $this->mailer->addAddress(ADMINEMAIL);
+            $this->mailer->isHTML(true);          
+            $this->mailer->Subject = 'Raktar keszlet';
+            $this->mailer->Body    = $mailBody;
+            $result = $this->mailer->send();
+            if ($result) {
+                $this->session->set('successMsg','EMAIL_SENDED');
+            } else {
+                echo '<div class="alert alert-danger">Hiba email küldés közben'.JSON_encode($result).'</div>';
+                exit();
+            }            
+            $this->session->set('successMsg','Sikeresen elküldve');
+        
+        echo '<script>document.location="#";</script>'; 
+        
+	}
 
 	/**
      * tree browser

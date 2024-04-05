@@ -47,6 +47,9 @@
 					<em class="fas fa-times" v-bind:title="lng('DELFILTER')"></em></a>
 			</div>
 		</form>
+		<div v-if="logedAdmin">
+			<button type="button" class="btn btn-secondary" v-on:click="sendMail()">send email</button>
+		</div>
 	</div>	
 	
     <div class="row" style="margin:0px 0px 0px 0px">
@@ -77,6 +80,9 @@
 							<em class="fas fa-shopping-basket"></em> {{ item.stock }} {{ item.unit }} Szerezd be!
 						</div>
 					</div>
+					<var v-if="((item.warning_stock > 0) && ((item.unit == 'l') | (item.unit == 'ml')))">
+					  ({{ Math.round(100 * item.stock / item.warning_stock) }}%)
+					</var>
 				</td>    
 				<td>
 					{{ item.code }}
@@ -216,17 +222,22 @@
 		openQRCamera(node) {
 	  		var reader = new FileReader();
 	  		reader.onload = function() {
-			node.value = "";
-			qrcode.callback = function(res) {
-				if(res instanceof Error) {
-					alert("No QR code found. Please make sure the QR code is within the camera's frame and try again.");
-				} else {
-					node.parentNode.previousElementSibling.value = res;
-				}
+				node.value = "";
+				qrcode.callback = function(res) {
+					if(res instanceof Error) {
+						alert("No QR code found. Please make sure the QR code is within the camera's frame and try again.");
+					} else {
+						node.parentNode.previousElementSibling.value = res;
+					}
+				};
+				qrcode.decode(reader.result);
 			};
-			qrcode.decode(reader.result);
-		};
 		reader.readAsDataURL(node.files[0]);
+		},
+		sendMail() {
+			// cikk lista emailben
+			window.location=HREF('product.sendMail',{"page":1,"filter": ''});
+			return false;
 		}
     
     }
