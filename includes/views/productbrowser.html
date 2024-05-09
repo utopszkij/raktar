@@ -80,8 +80,8 @@
 							<em class="fas fa-shopping-basket"></em> {{ item.stock }} {{ item.unit }} Szerezd be!
 						</div>
 					</div>
-					<var v-if="((item.warning_stock > 0) && ((item.unit == 'l') | (item.unit == 'ml')))">
-					  ({{ Math.round(100 * item.stock / item.warning_stock) }}%)
+					<var v-if="((item.optional_stock > 0) && ((item.unit == 'l') | (item.unit == 'ml')))">
+					  ({{ Math.round(100 * item.stock / item.optional_stock) }}%)
 					</var>
 				</td>    
 				<td>

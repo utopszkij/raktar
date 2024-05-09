@@ -31,6 +31,7 @@
 			$result->unit_price = 0; 
             $result->error_stock = 1;
             $result->warning_stock = 5;
+            $result->optional_stock = 5;
 			$result->created_by = $_SESSION['loged']; 
 			$result->created_at = date('Y-m-d');
             return $result;
@@ -62,9 +63,9 @@
             $db1 = new Query($this->table,'p');
             $db1->join('LEFT OUTER','events','e','e.product_id','=','p.id')
 				->join('LEFT OUTER','storages','s','s.id','=','p.storage_id')
-				->select(['p.id','p.sort_name','p.image_link','p.warning_stock','p.error_stock',
+				->select(['p.id','p.sort_name','p.image_link','p.warning_stock','p.error_stock', 'p.optional_stock',
                     'concat(s.code," ",s.subname) code' ,'p.tags','sum(e.quantity) stock', 'p.unit'])
-				->groupBy(['p.id','p.sort_name','p.tags','s.code','p.unit','p.warning_stock','p.error_stock']);
+				->groupBy(['p.id','p.sort_name','p.tags','s.code','p.unit','p.warning_stock','p.error_stock','p.optional_stock']);
             $db1->where('e.event_type','<>',$beszerzendoId);    
 			if ($filter != '') {
 				$w = explode('|',$filter);

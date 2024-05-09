@@ -157,6 +157,12 @@
         </div>
         <div class="row">
             <div class="form-outline col-12">
+                <label>{{ lng('OPTIONAL_STOCK') }}:&nbsp;</label>
+				<input name="optional_stock" type="number" class="form-control" v-bind:value="record.optional_stock" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-outline col-12">
                 <label>{{ lng('SUBNAME') }}:&nbsp;</label>
                 <select name="storage_id" class="form-control" 
                         v-model="record.storage_id" 
@@ -165,7 +171,7 @@
             </div>
         </div>
         <div class="row">
-			<div class="col-12">At azonos tároló helyhez tartozó helyekben a "Tároló hely" adat pontosan, betütől betüre azonos legyen!</div>
+			<div class="col-12">Az azonos tároló helyhez tartozó helyekben a "Tároló hely" adat pontosan, betütől betüre azonos legyen!</div>
         </div>
         <div class="row">
             <div class="form-outline col-12">
@@ -327,6 +333,12 @@
 				<input name="warning_stock" type="number" disabled="disabled" class="form-control" v-bind:value="record.warning_stock" />
             </div>
         </div>
+        <div class="row">
+            <div class="form-outline col-12">
+                <label>{{ lng('OPTIONAL_STOCK') }}:&nbsp;</label>
+				<input name="optional_stock" type="number" disabled="disabled" class="form-control" v-bind:value="record.optional_stock" />
+            </div>
+        </div>
         <div class="row attachments">
             <div class="form-outline col-12" style="vertical-align: middle">
                 <label>{{ lng('ATTACHMENTS') }}:&nbsp;</label>
@@ -347,8 +359,12 @@
                     v-on:click="editClick()">
                     <em class="fas fa-edit"></em>&nbsp;{{ lng('EDIT') }}
                 </button>&nbsp;
+                <button type="button" class="btn btn-danger" v-if="logedAdmin" v-on:click="delClick(record.id)">
+                    <em class="fas fa-eraser" v-bind:title="lng('DELETE')"></em>{{ lng('DELETE') }}
+                </button>&nbsp;
             </div>
         </div>
+
 
         <div class="row formBUttons">
             <button type="button" class="btn btn-secondary col-2"

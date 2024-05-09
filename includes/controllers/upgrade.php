@@ -315,6 +315,44 @@ class Upgrade {
 		}	
 	}
 
+	protected function do_v2_4_2($dbverzio) {
+		if ($this->versionAdjust($dbverzio) < $this->versionAdjust('v2.4.2')) {
+			$q = new Query('eventtypes');
+			$q->exec('alter table products
+			add optional_stock INT default 0');
+			if ($q->error != '') {
+				echo $q->error.'<br>'; exit();
+			}	
+			$q->exec('update products
+			set optional_stock = warning_stock');
+			if ($q->error != '') {
+				echo $q->error.'<br>'; exit();
+			}	
+			$this->setDbVersion('v2.4.2');
+		}	
+	}
+
+	protected function do_v2_4_3($dbverzio) {
+		if ($this->versionAdjust($dbverzio) < $this->versionAdjust('v2.4.3')) {
+
+			$table = new Table('messages');
+			$table->id();
+			$table->string('sender_name');
+			$table->string('sender_email');
+			$table->text('txt');
+			$table->string('status');
+			$table->text('comment');
+			$table->string('received');
+			$table->string('answered');
+			$table->string('closed');
+			$table->createInDB();
+			if ($table->error != '') {
+				echo $table->error.'<br>'; exit();
+			}	
+			$this->setDbVersion('v2.4.3'); 
+		}	
+	}
+
 
 
 	/**
@@ -330,6 +368,8 @@ class Upgrade {
 		$this->do_v2_3_0($dbverzio);
 		$this->do_v2_4_0($dbverzio);
 		$this->do_v2_4_1($dbverzio);
+		$this->do_v2_4_2($dbverzio);
+		$this->do_v2_4_3($dbverzio);
 		// ide jönek a későbbi verziokhoz szükséges db alterek növekvő verzió szerint
 	}
 

@@ -155,6 +155,7 @@ tokens = {
 	"ATTACHMENTS":"Csatolt fájlok",
     "ERROR_STOCK":"Hibajelzési készlet",
     "WARNING_STOCK":"Figyelmeztetési készlet",
+    "OPTIONAL_STOCK":"Optimális készlet",
 
     /* event */
     "EVENT":"Esemény",
@@ -205,5 +206,24 @@ tokens = {
     "ADDRESS_REQUESTED":"Helyszin megadása kötelező",
     "DESC_REQUESTED":"Leírás megadása kötelező",
 
-    "END":"Vége"
+    /* messages */
+  "MESSAGES":"Üzenet",
+  "MESSAGESS":"Üzenetek",
+  "SENDER_NAME":"A beküldő neve (vagy nick neve)",
+  "SENDER_EMAIL":"A beküldő email címe",
+  "TXT":"Üzenet szövege",
+  "RECEIVED":"Beérkezett",
+  "ANSWERED":"Megválaszolva",
+  "STATUS":"Státusz",
+  "CLOSED":"Lezárva",
+  "COMMENT":"Megjegyzés",
+  "TXT_REQUED":"Szöveget meg kell adni",
+  "active":"aktív",
+  "answered_active":"Megválaszolva, intézkedni kell",
+  "answered_closed":"Megválaszolva, lezárt",
+  "closed":"lezárt",
+  "NOW":"mai nap",
+
+"END":"Vége"
+
 };

@@ -379,8 +379,8 @@ class Product extends Controller {
 				$mailBody .= '<td>'.$item->sort_name.'</td>';
 				$mailBody .= '<td>'.$item->stock.'</td>';
 				$mailBody .= '<td>'.$item->unit.'</td>';
-				if (($item->warning_stock > 0) & (($item->unit == 'l') | ($item->unit == 'ml'))) {
-					$mailBody .= '<td>'.round(100*$item->stock/$item->warning_stock).'%</td>';
+				if (($item->optional_stock > 0) & (($item->unit == 'l') | ($item->unit == 'ml'))) {
+					$mailBody .= '<td>'.round(100*$item->stock/$item->optional_stock).'%</td>';
 				} else {
 					$mailBody .= '<td></td>';
 				}

@@ -60,7 +60,11 @@
                             {{ lng('EVENTS') }}</a>
                           <a class="dropdown-item" v-if="isAdmin" 
                             v-bind:href="HREF('event.items',{page:1,filter:'direction|SHOPING'})">
-                          {{ lng('SHOPING')+' '+lng('LIST') }}</a>
+                            {{ lng('SHOPING')+' '+lng('LIST') }}</a>
+                          <a class="dropdown-item" v-if="isAdmin" 
+                            v-bind:href="HREF('messages.items',{page:1,filter:''})">
+                            {{ lng('MESSAGES')+' '+lng('LIST') }}</a>
+
                 </div>        
               </li>	
             </ul>
