@@ -1,0 +1,197 @@
+
+<div v-if="errorMsg != ''" class="alert alert-danger">
+    <div v-html="lng(errorMsg)"></div>
+</div>
+
+<div id="messages">
+    <h2>{{ lng('MESSAGES') }}</h2>
+    <form id="messagesForm" action="index.php" method="post" class="form" 
+        enctype="multipart/form-data" style="display:none">
+        <input type="hidden" v-model="flowKey" name="flowKey" />
+        <input type="hidden" value="messages.save" name="task" />			
+        <input type="hidden" v-model="record.id" name="id" />			
+        <input type="hidden" v-model="record.received" name="received" />			
+		
+                     <div class="row">
+                        <div class="col-12" v-if="record.id > 0">
+							<label>{{ lng("ID") }}</label>:
+							<input type="number" name="_id" v-model="record.id" disabled="disabled" />
+						</div>
+						<div class="col-12" v-if="record.id > 0">
+							<label>{{ lng("RECEIVED") }}</label>:
+							<input type="text" name="_received" v-model="record.received" disabled="disabled" />
+						</div>
+						<div class="col-12">
+							<label>{{ lng("SENDER_NAME") }}</label>:
+							<input type="text" name="sender_name" id="sender_name" v-model="record.sender_name" required="required" />
+						</div>
+						<div class="col-12">
+							<label>{{ lng("SENDER_EMAIL") }}</label>:
+							<input type="email" name="sender_email" id="sender_email" v-model="record.sender_email" required="required" />
+						</div>
+						<div class="col-12">
+							<label>{{ lng("TXT") }}</label>:
+							<textarea cols="60" rows="10" name="txt" id="txt" v-model="record.txt" required="required"></textarea>
+						</div>
+					</div>
+					<div class="row" v-if="record.id > 0">
+						<div class="col-12">
+							<label>{{ lng("STATUS") }}</label>:
+                            <select name="status" id="status" v-model="record.dtatus">
+                                <option value="active">Aktív</option>
+                                <option value="answered_active">Megválaszolva, intézkedni kell</option>
+                                <option value="answered_closed">Megválaszolva, nem kell intézkedni</option>
+                                <option value="closed">Lezárt</option>
+                            </select>
+						</div>
+						<div class="col-12">
+							<label>{{ lng("ANSWERED") }}</label>:
+							<input type="text" name="answered" id="answered" v-model="record.answered" />(éééé-hh-nn)
+                            <button type="button" class="btn btn-secondary" v-on:click="nowClick('answered')">
+                                &lt;{{ lng('NOW') }}
+                            </button>
+						</div>
+						<div class="col-12">
+							<label>{{ lng("CLOSED") }}</label>:
+							<input type="text" name="closed" id="closed" v-model="record.closed" />(éééé-hh-nn)
+                            <button type="button" class="btn btn-secondary" v-on:click="nowClick('closed')">
+                                &lt;{{ lng('NOW') }}
+                            </button>
+						</div>
+						<div class="col-12">
+							<label>{{ lng("COMMENT") }}</label>:
+							<textarea cols="60" rows="5" name="comment" id="comment" v-model="record.comment"></textarea>
+						</div>
+                    </div>    
+
+                    <div class="row formBUttons" v-if="(logedAdmin | (record.id == 0))">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-success">
+                                <em class="fas fa-check"></em>&nbsp;{{ lng('SAVE') }}
+                            </button>&nbsp;
+                            <a href="index.php" class="btn btn-secondary">
+                                <em class="fas fa-reply"></em>&nbsp;{{ lng('CANCEL') }}
+                            </a>&nbsp;
+                            <button type="button" 
+                               v-on:click="delClick()"
+                               v-if="(logedAdmin & (record.id > 0))"
+                               class="btn btn-danger">
+                                <em class="fas fa-eraser"></em>&nbsp;{{ lng('DELETE') }}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row formBUttons" v-if="!(logedAdmin | record.id == 0)">
+                        <div class="col-12">
+                            <a href="index.php" class="btn btn-secondary">
+                                <em class="fas fa-reply"></em>&nbsp;{{ lng('BACK') }}
+                            </a>
+                        </div>
+                    </div>
+
+                                
+    </form>    
+
+    <div id="messagesShow" class="form">
+		
+        <div class="row">
+            <div class="col-12" v-if="record.id > 0">
+                <label>{{ lng("ID") }}</label>:
+                <input type="number" name="_id" v-model="record.id" disabled="disabled" />
+            </div>
+            <div class="col-12">
+                <label>{{ lng("RECEIVED") }}</label>:
+                <input type="text" name="_received" v-model="record.received" disabled="disabled" />
+            </div>
+            <div class="col-12">
+                <label>{{ lng("SENDER_NAME") }}</label>:
+                <input type="text" name="sender_name" v-model="record.sender_name" disabled="disabled" />
+            </div>
+            <div class="col-12">
+                <label>{{ lng("SENDER_EMAIL") }}</label>:
+                <input type="email" name="sender_email" v-model="record.sender_email" disabled="disabled" />
+            </div>
+            <div class="col-12">
+                <label>{{ lng("TXT") }}</label>:
+                <textarea cols="60" rows="10" name="txt" v-model="record.txt" disabled="disabled"></textarea>
+            </div>
+            <div class="col-12">
+                <label>{{ lng("STATUS") }}</label>:
+                {{ lng(record.status) }}
+            </div>
+            <div class="col-12">
+                <label>{{ lng("ANSWERED") }}</label>:
+                <input type="text" name="answered" v-model="record.answered" disabled="disabled"/>
+            </div>
+            <div class="col-12">
+                <label>{{ lng("CLOSED") }}</label>:
+                <input type="text" name="closed" v-model="record.closed" disabled="disabled"/>
+            </div>
+            <div class="col-12">
+                <label>{{ lng("COMMENT") }}</label>:
+                <textarea cols="60" rows="5" name="comment" v-model="record.comment" disabled="disabled"></textarea>
+            </div>
+            <div class="row formBUttons" v-if="logedAdmin">
+                <div class="col-12">
+                    <button type="button" 
+                       v-on:click="editClick()"
+                       class="btn btn-primary">
+                        <em class="fas fa-edit"></em>&nbsp;{{ lng('EDIT') }}
+                    </button>
+                    <button type="button" 
+                       v-on:click="delClick()"
+                       class="btn btn-danger">
+                        <em class="fas fa-eraser"></em>&nbsp;{{ lng('DELETE') }}
+                    </button>
+                </div>
+            </div>
+            <div class="row formBUttons" v-if="!logedAdmin">
+                <div class="col-12">
+                    <a v-bind:href="previous" class="btn btn-secondary">
+                        <em class="fas fa-reply"></em>&nbsp;{{ lng('BACK') }}
+                    </a>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
+
+
+
+<script>
+    methods = {
+		afterMount() {
+			if (this.record != undefined) {
+				if (this.record.id == 0) {
+					this.editClick();
+				}
+			}
+		},
+        delClick() {
+            popupConfirm(lng('SUREDELETE'), 
+            function() {
+                location=HREF('messages.delete',{id:app.record.id, key:app.flowKey}); 
+            })
+        },
+        editClick() {
+			document.getElementById('messagesForm').style.display="block";
+			document.getElementById('messagesShow').style.display="none";
+            var s = document.getElementById('status');
+            var i = 0;
+            if (s) {
+                for (i=0; i<s.options.length; i++) {
+                    if (app.record.status == s.options[i].value) {
+                        s.selectedIndex = i;
+                    }
+                }
+            }
+		},
+        nowClick(id) {
+            var d = new Date();
+            var month = d.getMonth()+1;
+            var day = d.getDate();
+            if (month <= 9) month = '0'+month;
+            if (day <= 9) day = '0'+day;
+            document.getElementById(id).value = d.getFullYear()+'-'+month+'-'+day;
+        }    
+    }
+</script>

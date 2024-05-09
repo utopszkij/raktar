@@ -45,6 +45,11 @@ Aki ezzel a módszerrel nem ért egyet az az index.php -t modosítva használhat
 
 ### A programot mindenki csak saját felelősségére használhatja.
 
+## verzió v2.4.3
+"messages
+2024.05.08.
+
+### ******************************************************
 ## verzió v2.4.1
 "Beszerzendő" termék lista
 2023.12.29.
