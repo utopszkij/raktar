@@ -1,5 +1,7 @@
 html {font-size:18px}
-body {text-align:center}
+body {text-align:center; background: #83a4d4;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #b6fbff, #83a4d4);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #b6fbff, #83a4d4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */}
 .page {min-height:600px; text-align:left; padding:1%}
 .warning {background-color:red; color:yellow; padding:1%;}
 .warning a {color:yellow;}
@@ -9,8 +11,8 @@ form .row {margin:20px 0px 20px 0px}
 .link {cursor:pointer; color:#0d6efd; font-style:normal; text-decoration:underline}
 
 #header {height:140px; background-color:silver; cursor:pointer;
-	background-image:url('../../images/header.jpg'); background-size: 100% 200px; background-repeat:no-repeat }
-#fomenu {background-color:#655191; border-radius:8px;}
+	background-image:url('../../images/header.jpg'); background-size: 100% 200px; background-repeat:no-repeat; border-radius:8px; }
+#fomenu {background-color:#102950; border-radius:8px; border-bottom: 4px solid #00e200;}
 #popup {position:fixed; z-index:99; top:100px; left:100px; display:none;
   padding:10px; text-align:center; width:auto; height:auto;
   border-radius:5px;}
@@ -64,7 +66,7 @@ pre code {display:block; max-height:14px; padding:0px; margin:0px; line-height:1
 #products .name {width:auto}
 #products .tags {width:200px}
 #products .buttons {width:auto}
-#products .navbar-toggler, #products .navbar-toggler:hover {background-color:blue; color:white}
+#products .navbar-toggler, #products .navbar-toggler:hover {background-color:blue; color:white; font-size: 14px;}
 
 .stock-error {color:red}
 .stock-warning {color:orange}
@@ -91,7 +93,7 @@ pre code {display:block; max-height:14px; padding:0px; margin:0px; line-height:1
 }
 
 
-#footer {background-color:black; color:white; border-radius:8px;}
+#footer {background-color:#102950; color:white; border-radius:8px; border-bottom: 4px solid #00e200;}
 #footer a {text-decoration:none; color:white}
 
 #scrolltotop {position:fixed; bottom:20px; right:30px; z-index:99; 
@@ -115,7 +117,10 @@ pre code {display:block; max-height:14px; padding:0px; margin:0px; line-height:1
   #events form .form-control {display:block}
   #events form label {width:auto; text-align:left}
 
-
+  #messagess tr {display:block; min-width:100%; border-style:solid; border-width:0 0 2px 0; border-color:black}
+  #messagess th {display:none; width:100%}
+  #messagess td {display:block; border-style:none; min-width:100%}
+  
 }
 
 @media print {
