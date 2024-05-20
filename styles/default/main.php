@@ -24,7 +24,7 @@
 	<script src='vendor/qrcode_reader/qr_packed.js'></script>
 
 
-	<link rel="stylesheet" href="<?php echo SITEURL; ?>/styles/default/style.css?t=<?php echo $fileVerzio; ?>">
+	<link rel="stylesheet" href="<?php echo SITEURL; ?>/styles/default/style.css?t=<?php echo $fileVerzio; ?>.1">
 
 	<!-- multi language, ? szürés -->
 	<?php
