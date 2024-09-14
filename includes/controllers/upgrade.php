@@ -286,8 +286,8 @@ class Upgrade {
 	protected function do_v2_4_0($dbverzio) {
 		if ($this->versionAdjust($dbverzio) < $this->versionAdjust('v2.4.0')) {
 			$table = new Table('products');
-			$table->integer('warning_stock');
-			$table->integer('error_stock');
+			$table->number('warning_stock');
+			$table->number('error_stock');
 			$table->alterInDB();
 			if ($table->error != '') {
 				echo $table->error.'<br>'; exit();

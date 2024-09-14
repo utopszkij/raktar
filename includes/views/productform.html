@@ -120,7 +120,7 @@
             <div class="form-outline col-12">
                 <label>{{ lng('UNIT_PRICE') }}:&nbsp;</label>
                 <input name="unit_price" class="form-control" 
-                        v-model="record.unit_price" type="number" 
+                        v-model="record.unit_price" type="number" step="0.1"
                         :disabled="(!logedAdmin)" />
             </div>
         </div>
@@ -146,19 +146,19 @@
         <div class="row">
             <div class="form-outline col-12">
                 <label>{{ lng('ERROR_STOCK') }}:&nbsp;</label>
-				<input name="error_stock" type="number" class="form-control" v-bind:value="record.error_stock" />
+				<input name="error_stock" type="number" step="0.1" class="form-control" v-bind:value="record.error_stock" />
             </div>
         </div>
         <div class="row">
             <div class="form-outline col-12">
                 <label>{{ lng('WARNING_STOCK') }}:&nbsp;</label>
-				<input name="warning_stock" type="number" class="form-control" v-bind:value="record.warning_stock" />
+				<input name="warning_stock" type="number" step="0.1" class="form-control" v-bind:value="record.warning_stock" />
             </div>
         </div>
         <div class="row">
             <div class="form-outline col-12">
                 <label>{{ lng('OPTIONAL_STOCK') }}:&nbsp;</label>
-				<input name="optional_stock" type="number" class="form-control" v-bind:value="record.optional_stock" />
+				<input name="optional_stock" type="number" step="0.1" class="form-control" v-bind:value="record.optional_stock" />
             </div>
         </div>
         <div class="row">
@@ -301,7 +301,7 @@
                 <label>{{ lng('UNIT_PRICE') }}:&nbsp;</label>
                 <input name="unit_price" class="form-control" 
                         v-model="record.unit_price" type="number" 
-                        :disabled="true" />
+                        :disabled="true"  step="0.1"/>
             </div>
         </div>
         <div class="row">
@@ -324,19 +324,19 @@
         <div class="row">
             <div class="form-outline col-12">
                 <label>{{ lng('ERROR_STOCK') }}:&nbsp;</label>
-				<input name="error_stock" type="number" disabled="disabled" class="form-control" v-bind:value="record.error_stock" />
+				<input name="error_stock" type="number" disabled="disabled" step="0.1" class="form-control" v-bind:value="record.error_stock" />
             </div>
         </div>
         <div class="row">
             <div class="form-outline col-12">
                 <label>{{ lng('WARNING_STOCK') }}:&nbsp;</label>
-				<input name="warning_stock" type="number" disabled="disabled" class="form-control" v-bind:value="record.warning_stock" />
+				<input name="warning_stock" type="number" disabled="disabled" step="0.1" class="form-control" v-bind:value="record.warning_stock" />
             </div>
         </div>
         <div class="row">
             <div class="form-outline col-12">
                 <label>{{ lng('OPTIONAL_STOCK') }}:&nbsp;</label>
-				<input name="optional_stock" type="number" disabled="disabled" class="form-control" v-bind:value="record.optional_stock" />
+				<input name="optional_stock" type="number" disabled="disabled"  step="0.1" class="form-control" v-bind:value="record.optional_stock" />
             </div>
         </div>
         <div class="row attachments">
