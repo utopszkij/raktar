@@ -60,8 +60,7 @@
 				<td>
 					{{ lng(item.status) }}
 				</td>    
-				<td style="height:auto">
-					<pre style="height:48px"><code>{{ item.txt }}</code></pre>
+				<td style="max-height:64px; overflow:hidden" v-html="item.txt.replaceAll('\n','<br />')">
 				</td>    
 				<td>
 					<a class="btn btn-primary" v-if="logedAdmin" v-bind:href="HREF('messages.edit',{id:item.id, backtask:'messages.items'})">

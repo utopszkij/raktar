@@ -31,7 +31,7 @@
 						</div>
 						<div class="col-12">
 							<label>{{ lng("TXT") }}</label>:
-							<textarea cols="60" rows="10" name="txt" id="txt" v-model="record.txt" required="required"></textarea>
+							<textarea style="width:100%; height:64px" name="txt" id="txt" v-model="record.txt" required="required"></textarea>
 						</div>
 					</div>
 					<div class="row" v-if="record.id > 0">
@@ -60,7 +60,7 @@
 						</div>
 						<div class="col-12">
 							<label>{{ lng("COMMENT") }}</label>:
-							<textarea cols="60" rows="5" name="comment" id="comment" v-model="record.comment"></textarea>
+							<textarea style="width:100%; height:64px" name="comment" id="comment" v-model="record.comment"></textarea>
 						</div>
                     </div>    
 
@@ -112,7 +112,7 @@
             </div>
             <div class="col-12">
                 <label>{{ lng("TXT") }}</label>:
-                <textarea cols="60" rows="10" name="txt" v-model="record.txt" disabled="disabled"></textarea>
+                <var v-html="record.txt.replaceAll('\n','<br />')"></var>
             </div>
             <div class="col-12">
                 <label>{{ lng("STATUS") }}</label>:
@@ -128,7 +128,7 @@
             </div>
             <div class="col-12">
                 <label>{{ lng("COMMENT") }}</label>:
-                <textarea cols="60" rows="5" name="comment" v-model="record.comment" disabled="disabled"></textarea>
+                <var v-html="record.comment.replaceAll('\n','<br />')"></var>
             </div>
             <div class="row formBUttons" v-if="logedAdmin">
                 <div class="col-12">

@@ -126,7 +126,7 @@ class Messages extends Controller {
         $record->answered = $this->request->input('answered','');
         $record->closed = $this->request->input('closed','');
         $record->status = $this->request->input('status','active');
-        $record->comment = $this->request->input('comment','');
+        $record->comment = $this->request->input('comment','',HTML);
 
         $errorMsg = ($this->validator($record));
         if ($errorMsg == '') {    

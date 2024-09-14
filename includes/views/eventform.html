@@ -44,7 +44,7 @@
             <div class="form-outline col-12">
                 <label>{{ lng('QUANTITY') }}:&nbsp;</label>
                 <input type="number" name="quantity" class="form-control" 
-                        v-model="record.quantity" required="required"
+                        v-model="record.quantity" required="required" step="0.1"
                         :disabled="(!logedAdmin)"  />
                 &nbsp;{{ product.unit}}        
             </div>
